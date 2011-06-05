@@ -1,0 +1,88 @@
+#panel_detalle_fields{
+	background-color:#edf5ff;
+	margin-top:30px;
+	margin-bottom:5px;
+	border:1px solid #ccc;
+	text-align:left;
+	
+}
+#panel_detalle_fields .label{
+	padding:5px;
+	text-align:right;
+	#width:25%;
+	min-width:200px;
+}
+#panel_detalle_fields input{
+	position:relative;
+	background-color: #F7F7F7;
+	border: #C0C0C0 1px solid;
+	font-size: 12px;
+	font-weight: bold;
+	margin:5px;
+}
+#panel_detalle_fields button{
+	position:relative;
+	font-weight: bold;
+	margin:5px;
+}
+#panel_detalle_fields img{
+	position:relative;
+}
+#panel_detalle_fields textarea{
+	float:none;
+	position:relative;
+	background-color: #F7F7F7;
+	border: #C0C0C0 1px solid;
+	font-size: 12px;
+	font-weight: bold;
+	margin:5px;
+}
+
+select{
+	width: 200px;
+	background-color: #F7F7F7;
+	border: #C0C0C0 1px solid;
+	font-family: Verdana;
+	font-size: 12px;
+	font-weight: bold;
+	margin:5px;
+}
+#panel_detalle_fields select{
+	position:relative;
+	float:none;
+}
+
+/*#button_nuevo{float:left;}*/
+
+#button_aceptar_detalle{
+	float:right;
+}
+#button_cancelar_detalle{
+	float:right;
+}
+#panel_detalle_fields .required{
+	border: 3px solid #F00 ;
+
+}
+.sep_entity{
+	border:1px solid #333;
+	font-size:18px;
+	text-align:center;
+	padding:5px;
+	font-weight:bold;
+	background-color:#ddd;
+	margin: 5px 5px 15px 5px;
+}
+.aviso{
+	padding:10px;
+	text-align:center;
+	margin:50px;
+	background-color:#edea13;
+	border:3px solid #c1bf11;
+}
+.info{
+    padding:5px 0 0 10px;
+    font-size:80%;
+    font-style:italic;
+    color:#444;
+}

@@ -2,19 +2,36 @@
     <div id="destacado">
         <div class="top"></div>
         <div class="destacado-content">
-            <div id="noticias">Noticias</div>
+            <div id="noticias">
+                <div class="scroll-pane ui-widget ui-widget-header ui-corner-all">
+	            <div id="scroll-bar-wrap" class="scroll-bar-wrap ui-widget-content ui-corner-bottom">
+                            <div class="scroll-bar"></div>
+                    </div>
+                    <div class="scroll-content">
+                        <ul>
+                            <?foreach($this->news as $new):?>
+                            <li>
+                                <div class="noticias-fecha"><?=$new->fecha?></div>
+                                <?=$new->texto?>
+                            </li>
+                            <?endforeach;?>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
             <div id="ficha">
                 <div id="ficha-iconos"></div>
-                <h1>Proyecto: La Butaca Escarlata</h1>
-                <div id="ficha-imagen"><img src="/img/proyecto.jpg"></div>
+                <h1>Proyecto: <?=$this->project->titulo?></h1>
+                <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
                 <div id="ficha-info">
-                    <div class="number">78 %</div>
-                    <div class="text">recaudad</div>
+                    <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
+                    <div class="text">recaudado</div>
                     <div id="progressbar"></div>
-                    <div class="text">3568 de 4000 &euro;</div>
-                    <div class="number margin">35</div>
+                    <div class="text"><?=round($this->recaudado,0)?> de <?=round($this->project->importe_solicitado,0)?> &euro;</div>
+                    <div class="number margin"><?=$this->numApoyos?></div>
                     <div class="text">apoyos</div>
-                    <div class="number margin">40</div>
+                    <div class="number margin"><?=$this->days?></div>
                     <div class="text">días</div>
                 </div>
                 
