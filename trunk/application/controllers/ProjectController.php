@@ -1,0 +1,60 @@
+<?php
+
+class ProjectController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        /* Initialize action controller here */
+        $this->view->headScript()->appendFile( '/js/project.js');
+    }
+
+    public function indexAction()
+    {
+
+        $request = $this->getRequest ();
+
+        $linkRewrite=$request->project;
+
+        $dbProject=new Application_Model_DbTable_Projects();
+
+        $project=$dbProject->fetchRow(
+                $dbProject->select()
+                ->where('link_rewrite = "'.$linkRewrite.'"')
+                );
+
+        if(count($project)==0)
+            $this->_redirect ( '/');
+        else{
+            $dbReward=new Application_Model_DbTable_Rewards();
+            $rewards=$dbReward->fetchAll(
+                $dbReward->select()
+                ->where('id_proyecto = '.$project->id_proyecto)
+                );
+
+
+            $dbSupport =new Application_Model_DbTable_Support();
+            $supports=$dbSupport->fetchRow(
+                    $dbSupport->select()
+                    ->from("apoyo",
+                            array('sum(apoyo) as sum_apoyo','count(apoyo) as count_apoyo', 'apoyo'))
+                    ->where('id_proyecto = '.$project->id_proyecto)
+                    ->group('apoyo')
+                    );
+            
+            $this->view->recaudado=isset($supports->sum_apoyo)?$supports->sum_apoyo:0;
+            $this->view->numApoyos=isset($supports->count_apoyo)?$supports->count_apoyo:0;
+            $this->view->rewards=$rewards;
+            $this->view->project=$project;
+            $this->view->porcentaje=($supports->apoyo/$project->importe_solicitado)*100;
+            $now=new Datetime();
+            $interval = $now->diff(new Datetime($project->fec_fin));
+            $this->view->days=$interval->format('%a');
+            $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
+        }
+        
+    }
+
+
+}
+

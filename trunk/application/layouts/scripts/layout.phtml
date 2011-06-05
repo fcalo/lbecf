@@ -8,8 +8,7 @@ echo $this->doctype(); ?>
     <head>
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
-        <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css'); ?>
-        <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
+        <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
         <?php //echo $this->headScript()->prependFile($this->baseUrl().'/js/jquery-1.5.1.min.js');?>
         <?php //echo $this->headScript()->prependFile($this->baseUrl().'/js/jquery-ui-1.8.13.custom.min.js');?>
         <?=$this->jQuery()->setLocalPath( STATIC_PATH.'/js/jquery-1.5.1.min.js');?>
