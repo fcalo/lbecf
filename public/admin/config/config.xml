@@ -197,6 +197,30 @@
                 <null>N</null>
                 <in_list>S</in_list>
             </field>
+            <field>
+                    <name>username</name>
+                    <description>Nombre de usuario</description>
+                    <type>varchar(50)</type>
+            </field>
+            <field>
+                    <name>fec_alta</name>
+                    <description>Fec. Alta</description>
+                    <type>date</type>
+            </field>
+            <field>
+                    <name>pass</name>
+                    <description>Contraseña</description>
+                    <type>varchar(32)</type>
+                    <null>N</null>
+                    <in_list>S</in_list>
+                    <pass>S</pass>
+            </field>
+            <field>
+                <name>activo</name>
+                <description>Activo</description>
+                <type>char(1)</type>
+                <null>N</null>
+            </field>
        </fields>
    </entity>
 
