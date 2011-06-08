@@ -1,0 +1,58 @@
+#quien_jugo_partido_panel table{
+	width:100%;
+	padding:10px;
+}
+#quien_jugo_partido_panel th{
+	text-align:center;
+	font-weight:bold;
+}
+#quien_jugo_partido_panel th{
+	padding:2px;
+	text-align:center;
+}
+#quien_jugo_partido_panel td{
+	text-align:center;
+}
+
+#btn_guardar_jugo_container{
+	text-align:right;
+	margin:10px;
+}
+#loader_guardar_jugo{
+	background:url("../img/ajax-loader-wheel.gif") no-repeat;
+	width:16px;
+	height:16px;
+	float:right;
+	margin:3px;
+	visibility:hidden;
+}
+	
+#asistencia_partido_panel table{
+	width:100%;
+	padding:10px;
+}
+#asistencia_partido_panel th{
+	text-align:center;
+	font-weight:bold;
+}
+#asistencia_partido_panel th{
+	padding:2px;
+	text-align:center;
+}
+#asistencia_partido_panel td{
+	text-align:center;
+}
+
+#btn_guardar_asistencia{
+	text-align:right;
+	margin:10px;
+}
+#loader_guardar_asistencia{
+	background:url("../img/ajax-loader-wheel.gif") no-repeat;
+	width:16px;
+	height:16px;
+	float:right;
+	margin:3px;
+	visibility:hidden;
+}
+	
