@@ -1,0 +1,153 @@
+body {
+margin:0;
+padding:10;
+height:100%;
+}
+#csi{
+	position:absolute;
+    background:url("../img/cornersupizq.jpg") no-repeat;
+    top:0;
+    left:0;
+    height:116px;
+    width:187px;
+}
+#csd{
+	position:absolute;
+    background:url("../img/cornersupder.jpg") no-repeat;
+    top:0;
+    right:0;
+    height:116px;
+    width:128px;
+}
+#cii{
+	position:absolute;
+    background:url("../img/cornerinfizq.jpg") no-repeat;
+    bottom:0px;
+    left:0;
+    height:115px;
+    width:187px;
+}
+#cid{
+	position:absolute;
+    background:url("../img/cornerinfder.jpg") no-repeat;
+    bottom:5px;
+    right:4px;
+    height:110px;
+    width:123px;
+}
+#cab{
+	position:absolute;
+    background:url("../img/superior.jpg") repeat-x top center;
+    top:4px;
+    left:0px;
+    height:116px;
+    width:99%;
+}
+#izq{
+	float:left;
+	background:url("../img/izquierda.jpg") repeat-x top;
+	z-index:-99;
+    left:0px;
+    width:154px;
+	min-width:154px;
+    top:130px;
+	height:500px;
+	min-height:500px;
+	
+}
+#der{
+	position:absolute;
+    background:url("../img/derecha.jpg") repeat-y;
+    float:right;
+    right:7px;
+    width:109px;
+    height:98%;
+}
+#inf{
+	position:absolute;
+    background:url("../img/inferior.jpg") repeat-x ;
+    clear:both;
+    left:0px;
+    bottom:5px;
+    height:96px;
+    width:96%;
+}
+#dcuerpo{
+	width:100%;
+	margin-right:10px;
+	padding-left:10px;
+}
+#loading{
+	background:url("../img/ajax-loader.gif") no-repeat #EDF5FF center center;
+	position:absolute;
+    top:115px;
+    bottom:110px;
+   	left:168px;
+   	right:125px;
+    overflow:auto;
+    z-index:99;
+    border:1px solid #ccc;
+    display:none;
+    /*opacity: 0.5;
+	filter:alpha(opacity=50);*/
+}
+#loader{
+	position:absolute;
+    top:115px;
+    bottom:110px;
+   	left:168px;
+   	right:125px;
+    overflow:hidden;
+    background-color: white;
+    /*border:1px solid;*/
+    display:none;
+}
+#img-loader{
+	background:url("../img/ajax-loader-big.gif") no-repeat #eeeeee left center;
+	text-align:center; 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color:#8D5B3A;
+	position:absolute;
+    top:40%;
+   	left:30%;
+   	width:40%;
+   	height:10%;
+    border:5px solid;
+    padding-top:15px;
+}
+
+#menu{
+    top:125px;
+    left:6px;
+    width:154px;
+	float:left;
+	
+}
+.menu1{
+	height:22px;
+	border-bottom:1px solid white;
+	background:url("../img/menu1.jpg");
+	text-align:left;
+	padding-left:20px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color:white;
+	cursor:pointer;
+	padding-top:3px;
+}
+.menu2{
+	height:22px;
+	border-bottom:1px solid white;
+	background:url("../img/menu2.jpg");
+	text-align:left;
+	padding-left:20px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color:white;
+	cursor:pointer;
+	padding-top:3px;
+}

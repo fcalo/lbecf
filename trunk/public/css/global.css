@@ -56,6 +56,12 @@ input[type='text'], input[type='password']{
 	color:#900;
 
 }
+#header #user #profile{
+    margin-top:10px;
+}
+#header #user #profile a{
+    font-size:12px;
+}
 #header #user span{
 	margin-left:60px;
 	width:80px;
@@ -67,7 +73,7 @@ input[type='text'], input[type='password']{
 	width:100px;
 	margin-top:3px;
 }
-#header #user input[type='button']{
+#header #user input[type='submit']{
 	border:1px solid #600;
 	color:#fff;
 	background-color:#900;
@@ -105,7 +111,7 @@ input[type='text'], input[type='password']{
 	color:#fff;
 	text-decoration:none;
 }
-#header #menu ul li:hover{
+#header #menu ul li:hover, #header #menu ul li.active{
 	padding-bottom:2px;
 	border-bottom:2px solid #fff;
 	cursor:pointer;
@@ -138,7 +144,7 @@ input[type='text'], input[type='password']{
 
 /*home*/
 #panel-home{
-    margin:7px;
+    margin:7px 7px 0 7px;
 }
 
 #panel-home #destacado .top{
@@ -253,6 +259,38 @@ input[type='text'], input[type='password']{
     width:200px;
 }
 
+#panel-home #bottom-home{
+    margin-top:40px;
+    width:960px;
+    border-top:10px solid #900;
+}
+#panel-home #bottom-home .texto{
+    font-family:Courier, "Courier New";
+    padding:20px 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    clear:both;
+}
+#panel-home #bottom-home #emprendedores,
+#panel-home #bottom-home #colaboradores,
+#panel-home #bottom-home #patrocinadores{
+    width:294px;
+    height:191px;
+    padding:70px 10px;
+    float:left;
+    margin-right:9px;
+}
+#panel-home #bottom-home #emprendedores{background:url(../img/emprendedores.jpg) no-repeat;}
+#panel-home #bottom-home #colaboradores{background:url(../img/colaboradores.jpg) no-repeat;margin-right:0;}
+#panel-home #bottom-home #patrocinadores{background:url(../img/patrocinadores.jpg) no-repeat;}
+#panel-home #bottom-home .datos{
+    font-size:11px;
+    color:#333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 /*fin home*/
 /* proyecto */
 #tabs {
@@ -365,6 +403,7 @@ input[type='text'], input[type='password']{
     color:#fff;
     cursor: pointer;
     font-weight: normal;
+    border:0;
 
 }
 .btn-red:hover{
@@ -375,3 +414,128 @@ input[type='text'], input[type='password']{
     float:right;
 }
 /* fin proyecto */
+/* registro y login */
+#content #panel-form{
+    padding:10px 0;
+    margin:0 auto;
+    width:500px;
+    text-align: left;
+    color:#000;
+    border:1px solid #900;
+    padding:10px;
+    font-size: 12px;
+}
+#content #panel-form input{
+    font-size: 12px;
+}
+#content #panel-form h2{
+    color:#900;
+}
+#content #panel-form fieldset{
+    border:0;
+}
+#content #panel-form a{
+    color:#900;
+}
+#content #panel-form dt{
+    float:left;
+    clear:left;
+    width:100px;
+    padding-top:10px;
+}
+#content #panel-form div#emailforgot-label{
+    float:left;
+    width:125px;
+}
+#content #panel-form dd{
+    padding-top:10px;
+}
+.fb{
+    background:url(../img/fb.png) no-repeat center center ;
+    width:89px;
+    height:21px;
+    display:block;
+    border:0;
+}
+#header #user .fb{
+    float:right;
+    margin-right:20px;
+}
+.fb span{
+    display:none;
+}
+.errors li{
+    list-style: none;
+    color:#600;
+}
+
+/* registro y login */
+/* funciona*/
+#content #panel-funciona{
+    padding-top: 20px;
+}
+#content #funciona{
+    background:url(../img/funciona.jpg) no-repeat;
+    height:268px;
+    width: 933px;
+    margin:10px auto;
+}
+#funciona #enlaces{
+    font-size:20px;
+    padding:40px 20px;
+}
+#funciona #enlaces a{
+    color:#900;
+    text-decoration:none;
+    font-weight:bold;
+}
+#funciona #enlaces div{
+    margin-bottom:12px;
+}
+#content #texto-funciona{
+    margin:0 115px;
+    color:#000;
+    padding-bottom: 20px;
+}
+#content #texto-funciona h3{
+    color:#900;
+    font-weight:bold;
+    font-size:14px;
+}
+/* FIN funciona */
+
+/* FAQ */
+#content #faq{
+    margin:0 20px;
+    padding:10px 0;
+    color:#000;
+}
+#content #faq h3{
+    color:#900;
+    font-weight:bold;
+    font-size:14px;
+}
+#content #faq a{
+    color:#333;
+    text-decoration:none;
+}
+#content #faq .question{
+    color:#333;
+    font-weight:bold;
+}
+#content #faq #answers{
+    padding-top:40px;
+}
+/* Fin FAQ */
+/* static */
+#content .static{
+    margin:0 20px;
+    padding:10px 0;
+    color:#000;
+}
+
+#content .static h3{
+    color:#900;
+}
+
+/* FIN static */

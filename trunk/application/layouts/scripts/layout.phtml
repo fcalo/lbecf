@@ -14,18 +14,30 @@ echo $this->doctype(); ?>
         <?=$this->jQuery()->setLocalPath( STATIC_PATH.'/js/jquery-1.5.1.min.js');?>
         <?=$this->jQuery()->setUiLocalPath( STATIC_PATH.'/js/jquery-ui-1.8.13.custom.min.js');?>
         <?=$this->jQuery()->uiEnable();?>
-        <?= $this->headScript(); ?>
+        <?= $this->headScript()->prependFile($this->baseUrl().'/js/comun.js'); ?>
     </head>
     <body>
         <div id="body">
 		<div id="header">
 
 			<div id="user">
-				<span>Usuario:</span><input type="text"/>
-				<span>Contraseña:</span><input type="password"/>
-				<input type="button" value="Acceder"/>
-				<div><a href="#">¿Ha olvidado sus datos?</a></div>
-				<div><a href="#">Registrarse</a></div>
+                            <?
+                                $auth = Zend_Auth::getInstance ();
+                                if ($auth->hasIdentity()):?>
+                                <div id="profile">
+                                    <div>Hola, <a href="/usuario/perfil/<?=$auth->getIdentity()->username?>"><?=$auth->getIdentity()->username?></a></div>
+                                    <div><a href="/usuario/logout">Desconectar</a></div>
+                                </div>
+                            <?else:?>
+                                <form action="/usuario/login" method="post">
+                                    <span>Usuario:</span><input type="text" name="user"/>
+                                    <span>Contraseña:</span><input type="password" name="password"/>
+                                    <input type="submit" value="Acceder"/>
+                                    <input type="button" class="fb" value=""/>
+                                </form>
+                                <div><a href="/usuario/forgot/">¿Ha olvidado sus datos?</a></div>
+                                <div><a href="/usuario/register/">Registrarse</a></div>
+                            <?endif;?>
 			</div>
 			<div id="social"></div>
 			<div id="title">
@@ -35,12 +47,12 @@ echo $this->doctype(); ?>
 
 			<div id="menu">
 				<ul>
-					<li><a href="#">Inicio</a></li>
-					<li><a href="#">Proyectos</a></li>
-					<li><a href="#">Sobre LBE</a></li>
-					<li><a href="#">Cómo funciona</a></li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Blog & Foro</a></li>
+					<li <?=($_SERVER['REQUEST_URI']=="/")?"class='active'":""?>><a href="/">Inicio</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/proyecto")>0)?"class='active'":""?>><a href="/proyecto/la-butaca-escarlata">Proyectos</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/sobre")>0)?"class='active'":""?>><a href="/sobre/">Sobre LBE</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/funcion")>0)?"class='active'":""?>><a href="/funciona/">Cómo funciona</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/faq")>0)?"class='active'":""?>><a href="/faq/">FAQ</a></li>
+					<li><a href="http://labutacaescarlata.blogspot.com/">Blog & Foro</a></li>
 				</ul>
 				<div class="cl"></div>
 			</div>
@@ -51,10 +63,10 @@ echo $this->doctype(); ?>
                 </div>
                 <div id="footer">
 			<div class="panel">
-				<div class="terminos"><a href="#">Aviso legal</a></div>
-				<div class="terminos"><a href="#">Política de privacidad</a></div>
-				<div class="terminos"><a href="#">Condiciones de uso</a></div>
-				<div class="terminos"><a href="#">Contacto</a></div>
+				<div class="terminos"><a href="/aviso/">Aviso legal</a></div>
+				<div class="terminos"><a href="/politica/">Política de privacidad</a></div>
+				<div class="terminos"><a href="/condiciones/">Condiciones de uso</a></div>
+				<div class="terminos"><a href="/contacto/">Contacto</a></div>
 			</div>
 		</div>
         </div>

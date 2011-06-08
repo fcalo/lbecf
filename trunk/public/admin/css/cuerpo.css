@@ -1,0 +1,101 @@
+#panel_listado{
+	display:none;
+}
+
+#panel_detalle{
+	display:none;
+}
+#estado{
+	background-color: #CDCDCD;
+	width:99%;
+	height:27px;
+	text-align:center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom:10px;
+	margin-top:5px;
+	border:1px solid #CDCDCD;
+}
+#link_ayuda{
+	position:relative;
+	float:right;
+	font-size: 10px;
+}
+#panel_ayuda{
+	position:absolute;
+	background-color:#ccc;
+	top:0px;
+    bottom:0px;
+   	left:0px;
+   	right:0px;
+    z-index:99;
+    border:10px solid #ccc;
+	display:none;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+	
+}
+#panel_ayuda_content{
+	position:absolute;
+	background-color:#DDD;
+	top:50px;
+    bottom:50px;
+   	left:50px;
+   	right:50px;
+	overflow:none;
+	z-index:100;
+    border:10px solid #BBB;
+	display:none;
+	opacity: 1;
+	filter:alpha(opacity=100);
+}
+#panel_ayuda_content_cerrar{
+	float:right;
+	padding:5px;
+}
+#panel_ayuda_content_text{
+	width:90%;
+	height:90%;
+	overflow:auto;
+	padding-top:20px;
+	text-align:left;
+	padding-left:5px;
+}
+#button_nuevo{
+	width:100px;
+	float:left;
+	margin-bottom:10px;
+}
+#button_search{
+	width:100px;
+	float:right;
+	margin-bottom:10px;
+}
+#label_filtered{
+	float:right;
+	font-size: 10px;
+}
+#dialog_detail{display:none;}
+#dialog_search{display:none;}
+
+label { 
+	display:block;
+	float:left;
+	width:10%;
+	clear:left; }
+
+#status-system{
+    position:relative;
+    clear:both;
+    width:50%;
+    margin:5px;
+    padding:5px;
+    left:350px;
+    top:-22px;
+    font-weight:bold;
+    text-align:center;
+    border: 3px solid #fbd005;
+    background-color:#e5c531;
+    color: #fff;
+}
