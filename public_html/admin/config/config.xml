@@ -216,6 +216,164 @@
        </fields>
    </entity>
 
+   <entity>
+        <id_entity>4</id_entity>
+        <title>Sobre LBE</title>
+        <maintance_type>1</maintance_type>
+        <table>static_sobre</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text</name>
+                <description>Texto</description>
+                <type>text</type>
+                <fckeditor>S</fckeditor>
+            </field>
+        </fields>
+    </entity>
+
+    <entity>
+        <id_entity>9</id_entity>
+        <title>Cómo funciona</title>
+        <maintance_type>1</maintance_type>
+        <table>static_funciona</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text_1</name>
+                <description>Que es</description>
+                <type>text</type>
+            </field>
+            <field>
+                <name>text_2</name>
+                <description>Publicar tu proyecto</description>
+                <type>text</type>
+            </field>
+            <field>
+                <name>text_3</name>
+                <description>Patricinar / Invertir</description>
+                <type>text</type>
+            </field>
+            <field>
+                <name>text_4</name>
+                <description>Colaborar</description>
+                <type>text</type>
+            </field>
+            <field>
+                <name>text_5</name>
+                <description>Sistema de pagos</description>
+                <type>text</type>
+            </field>
+        </fields>
+    </entity>
+
+    <entity>
+        <id_entity>5</id_entity>
+        <title>FAQ</title>
+        <maintance_type>1</maintance_type>
+        <table>static_faq</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text</name>
+                <description>Texto</description>
+                <type>text</type>
+                <fckeditor>S</fckeditor>
+            </field>
+        </fields>
+    </entity>
+
+    <entity>
+        <id_entity>6</id_entity>
+        <title>Aviso Legal</title>
+        <maintance_type>1</maintance_type>
+        <table>static_aviso</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text</name>
+                <description>Texto</description>
+                <type>text</type>
+                <fckeditor>S</fckeditor>
+            </field>
+        </fields>
+    </entity>
+
+    <entity>
+        <id_entity>7</id_entity>
+        <title>Politica de privacidad</title>
+        <maintance_type>1</maintance_type>
+        <table>static_politica</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text</name>
+                <description>Texto</description>
+                <type>text</type>
+                <fckeditor>S</fckeditor>
+            </field>
+        </fields>
+    </entity>
+
+    <entity>
+        <id_entity>8</id_entity>
+        <title>Condiciones de uso</title>
+        <maintance_type>1</maintance_type>
+        <table>static_condiciones</table>
+        <fields>
+             <field>
+                <name>id</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>text</name>
+                <description>Texto</description>
+                <type>text</type>
+                <fckeditor>S</fckeditor>
+            </field>
+        </fields>
+    </entity>
+    
+
 
     
 </config>
