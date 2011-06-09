@@ -1,9 +1,13 @@
 <div id="panel-form">
     <h2>Restablecer datos de conexión</h2>
-     <?if (isset ( $this->error )):?>
-    <ul class="errors">
-            <?=$this->error ;?>
-    </ul>
+    <?if ($this->procesado):?>
+        <div class="msg">Hemos enviado a tu correo electr&oacute; las instrucciones para que recuperes tus datos de conexión. Comprueba la bandeja de SPAM, por si acaso ;)</div>
+    <?else:?>
+         <?if (isset ( $this->error )):?>
+        <ul class="errors">
+                <?=$this->error ;?>
+        </ul>
+        <?endif;?>
+        <?= $this->form ?>
     <?endif;?>
-    <?= $this->form ?>
 </div>

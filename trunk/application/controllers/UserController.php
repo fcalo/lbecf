@@ -117,14 +117,15 @@ class UserController extends Zend_Controller_Action
                     $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
 
                     $mail = new Zend_Mail ( );
+                    $link=$hostname  . '/usuario/validar/'  . $token;
                     $mail->setBodyHtml ( 'Por favor, pulsa el siguiente enlace para terminar el registro<br />'
-                            . $hostname  . '/user/validate/'  . $token .'<br /><br />_______________________________<br />La Butaca Escarlata');
+                            .'<a href="'.$link.'">'.$link.'</a><br /><br />_______________________________<br />La Butaca Escarlata');
                     $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
 
                     $mail->addTo($formulario['email']);
-                    $mail->setSubject ( $formulario ['username'] . $this->view->translate ( ', confirma tu email' ) );
-                    $mail->send ();
-                    $this->_redirect ( '/' );
+                    $mail->setSubject ( $formulario ['username'].', confirma tu email');
+                    $this->view->procesado=$mail->send();
+
                 }
             }
             $this->view->form = $form;
@@ -162,16 +163,19 @@ class UserController extends Zend_Controller_Action
                     $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
 
                     $mail = new Zend_Mail ('utf-8');
+                    $link= $hostname .'/usuario/validar/'.$data['token'];
                     $mail->setBodyHtml ( 'Has solicitado tus datos de conexión de La Butaca Escarlata<br />'
-                            . $hostname .'/usuario/validate/t/'.$data['token'] .
+                            .'<a href="'.$link.'">'.$link.'</a>'.
                             '<br /><br />'.
-                            $this->view->translate('Otherwise, ignore this message.').
+                            'En otro caso, ignora el mensaje'.
                             '<br />____<br />La Butaca Escarlata' );
                     $mail->setFrom ( 'noreply@labutacaescarlata.com', 'labutacaescarlata.com' );
 
                     $mail->addTo($mailcheck ['email']);
-                    $mail->setSubject ( $mailcheck ['username'] . 'Reestablece tu acceso a La Butaca Escarlata');
-                    $mail->send ();
+                    $mail->setSubject ( $mailcheck ['username'] . ', Reestablece tu acceso a La Butaca Escarlata');
+                    if($mail->send()){
+                        $this->view->procesado=true;
+                    }
 
                 }
 
@@ -255,6 +259,50 @@ class UserController extends Zend_Controller_Action
         }
 
     }
+    public function validateAction()
+    {
+        // Do not attempt to render a view
+        $token = $this->_request->getParam ( 'token' ); //the token
+
+        if (! is_null ( $token ))
+        {
+            //lets check this token against ddbb
+            $model = new Model_Users();
+            $validatetoken = $model->fetchUserByToken( $token );
+
+            if ($validatetoken !== NULL)
+            {
+
+                //first kill previous session or data from client
+                //kill the user logged in (if exists)
+                Zend_Auth::getInstance ()->clearIdentity ();
+
+                //update the active status to 1 of the user
+                $data ['activo'] = "S";
+                $data ['username'] = $validatetoken ['username'];
+                //reset the token
+                $data['token'] = NULL;
+
+                $model->updateUser( $validatetoken ['id_usuario'] , $data);
+
+                //LETS OPEN THE GATE!
+                //update the auth data stored
+                $data = $model->fetchUserByUsername( $validatetoken ['username'] );
+                $auth = Zend_Auth::getInstance ();
+
+                $auth->getStorage()->write( (object)$data);
+
+                $this->_redirect ( '/usuario/perfil/'.$data ['username'] );
+
+            } else{
+                $this->view->error='Lo lamentamos, el token no existe o ya ha sido utilizado';
+            }
+
+        } else{
+            $this->view->error='Lo lamentamos, la url no es valida o ha caducado';
+        }
+    }
+
 
     public function profileAction(){
         $auth=Zend_Auth::getInstance();
