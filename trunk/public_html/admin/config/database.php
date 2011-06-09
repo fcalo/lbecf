@@ -9,9 +9,9 @@ if(strpos($server,".dev")>0){
 	
 }else{
 	DEFINE ("CT_SERVIDOR" , "localhost");
-	DEFINE ("CT_USER" ,"lovetuning") ;
-	DEFINE ("CT_PASS" ,"tun1ng11") ;
-	DEFINE ("CT_DB" , "lovetuning");
+	DEFINE ("CT_USER" ,"jkyljsco_root") ;
+	DEFINE ("CT_PASS" ,"but4c411") ;
+	DEFINE ("CT_DB" , "jkyljsco_lbe");
 }
 
 /***************************************/
