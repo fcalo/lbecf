@@ -1,1 +1,26 @@
-<h2>Contacto</h2>
+<div id="panel-form">
+    <h2>Contacto</h2>
+    <?if ($this->procesado):?>
+        <div class="msg">Gracias por ponerse en contacto con nosotros, hemos recibido su mensaje.</div>
+    <?else:?>
+        <?php
+        if (isset ( $this->error )) :
+            ?>
+        <ul class="errors">
+                <?=$this->error ;?>
+        </ul>
+        <?php endif;?>
+        <fieldset>
+            <form action="<?=$this->escape ( $this->form->getAction () )?>" method="<?=$this->escape ( $this->form->getMethod () )?>">
+            <?
+                    echo $this->form->email;
+                    echo $this->form->message;?>
+                    <span id="agree">
+                    <?=$this->form->agree?> He leido y acepto los <a href="/condiciones/">Condiciones de uso</a> y la <a href="/politica/">Pol&iacute;tica de privacidad</a>
+                    </span>
+                    <? echo $this->form->submit; ?>
+            </form>
+        </fieldset>
+    <?endif;?>
+</div>
+
