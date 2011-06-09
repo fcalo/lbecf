@@ -55,6 +55,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
         $routeOauth = new Zend_Controller_Router_Route( '/usuario/oauth/:step', array( 'controller' => 'user', 'action' => 'oauth') );
+        $routeValidate = new Zend_Controller_Router_Route( '/usuario/validar/:token', array( 'controller' => 'user', 'action' => 'validate') );
         $routeUser = new Zend_Controller_Router_Route( '/usuario/:action/*', array( 'controller' => 'user', 'action' => 'index') );
         $routeAviso= new Zend_Controller_Router_Route( '/aviso/', array( 'controller' => 'static', 'action' => 'aviso') );
         $routeCondiciones = new Zend_Controller_Router_Route( '/condiciones/', array( 'controller' => 'static', 'action' => 'condiciones') );
@@ -73,6 +74,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'user', $routeUser);
         $router->addRoute ( 'profile', $routeProfile);
         $router->addRoute ( 'oauth', $routeOauth);
+        $router->addRoute ( 'validate', $routeValidate);
         $router->addRoute ( 'aviso', $routeAviso);
         $router->addRoute ( 'condiciones', $routeCondiciones);
         $router->addRoute ( 'contacto', $routeContacto);

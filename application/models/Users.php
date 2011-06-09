@@ -11,7 +11,13 @@ class Model_Users
     public function saveUser(array $data){
         if(!isset($data['activo']))
                 $data['activo']='N';
-        $data['pass']=md5($data['pass']);
+        if (!isset($data["id_facebook"])){
+            $data['pass']=md5($data['pass']);
+            $data ['token'] = md5 ( uniqid ( rand (), 1 ) );
+        }else{
+            $data['activo']='S';
+        }
+
         return $this->db->insert($data);
     }
     public function updateUser($idUser, array $data){
@@ -51,13 +57,20 @@ class Model_Users
 
     public function getUserToken($email)
     {
-       //$user = $this->db->users->findOne( array('email' =>$email), array('token') );
-       return $user['token'];
+       $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('email= "'.$email.'"')
+        );
+       return $row['token'];
     }
 
     public function fetchUserByToken($token)
     {
-        //return $this->db->users->findOne( array('token' =>$token) );
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('token= "'.$token.'"')
+        );
+        return $row;
     }
 
     public function fetchUser($id)
@@ -67,7 +80,11 @@ class Model_Users
 
     public function fetchUserByUsername($username)
     {
-        //return $this->db->users->findOne( array('username' =>$username) );
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('username= "'.$username.'"')
+        );
+        return $row;
     }
 
     public function fetchUserByEmail($email)
