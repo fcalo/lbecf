@@ -58,12 +58,7 @@ input {border:1px solid #606060; background: #DDDDDD}
     <div id="header">Authorization Required</div>
 <div id="main">
     <div id="mid">
-        <p>Please enter the password below <em>Use "demo" to login. Use a wrong password to see the error message</em>.</p>
-
-        <p>Once logged in,  you won't need to re-enter the password for one hour,  the expiry time can be customized to your liking by altering the variable $expirytime in the Config Section of sas.php.</p>
-
-        <p>You will need to enable cookies for SAS to work as expected.</p>
-
+        
         <form action="" method="POST">
             Password:&nbsp;<input type="password" name="password" size="20">&nbsp;
             <input type="submit" value="Login">

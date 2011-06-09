@@ -18,8 +18,11 @@ class ProjectController extends Zend_Controller_Action
 
         $dbProject=new Application_Model_DbTable_Projects();
 
+
+        //->from(array("proyectos"), array("*","days"=>"abs(datediff(now(),p.fec_fin)"))
         $project=$dbProject->fetchRow(
                 $dbProject->select()
+                ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("abs(datediff(now(),fec_fin))")))
                 ->where('link_rewrite = "'.$linkRewrite.'"')
                 );
 
@@ -47,13 +50,48 @@ class ProjectController extends Zend_Controller_Action
             $this->view->rewards=$rewards;
             $this->view->project=$project;
             $this->view->porcentaje=($supports->apoyo/$project->importe_solicitado)*100;
-            $now=new Datetime();
-            $interval = $now->diff(new Datetime($project->fec_fin));
-            $this->view->days=$interval->format('%a');
+            //$now=new Datetime();
+            //$interval = $this->dateDifference(date(), $project->fec_fin);
+            $this->view->days=$project->days;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
         }
         
     }
+
+    private function dateDifference($startDate, $endDate)
+        {
+            $startDate = strtotime($startDate);
+            $endDate = strtotime($endDate);
+            if ($startDate === false || $startDate < 0 || $endDate === false || $endDate < 0 || $startDate > $endDate)
+                return false;
+
+            $years = date('Y', $endDate) - date('Y', $startDate);
+
+            $endMonth = date('m', $endDate);
+            $startMonth = date('m', $startDate);
+
+            // Calculate months
+            $months = $endMonth - $startMonth;
+            if ($months <= 0)  {
+                $months += 12;
+                $years--;
+            }
+            if ($years < 0)
+                return false;
+
+            // Calculate the days
+                        $offsets = array();
+                        if ($years > 0)
+                            $offsets[] = $years . (($years == 1) ? ' year' : ' years');
+                        if ($months > 0)
+                            $offsets[] = $months . (($months == 1) ? ' month' : ' months');
+                        $offsets = count($offsets) > 0 ? '+' . implode(' ', $offsets) : 'now';
+
+                        $days = $endDate - strtotime($offsets, $startDate);
+                        $days = date('z', $days);
+
+            return array($years, $months, $days);
+        }
 
 
 }

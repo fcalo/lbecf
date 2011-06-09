@@ -4,6 +4,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRegistry()
     {
+        
         $config = new Zend_Config_Ini( APPLICATION_PATH . '/configs/application.ini' , 'production', array("allowModifications"=>true) );
         if (file_exists(APPLICATION_PATH . '/configs/local.ini')) {
             $lconfig = new Zend_Config_Ini( APPLICATION_PATH . '/configs/local.ini' , 'production' );
@@ -39,6 +40,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initPlugins()
     {
+
         //Zend_Controller_Action_HelperBroker::addPath( APPLICATION_PATH .'/controllers/helpers');
 
         $front = Zend_Controller_Front::getInstance();
@@ -85,4 +87,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $front;
     }
 }
+
+
 
