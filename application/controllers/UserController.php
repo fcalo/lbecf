@@ -5,6 +5,7 @@ class UserController extends Zend_Controller_Action
 
     public function init()
     {
+
         /* Initialize action controller here */
         $this->view->headScript()->appendFile( '/js/user.js');
     }
