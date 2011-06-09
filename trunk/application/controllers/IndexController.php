@@ -11,6 +11,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+        $paypal = new Zend_Paypal();
+        
         $dbProject=new Application_Model_DbTable_Projects();
 
         $project=$dbProject->fetchRow(
