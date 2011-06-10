@@ -12,15 +12,13 @@ class SupportController extends Zend_Controller_Action
 
         $config = Zend_Registry::get('config');
         $support = $this->getRequest()->getParam('support');
+        $reward = $this->getRequest()->getParam('reward');
         $linkRewrite = $this->getRequest()->getParam('proyect');
 
         $Project=new Model_Projects();
         $project=$Project->fetchProjectByLinkRewrite($linkRewrite);
 
-        
-
         $hostname='http://' . $this->getRequest ()->getHttpHost ();
-
 
         $paypalConfig['cancelUrl']=$hostname.$config->payment->paypal->return_cancel;
         $paypalConfig['returnUrl']=$hostname.$config->payment->paypal->return;
@@ -42,6 +40,7 @@ class SupportController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance ();
         $data['id_usuario_apoyo']=$auth->getIdentity()->id_usuario;
         $data['apoyo']=$support;
+        $data['id_recompensa']=$reward;
         $data['fecha']=date("Y-m-d H:i:s");
         $data['preapproved_key']=$preapprovalKey;
         $Support->saveSupport($data);
