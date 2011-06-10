@@ -12,8 +12,6 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $paypal = new Zend_Paypal();
-        
         $dbProject=new Application_Model_DbTable_Projects();
 
         $project=$dbProject->fetchRow(
@@ -30,7 +28,7 @@ class IndexController extends Zend_Controller_Action
                     $dbSupport->select()
                     ->from("apoyo",
                             array('sum(apoyo) as sum_apoyo','count(apoyo) as count_apoyo', 'apoyo'))
-                    ->where('id_proyecto = '.$project->id_proyecto)
+                    ->where('id_proyecto = '.$project->id_proyecto.' AND approved="S"')
                     ->group('apoyo')
                     );
 

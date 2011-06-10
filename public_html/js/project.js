@@ -13,7 +13,7 @@ $(function() {
             if($("#idUser").length==0 || $("#idUser").val()=="")
                 location.href="/usuario/login";
             else
-                alert($(this).attr("id"));
+                location.href="/apoyo/pago/"+($("#link").val())+"/"+($(this).attr("id"));
         });
 
 
