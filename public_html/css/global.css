@@ -423,6 +423,16 @@ input[type='text'], input[type='password']{
 #panel-project #colaboradores .colaborador p{
     color:#000;
 }
+.ui-dialog .ui-widget-header{
+    background:none;
+    border:0;
+}
+#amount{
+    font-size:12px;
+    text-align: right;
+    width:55px;
+    padding: 1px 10px;
+}
 
 /* fin proyecto */
 /* registro y login */
@@ -549,4 +559,27 @@ input[type='text'], input[type='password']{
     color:#900;
 }
 
+#content #history {
+	margin:0 100px;
+	padding:20px 0;
+        color:#000;
+}
+
+#content #history h2{
+	color:#900;
+}
+#content #history p{
+	margin-top:35px;
+}
+
+
+#content #pruebame{
+	background:url(../img/pruebame.jpg) no-repeat;
+	height:319px;
+	width:349px;
+	margin:60px auto
+}
 /* FIN static */
+div .msg{
+    padding:10px 30px 50px 30px;
+}
