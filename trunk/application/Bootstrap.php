@@ -64,6 +64,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeFunciona = new Zend_Controller_Router_Route( '/funciona/', array( 'controller' => 'static', 'action' => 'funciona') );
         $routePolitica = new Zend_Controller_Router_Route( '/politica/', array( 'controller' => 'static', 'action' => 'politica') );
         $routeSobre = new Zend_Controller_Router_Route( '/sobre/', array( 'controller' => 'static', 'action' => 'sobre') );
+        $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support', array( 'controller' => 'support', 'action' => 'pago') );
+        $routeSupport = new Zend_Controller_Router_Route( '/apoyo/:action/*', array( 'controller' => 'support', 'action' => 'index') );
 
         //set the api route
         //$routeApi = new Zend_Controller_Router_Route('/api/:action/*', array(  'controller' => 'api', 'action' => 'index') );
@@ -82,6 +84,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'funciona', $routeFunciona);
         $router->addRoute ( 'politica', $routePolitica);
         $router->addRoute ( 'sobre', $routeSobre);
+        $router->addRoute ( 'support', $routeSupport );
+        $router->addRoute ( 'payment', $routePayment );
 
         //set all routes
         $front->setRouter ( $router );
