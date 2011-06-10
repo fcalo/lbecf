@@ -50,17 +50,31 @@
 	</div>
     </div>
     <div id="recompensas">
+        <input type="hidden" id="id-recompensa"/>
+        <input type="hidden" id="apoyo-minimo"/>
         <span>Recompensas por apoyar el proyecto</span>
         <ul class="scroll-content-item ui-widget-header">
             <?foreach($this->rewards as $reward):?>
             <li>
                 <div class="recompensa-valor"><?=$reward->apoyo_minimo?>&euro;</div>
                 <div class="recompensa-desc"><?=$reward->recompensa?></div>
-                <div id="<?=$reward->id_recompensa?>" class="btn-red">Apoyar</div>
+                <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Apoyar</div>
             </li>
             <?endforeach;?>
             
         </ul>
     </div>
     <div class="cl"></div>
+</div>
+<div id="dialog-form" title="Apoyar el proyecto">
+    <div>
+	<p class="validateTips"></p>
+
+	<form>
+	<fieldset>
+		<label for="amount">Cantidad con la que apoyar</label>
+		<input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+    </div>
 </div>
