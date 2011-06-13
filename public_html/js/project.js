@@ -64,4 +64,12 @@ $(function() {
                     if ($(this).val() != '')
                         $(this).val($(this).attr('value').replace(/[^0-9]/g, ""));
                 });
+
+
+                $("#btn-reward").click(function(){
+                    $("#reward-item").clone().appendTo(".reward");
+                    var count=$(".reward-item").length;
+                    $(".reward-item:nth-child("+count+") span b").html(count);
+
+                });
 });
