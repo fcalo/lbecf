@@ -1,0 +1,28 @@
+<div id="panel-form" class="create-project">
+    <h2>Introduce tu proyecto en La Butaca Escarlata </h2>
+     <?php if (isset ( $this->error )) :?>
+        <ul class="errors">
+             <?=$this->error ;?>
+        </ul>
+     <?php endif;?>
+    <fieldset>
+        <form action="<?=$this->escape ( $this->form->getAction () )?>" method="<?=$this->escape ( $this->form->getMethod () )?>">
+            <?
+            echo $this->form->titulo;
+            echo $this->form->descripcion;
+            echo $this->form->imagen;
+            echo $this->form->fecha;
+            echo $this->form->importe;?>
+            <div class="reward">
+                <div id="reward-item" class="reward-item">
+                    <span>Recompensa nº <b>1</b></span>
+                    <?echo  str_replace("recompensa","recompensa[]", $this->form->recompensa);
+                        echo str_replace("minimo","minimo[]", $this->form->minimo);
+                        ?>
+                </div>
+            </div>
+            <input type="button" id="btn-reward" class="btn-red" value="Ofrecer más recompensas"/>
+            <?echo $this->form->submit; ?>
+        </form>
+    </fieldset>
+</div>

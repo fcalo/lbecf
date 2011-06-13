@@ -433,6 +433,12 @@ input[type='text'], input[type='password']{
     width:55px;
     padding: 1px 10px;
 }
+#panel-form #reward-item{
+    margin:10px 0;
+    padding:10px 0;
+    border-top:1px dotted #900;
+    border-bottom:1px dotted #900;
+}
 
 /* fin proyecto */
 /* registro y login */
@@ -463,6 +469,14 @@ input[type='text'], input[type='password']{
     clear:left;
     width:100px;
     padding-top:10px;
+}
+#content #panel-form.create-project dt{
+    width:auto;
+    float:none;
+}
+#content #panel-form.create-project dd{
+    padding:0;
+    margin:0;
 }
 #content #panel-form div#emailforgot-label{
     float:left;

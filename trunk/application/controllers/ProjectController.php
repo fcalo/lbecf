@@ -58,6 +58,10 @@ class ProjectController extends Zend_Controller_Action
         
     }
 
+    public function createAction(){
+        $this->view->form=new Form_Project();
+    }
+
 
 
 }

@@ -51,6 +51,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //set the language route url (the default also)
         $routeDefault = new Zend_Controller_Router_Route ( ':controller/:action/*', array ('controller' => 'index', 'action' => 'index') );
         //set the user profile route
+        $routeAddProject = new Zend_Controller_Router_Route( '/proyecto/crear/', array( 'controller' => 'project', 'action' => 'create') );
         $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
@@ -73,6 +74,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $router->addRoute ( 'default', $routeDefault );//important, put the default route first!
         $router->addRoute ( 'project', $routeProject);
+        $router->addRoute ( 'add_project', $routeAddProject);
         
         $router->addRoute ( 'user', $routeUser);
         $router->addRoute ( 'profile', $routeProfile);
