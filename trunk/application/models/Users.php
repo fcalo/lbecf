@@ -25,8 +25,10 @@ class Model_Users
     }
 
 
-    function deleteUser($username){
-        //TODO
+    function deleteUser($idUser){
+        $data['activo']='N';
+        $data['fec_baja']=date("Y-m-d H:i:s");
+        return $this->db->update($data, "id_usuario=".$idUser);
     }
 
     public function checkUserLogin($email, $password)
@@ -34,7 +36,7 @@ class Model_Users
 
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('(email="'.$email.'" or username="'.$email.'") AND hex(pass)=hex(md5("'.$password.'")) and activo="S"')
+        ->where('(email="'.$email.'" or username="'.$email.'") AND hex(pass)=hex(md5("'.$password.'")) and activo="S" and fec_baja is null')
         );
         return $row;
     }
@@ -42,7 +44,7 @@ class Model_Users
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('email= "'.$email.'"')
+        ->where('email= "'.$email.'" and activo="S" and fec_baja is null')
         );
         return count($row)==0;
     }
@@ -50,7 +52,7 @@ class Model_Users
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('username= "'.$username.'"')
+        ->where('username= "'.$username.'" and activo="S" and fec_baja is null')
         );
         return count($row)==0;
     }
@@ -82,7 +84,7 @@ class Model_Users
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('username= "'.$username.'"')
+        ->where('username= "'.$username.'" and activo="S" and fec_baja is null')
         );
         return $row;
     }
@@ -91,7 +93,7 @@ class Model_Users
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('email= "'.$email.'"')
+        ->where('email= "'.$email.'" and activo="S" and fec_baja is null')
         );
         return $row;
     }
@@ -100,9 +102,10 @@ class Model_Users
     {
         $row=$this->db->fetchRow(
             $this->db->select()
-            ->where('id_facebook= "'.$idFacebook.'"')
+            ->where('id_facebook= "'.$idFacebook.'" and activo="S" and fec_baja is null')
         );
         return $row;
     }
+
 }
 

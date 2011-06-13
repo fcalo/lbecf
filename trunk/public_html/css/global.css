@@ -583,3 +583,15 @@ input[type='text'], input[type='password']{
 div .msg{
     padding:10px 30px 50px 30px;
 }
+
+/* Profile */
+#content #panel-profile{
+    margin:0 20px;
+    padding:10px 0;
+    color:#000;
+}
+#content #panel-profile h2{
+    color:#900;
+}
+
+/* FIN Profile */
