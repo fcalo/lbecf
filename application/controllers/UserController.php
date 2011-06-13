@@ -303,6 +303,20 @@ class UserController extends Zend_Controller_Action
         }
     }
 
+    public function deleteAction()
+    {
+
+        $auth=Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                $this->_redirect("/");
+
+        $user=$auth->getIdentity();
+        $model = new Model_Users();
+        $model->deleteUser($user['id_usuario']);
+        
+        $auth->clearIdentity ();
+    }
+
 
     public function profileAction(){
         $auth=Zend_Auth::getInstance();
