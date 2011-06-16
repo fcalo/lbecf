@@ -55,6 +55,10 @@ Replace <API_SIGNATURE> with your Signature
 $API_UserName = "sbapi_1287090601_biz_api1.paypal.com"; //TODO
 $API_Password = "1287090610"; //TODO
 $API_Signature = "ANFgtzcGWolmjcm5vfrf07xVQ6B9AsoDvVryVxEQqezY85hChCfdBMvY"; //TODO
+
+//$API_UserName = "labutacaescarlata_api1.gmail.com";
+//$API_Password = "A24GTV9YPS5KYSJ7";
+//$API_Signature = "AFcWxV21C7fd0v3bYYYRCpSSRl31AhkRWH4zVQFPnA22EZ8a-w55BxCY";
 	
 //Default App ID for Sandbox	
 $API_AppID = "APP-80W284485P519543T";
@@ -98,10 +102,12 @@ try
     
 
     //open the stream and send request
-     $fp = @fopen($url, "r", false, $ctx);
+     $fp = fopen($url, "r", false, $ctx);
 
     //get response
   	 $response = stream_get_contents($fp);
+
+         var_dump($response);
 
   	//check to see if stream is open
      if ($response === false) {

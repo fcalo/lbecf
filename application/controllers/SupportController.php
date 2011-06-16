@@ -28,11 +28,19 @@ class SupportController extends Zend_Controller_Action
 
         $params['amount']=$support;
         $params['date']=$project->fec_fin;
+
+        
         
         $paypal=new Zend_Paypal($paypalConfig);
 
+        
+
         $preapprovalKey=$paypal->getPreapprovalKey($params);
         //Se guarda la clave
+
+        var_dump($preapprovalKey);
+
+        die("c");
 
         $Support=new Model_Supports();
 
