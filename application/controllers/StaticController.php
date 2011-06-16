@@ -18,11 +18,12 @@ class StaticController extends Zend_Controller_Action
     private function _getTexts($model){
         $data=$model->fetchRow($model->select());
         $rt=array();
-        $rt[]=$data['text_1'];
-        $rt[]=$data['text_2'];
-        $rt[]=$data['text_3'];
-        $rt[]=$data['text_4'];
-        $rt[]=$data['text_5'];
+        $this->view->headScript()->appendFile( '/js/funciona.js');
+        $rt[]=nl2br(utf8_encode($data['text_1']));
+        $rt[]=nl2br(utf8_encode($data['text_2']));
+        $rt[]=nl2br(utf8_encode($data['text_3']));
+        $rt[]=nl2br(utf8_encode($data['text_4']));
+        $rt[]=nl2br(utf8_encode($data['text_5']));
         return $rt;
     }
 
