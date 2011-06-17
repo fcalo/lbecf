@@ -60,6 +60,7 @@ class ProjectController extends Zend_Controller_Action
             //$interval = $this->dateDifference(date(), $project->fec_fin);
             $this->view->days=$project->days;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
+            $this->view->url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
         }
         
     }

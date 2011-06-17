@@ -40,7 +40,15 @@ echo $this->doctype(); ?>
                                 <div><a href="/usuario/register/">Registrarse</a></div>
                             <?endif;?>
 			</div>
-			<div id="social"></div>
+			<div id="social">
+                            <?$config = Zend_Registry::get('config');?>
+                            <a href="<?=$config->social->urlTuenti?>" target="_blank"><img src="/img/tu.png"/></a>
+                            <a href="<?=$config->social->urlLinkedin?>" target="_blank"><img src="/img/in.png"/></a>
+                            <a href="<?=$config->social->urlTwitter?>" target="_blank" ><img src="/img/tw.png"/></a>
+                            <a href="<?=$config->social->urlFacebook?>" target="_blank"><img src="/img/fb.png"/></a>
+                            
+
+                        </div>
 			<div id="title">
 				<span>Una buena idea no tiene precio, para todo lo demás...</span>
 				<div></div>
