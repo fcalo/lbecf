@@ -104,7 +104,13 @@
                     <name>recompensa</name>
                     <description>Recompensa</description>
                     <type>varchar(255)</type>
+                    <in_list>S</in_list>
                     <null>N</null>
+                </field>
+                <field>
+                    <name>subasta</name>
+                    <description>¿Subasta?</description>
+                    <type>char(1)</type>
                 </field>
             </fields>
         </entity>

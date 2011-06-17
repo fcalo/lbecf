@@ -132,6 +132,20 @@
             <?endforeach;?>
             
         </ul>
+        <?if(count($this->rewardsSale)>0):?>
+            <span>Recompensas limitadas</span>
+            Solo se tendrá en cuenta el apoyo más alto
+            <ul class="scroll-content-item ui-widget-header">
+                <?foreach($this->rewardsSale as $reward):?>
+                <li>
+                    <div class="recompensa-valor"><?=$reward->apoyo_minimo?>&euro;</div>
+                    <div class="recompensa-desc"><?=$reward->recompensa?></div>
+                    <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Apoyar</div>
+                </li>
+                <?endforeach;?>
+
+            </ul>
+        <?endif;?>
     </div>
     <div class="cl"></div>
     <div id="comentarios">

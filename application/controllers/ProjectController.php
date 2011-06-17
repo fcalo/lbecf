@@ -32,7 +32,12 @@ class ProjectController extends Zend_Controller_Action
             $dbReward=new Application_Model_DbTable_Rewards();
             $rewards=$dbReward->fetchAll(
                 $dbReward->select()
-                ->where('id_proyecto = '.$project->id_proyecto)
+                ->where('id_proyecto = '.$project->id_proyecto.' AND subasta!="S"')
+                );
+
+            $rewardsSale=$dbReward->fetchAll(
+                $dbReward->select()
+                ->where('id_proyecto = '.$project->id_proyecto.' AND subasta="S"')
                 );
 
 
@@ -48,6 +53,7 @@ class ProjectController extends Zend_Controller_Action
             $this->view->recaudado=isset($supports->sum_apoyo)?$supports->sum_apoyo:0;
             $this->view->numApoyos=isset($supports->count_apoyo)?$supports->count_apoyo:0;
             $this->view->rewards=$rewards;
+            $this->view->rewardsSale=$rewardsSale;
             $this->view->project=$project;
             $this->view->porcentaje=($supports->apoyo/$project->importe_solicitado)*100;
             //$now=new Datetime();
