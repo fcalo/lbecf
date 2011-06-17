@@ -30,11 +30,15 @@ input[type='text'], input[type='password']{
 
 }
 #header #social{
-	background:url(../img/social.png) no-repeat right center ;
 	width:600px;
 	height:32px;
 	float:right;
 
+}
+#header #social img{
+    float:right;
+    margin:0 2px;
+    border:0;
 }
 #header #title{
 	float:right;
@@ -353,10 +357,12 @@ input[type='text'], input[type='password']{
     padding:15px 0 10px 0;
 }
 #panel-project #ficha-bottom #project-social{
-    background:url(../img/social.png) no-repeat right center ;
     width:155px;
     height:32px;
     float:right;
+}
+#panel-project #ficha-bottom #project-social img{
+    border:0;
 }
 #panel-project #ficha-bottom span{
     color:#000;
@@ -658,3 +664,6 @@ div .msg{
 }
 
 /* FIN Profile */
+#li_ui_li_gen_1308307994921_0 #li_ui_li_gen_1308307994921_0-logo {
+    display: none;
+}
