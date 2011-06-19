@@ -9,9 +9,9 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-/*if ( APPLICATION_ENV != 'development' )
+if ( APPLICATION_ENV != 'development' )
     require('sas.php');
-*/
+
 
 if ( APPLICATION_ENV == 'development' )
     defined('STATIC_PATH') ||  define('STATIC_PATH',  'http://lbe.dev');

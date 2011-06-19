@@ -192,7 +192,7 @@ class UserController extends Zend_Controller_Action
 
         switch($step) {
             case "login":
-                    $this->_redirect ("{$config->oauth->facebook->siteUrl}?scope=user_location&client_id={$config->oauth->facebook->consumerKey}&redirect_uri={$config->oauth->facebook->callbackUrl}");
+                    $this->_redirect ("{$config->oauth->facebook->siteUrl}?scope=email&client_id={$config->oauth->facebook->consumerKey}&redirect_uri={$config->oauth->facebook->callbackUrl}");
                     break;
                 break;
             case "callback":
@@ -214,6 +214,7 @@ class UserController extends Zend_Controller_Action
                         $response = $httpclient->request();
 
                         $oauthuser = json_decode($response->getBody());
+
                         if (strstr($oauthuser->link, "profile.php?id=")===false && ($username = strrchr($oauthuser->link, "/"))!==false )
                         {
                             $username = substr($username, 1);
@@ -222,6 +223,22 @@ class UserController extends Zend_Controller_Action
                         }
 
                         $oauthid = $oauthuser->id;
+                        //Imagen
+                        $httpconf = array('adapter' => 'Zend_Http_Client_Adapter_Socket', 'ssltransport' => 'tls');
+                        $access_url = $oauthuser->link;
+                        $httpclient = new Zend_Http_Client($access_url, $httpconf);
+
+                        $response = $httpclient->request();
+                        parse_str($response->getBody(),$access_code);
+
+                        $a=explode("profile_pic", $response->getBody());
+                        $b=explode('src=', $a[3]);
+                        $c=explode('alt',$b[1]);
+
+                        $image=trim(str_replace("_n","_q",str_replace("\\","",str_replace("\"","",$c[0]))));
+
+                        //TODO: Crear copia
+
                     }
                     catch (Exception $e)
                     {
@@ -243,7 +260,7 @@ class UserController extends Zend_Controller_Action
                     }
                     $data['id_facebook'] = $oauthid;
                     $data['activo'] = "S";
-                    $data['email'] = $oauthuser->link;
+                    $data['email'] = $oauthuser->email;
                     $data['username'] = $username;
                     $model->saveUser ($data);
 

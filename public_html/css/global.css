@@ -659,6 +659,35 @@ div .msg{
     padding:10px 0;
     color:#000;
 }
+#content #panel-profile #datos img{
+    float:left;
+    margin: 5px 20px;
+}
+#content #panel-profile #acciones{
+    float:right;
+    margin:20px;
+}
+#content #panel-profile #acciones a{
+    display:block;
+    color:#900;
+}
+#content #panel-profile .profile-box{
+    border:1px solid #600;
+    width:420px;
+    margin:20px;
+    float:left;
+    background-color:#f7f7f7;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+}
+#content #panel-profile .profile-box h3{
+    padding-left:10px;
+    color:#900;
+}
+#content #panel-profile .profile-box a{
+    color:#900;
+}
 #content #panel-profile h2{
     color:#900;
 }
