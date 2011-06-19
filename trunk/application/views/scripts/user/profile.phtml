@@ -1,8 +1,40 @@
 <div id="panel-profile">
-    <h2><?=$this->user->username?></h2>
-    <input type="button" id="new-project" class="btn-red" value="Crear proyecto"/>
-    <input type="button" id="baja" class="btn-red" value="Darse de baja"/>
-
+    
+    <div id="acciones">
+        <a href="#" id="image">Cambiar imagen de perfil</a>
+        <a href="#" id="new-project">Crear proyecto</a>
+        <a href="#" id="baja">Darse de baja</a>
+    </div>
+    <div id="datos">
+        <img src="/img/user.jpg">
+        <h2><?=$this->user->username?></h2>
+    </div>
+    <div class="cl"></div>
+    <div class="profile-box">
+        <h3>Proyectos que apoyas</h3>
+        <ul>
+            <li><a href="#">La butaca escarlata</a></li>
+        </ul>
+    </div>
+    <div class="profile-box">
+        <h3>Tus propuestas</h3>
+        <ul>
+            <li><a href="#">La butaca escarlata</a></li>
+        </ul>
+    </div>
+    <div class="profile-box">
+        <h3>Proyectos que has comentado</h3>
+        <ul>
+            <li><a href="#">La butaca escarlata</a></li>
+        </ul>
+    </div>
+    <div class="profile-box">
+        <h3>Concursos que has comentado</h3>
+        <ul>
+            <li><a href="#">La butaca escarlata</a></li>
+        </ul>
+    </div>
+    <div class="cl"></div>
 </div>
 <div id="dialog-form" title="Darse de baja">
     <div>

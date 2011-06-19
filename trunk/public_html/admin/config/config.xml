@@ -224,6 +224,18 @@
                     <type>date</type>
             </field>
             <field>
+                <name>imagen</name>
+                <description>Imagen</description>
+                <type>varchar(255)</type>
+                <file>S</file>
+                <sizes>
+                    <size>
+                        <width>50</width>
+                    </size>
+                </sizes>
+                <in_list>S</in_list>
+            </field>
+            <field>
                 <name>activo</name>
                 <description>Activo</description>
                 <type>char(1)</type>
