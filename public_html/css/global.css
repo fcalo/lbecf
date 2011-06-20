@@ -331,14 +331,26 @@ input[type='text'], input[type='password']{
 }
 #panel-project #tabs h1 span{
     color:#000;
+    
 }
 
 #panel-project #tabs #votos{
     float:right;
     margin-top:15px;
 }
+#panel-project #tabs #votos div{
+    float:left;
+}
+#panel-project #tabs #votos div span{
+    font-size: 10px;
+    text-align: center;
+    width:22px;
+    display: block;
+}
 #panel-project #tabs #votos a{
-    margin:3px;
+    margin:0 3px;
+    display: block;
+    height:16px;
 }
 #panel-project #tabs #votos img{
     border:0;
