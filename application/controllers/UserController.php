@@ -263,6 +263,34 @@ class UserController extends Zend_Controller_Action
                     $data['email'] = $oauthuser->email;
                     $data['username'] = $username;
                     $model->saveUser ($data);
+                    $user = $model->fetchUserByIdFacebook($oauthid);
+
+                    //imagen
+                    $httpconf = array('adapter' => 'Zend_Http_Client_Adapter_Socket', 'ssltransport' => 'tls');
+                    $access_url = $image;
+                    $httpclient = new Zend_Http_Client($access_url, $httpconf);
+
+                    $response = $httpclient->request();
+                    parse_str($response->getBody(),$access_code);
+
+                    $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$user->id_usuario."/";
+
+                    
+                    $helper=new View_Helper_Image();
+
+                    $helper->ensurePath($path);
+                    chmod($path,0777);
+                 
+                    $path.=basename($image);
+
+                    $f=fopen($path,"w");
+                    fwrite($f, $response->getBody());
+                    fclose($f);
+
+                    chmod($path,0777);
+
+                    if(!$model->uploadImage($path,$user['id_usuario']))
+                        die("error");
 
                     $user = $model->fetchUserByIdFacebook($oauthid);
                 }
@@ -342,6 +370,35 @@ class UserController extends Zend_Controller_Action
                 $this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
 
         $this->view->user=$auth->getIdentity();
+        
+        if($request->isPost()){
+             if ($_FILES["imagen"]['name']!=""){
+                 $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$this->view->user->id_usuario."/";
+                 $helper=new View_Helper_Image();
+
+                 $helper->ensurePath($path);
+                 chmod($path,0777);
+                 $path.=basename($_FILES["imagen"]['name']);
+                 
+                 if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
+                        die("Ocurrio un error subiendo la imagen");
+                 chmod($path,0777);
+                 
+                 $user=new Model_Users();
+                 if(!$user->uploadImage($path,$this->view->user->id_usuario))
+                       die("error");
+                 
+                 $u=$user->fetchUser($this->view->user->id_usuario);
+
+                 unset($u['pass']);
+
+                $auth->clearIdentity ();
+                $auth->getStorage ()->write ( (object)$u );
+             }
+        }
+
+
+        
     }
 
     public function logoutAction()
