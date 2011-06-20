@@ -72,4 +72,10 @@ $(function() {
                     $(".reward-item:nth-child("+count+") span b").html(count);
 
                 });
+                $("#btn-reward-delete").click(function(){
+                    var count=$(".reward-item").length;
+                    if(count>0)
+                        $(".reward-item:nth-child("+count+")").remove();
+
+                });
 });
