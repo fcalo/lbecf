@@ -11,8 +11,14 @@
                 <div id="ficha-iconos"></div>
                 <input type="hidden" id="link" value="<?=$this->project->link_rewrite?>"/>
                 <div id="votos">
-                    <a href="#" id="down"><img src="/img/down.png"></a>
-                    <a href="#" id="up"><img src="/img/up.png"></a>
+                    <div>
+                        <a href="#" id="down"><img src="/img/down.png"></a>
+                        <span>(0)</span>
+                    </div>
+                    <div>
+                        <a href="#" id="up"><img src="/img/up.png"></a>
+                        <span>(0)</span>
+                    </div>
                 </div>
                 <h1><span>Proyecto: </span><?=$this->project->titulo?></h1>
                 <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
