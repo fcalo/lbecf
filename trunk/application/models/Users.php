@@ -17,8 +17,13 @@ class Model_Users
         }else{
             $data['activo']='S';
         }
-
-        return $this->db->insert($data);
+        //Comprueba si existia pero dado de baja
+        $user=$this->fetchUserByEmail($data['email'], true);
+        if($user!=NULL){
+            $data['fec_baja']=null;
+            return $this->updateUser($user['id_usuario'], $data);
+        }else
+            return $this->db->insert($data);
     }
     public function updateUser($idUser, array $data){
         return $this->db->update($data, "id_usuario=".$idUser);
@@ -40,11 +45,11 @@ class Model_Users
         );
         return $row;
     }
-    public function checkUserEmail($email)
+    public function checkUserEmail($email, $forceAll=false)
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('email= "'.$email.'" and activo="S" and fec_baja is null')
+        ->where('email= "'.$email.'"'.($forceAll?"":'and activo="S" and fec_baja is null'))
         );
         return count($row)==0;
     }
@@ -75,9 +80,13 @@ class Model_Users
         return $row;
     }
 
-    public function fetchUser($id)
+    public function fetchUser($id, $forceAll=false)
     {
-        //return $this->db->users->findOne( array('IdUser' =>$id) );
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('id_usuario= "'.$id.'"'.($forceAll?"":' and activo="S" and fec_baja is null'))
+        );
+        return $row;
     }
 
     public function fetchUserByUsername($username)
@@ -89,11 +98,11 @@ class Model_Users
         return $row;
     }
 
-    public function fetchUserByEmail($email)
+    public function fetchUserByEmail($email, $forceAll=false)
     {
         $row=$this->db->fetchRow(
         $this->db->select()
-        ->where('email= "'.$email.'" and activo="S" and fec_baja is null')
+        ->where('email= "'.$email.'"'.($forceAll?"":' and activo="S" and fec_baja is null'))
         );
         return $row;
     }
@@ -105,6 +114,39 @@ class Model_Users
             ->where('id_facebook= "'.$idFacebook.'" and activo="S" and fec_baja is null')
         );
         return $row;
+    }
+
+    public function uploadImage($path, $idUser){
+
+
+        $sizes[]=array("50","");
+        $sizes[]=array("","20");
+        $helper=new View_Helper_Image();
+
+        foreach($sizes as $size){
+            $width=$size[0];
+            $height=$size[1];
+            $pathRes=dirname($path)."/".$width."x".$height."/";
+
+
+            if (!$helper->ensurePath($pathRes)){
+                    die("Error creando estructura");
+            }
+
+            if($width=="")
+                    $width=$height*10;
+
+            if($height=="")
+                    $height=$width*10;
+
+            if(!$helper->resizeImage(dirname($path)."/", $pathRes, basename($path), $width,$height)){
+                    die("Error redimensionando");
+            }
+            $a=explode("/admin",$path);
+            
+        }
+        $this->db->update(array("imagen"=>".".$a[1]), "id_usuario=".$idUser);
+        return true;
     }
 
 }
