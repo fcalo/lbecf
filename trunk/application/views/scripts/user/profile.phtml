@@ -1,3 +1,4 @@
+<?$helper=new View_Helper_Image();?>
 <div id="panel-profile">
     
     <div id="acciones">
@@ -6,7 +7,7 @@
         <a href="#" id="baja">Darse de baja</a>
     </div>
     <div id="datos">
-        <img src="/img/user.jpg">
+        <img src="<?=$helper->image($this->user->id_usuario, $this->user->imagen)?>">
         <h2><?=$this->user->username?></h2>
     </div>
     <div class="cl"></div>
@@ -39,5 +40,12 @@
 <div id="dialog-form" title="Darse de baja">
     <div>
         <p>&iquest;Desea darse de baja de La Butaca escarlata?</p>
+    </div>
+</div>
+<div id="dialog-form-image" title="Cambiar imagen">
+    <div>
+        <form id="frm-image" method="post" enctype="multipart/form-data">
+            Selecciona tu nueva imagen de perfil<input type="file" name="imagen"/>
+        </form>
     </div>
 </div>
