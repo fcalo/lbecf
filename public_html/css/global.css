@@ -351,6 +351,7 @@ input[type='text'], input[type='password']{
     margin:0 3px;
     display: block;
     height:16px;
+    cursor: pointer;
 }
 #panel-project #tabs #votos img{
     border:0;
