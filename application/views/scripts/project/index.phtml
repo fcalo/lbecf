@@ -12,12 +12,12 @@
                 <input type="hidden" id="link" value="<?=$this->project->link_rewrite?>"/>
                 <div id="votos">
                     <div>
-                        <a href="#" id="down"><img src="/img/down.png"></a>
-                        <span>(0)</span>
+                        <a id="down"><img src="/img/down.png"></a>
+                        <span id="ldown">(<?=$this->votos['negativos']?>)</span>
                     </div>
                     <div>
-                        <a href="#" id="up"><img src="/img/up.png"></a>
-                        <span>(0)</span>
+                        <a id="up"><img src="/img/up.png"></a>
+                        <span id="lup">(<?=$this->votos['positivos']?>)</span>
                     </div>
                 </div>
                 <h1><span>Proyecto: </span><?=$this->project->titulo?></h1>

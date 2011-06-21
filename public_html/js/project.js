@@ -18,13 +18,7 @@ $(function() {
                 $("#apoyo-minimo").val(a[1]);
                 $("#amount").val($("#apoyo-minimo").val());
 
-                //TODO: aqui hay que pillar el id de recompensa y la cantidad minima
-                //Controlarlo en el dialogo y tambien almacenar la recompensa seleccionada en support
-                
                 $( "#dialog-form" ).dialog( "open" );
-
-                
-                //location.href="/apoyo/pago/"+($("#link").val())+"/"+($(this).attr("id"));
             }
         });
 
@@ -78,4 +72,34 @@ $(function() {
                         $(".reward-item:nth-child("+count+")").remove();
 
                 });
+
+         $("#up").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                voto(1);
+            }
+         });
+         $("#down").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                voto(-1);
+            }
+         });
 });
+
+function voto(valor){
+    $.ajax({
+        url: '/proyecto/voto/'+$("#link").val(),
+        data: "valor="+valor,
+        type: 'post',
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+                $("#lup").html("("+data['positivos']+")");
+                $("#ldown").html("("+data['negativos']+")");
+        }
+
+    });
+}

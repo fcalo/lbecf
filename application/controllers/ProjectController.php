@@ -16,7 +16,10 @@ class ProjectController extends Zend_Controller_Action
 
         $linkRewrite=$request->project;
 
+        //TODO:old
         $dbProject=new Application_Model_DbTable_Projects();
+
+        $model=new Model_Projects();
 
 
         //->from(array("proyectos"), array("*","days"=>"abs(datediff(now(),p.fec_fin)"))
@@ -61,12 +64,42 @@ class ProjectController extends Zend_Controller_Action
             $this->view->days=$project->days;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
             $this->view->url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
+            $this->view->votos=$model->getVotes($project->id_proyecto);
+
         }
         
     }
 
     public function createAction(){
         $this->view->form=new Form_Project();
+    }
+
+    public function voteAction(){
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+
+            $request = $this->getRequest ();
+
+            if($request->isPost()){
+                $post=$request->getPost();
+                $data['valor']=$post['valor'];
+
+                $model=new Model_Projects();
+
+                $project=$model->fetchProjectByLinkRewrite($request->link);
+
+                $data['id_proyecto']=$project['id_proyecto'];
+                $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                $model->vote($data);
+                echo json_encode($model->getVotes($data['id_proyecto']));
+                die;
+
+
+                
+            }
+        }
+
+        
     }
 
 
