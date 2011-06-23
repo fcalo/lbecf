@@ -159,6 +159,41 @@
                 </field>
             </fields>
         </entity>
+        <entity>
+            <id_entity>13</id_entity>
+            <title>Colaboradores</title>
+            <table>colaborador</table>
+            <fields>
+                <field>
+                    <name>id_colaborador</name>
+                    <description>id</description>
+                    <type>int(11)</type>
+                    <null>N</null>
+                    <auto_increment>S</auto_increment>
+                    <primary_key>S</primary_key>
+                </field>
+                <field>
+                    <name>colaborador</name>
+                    <description>Colaborador</description>
+                    <type>varchar(255)</type>
+                    <in_list>S</in_list>
+                    <null>N</null>
+                </field>
+                <field>
+                    <name>contacto</name>
+                    <description>Contacto</description>
+                    <type>varchar(255)</type>
+                    <null>N</null>
+                </field>
+                <field>
+                    <name>descripcion</name>
+                    <description>Descripción</description>
+                    <type>text</type>
+                    <null>S</null>
+                </field>
+                
+            </fields>
+        </entity>
    </entity>
 
    <entity>
