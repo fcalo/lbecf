@@ -69,6 +69,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routePolitica = new Zend_Controller_Router_Route( '/politica/', array( 'controller' => 'static', 'action' => 'politica') );
         $routeSobre = new Zend_Controller_Router_Route( '/sobre/', array( 'controller' => 'static', 'action' => 'sobre') );
         $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward', array( 'controller' => 'support', 'action' => 'pago') );
+        $routeCancelPayment = new Zend_Controller_Router_Route( '/apoyo/cancel/:preapproval_key', array( 'controller' => 'support', 'action' => 'cancel') );
         $routeSupport = new Zend_Controller_Router_Route( '/apoyo/:action/*', array( 'controller' => 'support', 'action' => 'index') );
 
         //set the api route
@@ -94,6 +95,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'sobre', $routeSobre);
         $router->addRoute ( 'support', $routeSupport );
         $router->addRoute ( 'payment', $routePayment );
+        $router->addRoute ( 'cancelPayment', $routeCancelPayment );
 
         //set all routes
         $front->setRouter ( $router );

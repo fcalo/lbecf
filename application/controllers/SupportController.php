@@ -50,6 +50,34 @@ class SupportController extends Zend_Controller_Action
         $this->_redirect($paypal->getUrlPayPal($paypal->getCmdPreapproval($preapprovalKey)));
     }
 
+    public function cancelAction(){
+
+
+        $preapprovalKey = $this->getRequest()->getParam('preapproval_key');
+
+        $modelSuport=new Model_Supports();
+        $support=$modelSuport->fetchSupportByPreapprovedKey($preapprovalKey);
+        $auth = Zend_Auth::getInstance();
+
+        if($auth->getIdentity()->id_usuario!=$support['id_usuario_apoyo'])
+                $this->_redirect("/");
+
+        $config = Zend_Registry::get('config');
+
+        $params=array();
+
+        $paypal=New Service_Paypal($params);
+
+        $rt=$paypal->CallCancelPreapproval($preapprovalKey);
+        if($rt['responseEnvelope.ack']!="Success")
+            die("ko");
+
+        $modelSuport->setCanceled($support['id_apoyo']);
+        die("ok");
+
+
+    }
+
     public function okAction(){}
 
     public function koAction(){}

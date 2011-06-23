@@ -8,6 +8,9 @@ body{
 	background-color:#f7f7f7;
         color:#900;
 }
+a{
+    cursor: pointer;
+}
 
 input[type='text'], input[type='password']{
 	border:1px solid #ccc;
@@ -165,7 +168,7 @@ input[type='text'], input[type='password']{
 #panel-home #destacado .destacado-content{
     background-color:#900;
     color:#fff;
-    padding:0 10px 0 20px;
+    padding:0 10px 20px 20px;
 }
 
 #panel-home #destacado .destacado-content #noticias{
@@ -697,9 +700,7 @@ div .msg{
 }
 #content #panel-profile .profile-box{
     border:1px solid #600;
-    width:420px;
     margin:20px;
-    float:left;
     background-color:#f7f7f7;
     -moz-border-radius:6px;
     -webkit-border-radius:6px;
@@ -711,6 +712,10 @@ div .msg{
 }
 #content #panel-profile .profile-box a{
     color:#900;
+}
+#content #panel-profile .profile-box .action-box{
+    float:right;
+    margin-right:10px;
 }
 #content #panel-profile h2{
     color:#900;
