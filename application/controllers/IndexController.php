@@ -21,17 +21,13 @@ class IndexController extends Zend_Controller_Action
                 ->order("id_proyecto DESC")
                 );
 
+
         if(count($project)!=0){
 
-            $dbSupport =new Application_Model_DbTable_Support();
-            $supports=$dbSupport->fetchRow(
-                    $dbSupport->select()
-                    ->from("apoyo",
-                            array('sum(apoyo) as sum_apoyo','count(apoyo) as count_apoyo', 'apoyo'))
-                    ->where('id_proyecto = '.$project->id_proyecto.' AND approved="S"')
-                    ->group('apoyo')
-                    );
+            $model=new Model_Supports();
+            $supports=$model->fetchSupportsByProject($project->id_proyecto);
 
+            
             $dbNews=new Application_Model_DbTable_News();
             $news=$dbNews->fetchAll($dbNews->select());
 
@@ -39,7 +35,7 @@ class IndexController extends Zend_Controller_Action
             $this->view->recaudado=isset($supports->sum_apoyo)?$supports->sum_apoyo:0;
             $this->view->numApoyos=isset($supports->count_apoyo)?$supports->count_apoyo:0;
             $this->view->project=$project;
-            $this->view->porcentaje=($supports->apoyo/$project->importe_solicitado)*100;
+            $this->view->porcentaje=($supports->sum_apoyo/$project->importe_solicitado)*100;
             $this->view->news=$news;
             $this->view->days=$project->days;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);

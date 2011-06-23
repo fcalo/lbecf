@@ -5,9 +5,12 @@
 
 
 $(function() {
+
+        $("#descripcion").html(unescape($("#descripcion").html()));
         $( "#tabs" ).tabs();
+        
         $( "#progressbar" ).progressbar({
-                value: $("#porcentaje").html()
+                value: ($("#porcentaje").html()*1)
         });
         $("#recompensas .btn-red").click(function(){
             if($("#idUser").length==0 || $("#idUser").val()=="")
@@ -87,6 +90,13 @@ $(function() {
                 voto(-1);
             }
          });
+         $("#add-comentario").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                comentario();
+            }
+         });
 });
 
 function voto(valor){
@@ -99,6 +109,21 @@ function voto(valor){
         success: function (data) {
                 $("#lup").html("("+data['positivos']+")");
                 $("#ldown").html("("+data['negativos']+")");
+        }
+
+    });
+}
+function comentario(){
+    if($("#txt-comentario").val()=="")
+        return false;
+    $.ajax({
+        url: '/proyecto/comentario/'+$("#link").val(),
+        data: "comentario="+$("#txt-comentario").val(),
+        type: 'post',
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            $("#comentarios").append('<div class="comentario"><div><span>'+data['username']+'</span>\n'+data['txt']+'</div><div class="fecha">hace unos segundos</div></div>');
         }
 
     });
