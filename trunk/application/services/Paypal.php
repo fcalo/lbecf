@@ -385,6 +385,20 @@ class Service_Paypal {
 		return $resArray;
 	}
 
+
+        public function CallCancelPreapproval( $preapprovalKey )
+	{
+
+		// required fields
+		$nvpstr = "preapprovalKey=" . urlencode($preapprovalKey);
+
+		/* Make the PreapprovalDetails call to PayPal */
+		$resArray = $this->hash_call("CancelPreapproval", $nvpstr);
+
+		/* Return the response array */
+		return $resArray;
+	}
+
 	/*
 	'-------------------------------------------------------------------------------------------------------------------------------------------
 	' Purpose: 	Prepares the parameters for the Preapproval API Call.

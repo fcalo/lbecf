@@ -1,6 +1,6 @@
 <?$helper=new View_Helper_Image();?>
 <div id="panel-profile">
-    
+    <input type="hidden" id="preapproval"/>
     <div id="acciones">
         <a href="#" id="image">Cambiar imagen de perfil</a>
         <a href="#" id="new-project">Crear proyecto</a>
@@ -14,7 +14,30 @@
     <div class="profile-box">
         <h3>Proyectos que apoyas</h3>
         <ul>
-            <li><a href="#">La butaca escarlata</a></li>
+            <?
+            $first=true;
+            $latsProject="";
+            foreach($this->supports as $support):
+                    if($lastProjecto!=$support['titulo']){
+                        if(!$first)
+                            echo '</ul></li>';
+                        $first=false;?>
+                       <li><a href="/proyecto/<?=$support['link_rewrite']?>"><?=$support['titulo']?></a>
+                    <ul>
+
+                <?}
+                    $lastProjecto=$support['titulo'];
+
+                    ?>
+
+
+                        <li><?=$support['apoyo']?> &euro; por <i><?=$support['recompensa']?></i>
+                            <?if($support['subasta']!="S"):?>
+                                <div class="action-box"><a class="cancel-preaproval" id="<?=$support['preapproved_key']?>">Cancelar apoyo</a></div>
+                            <?endif;?>
+                        </li>
+                    
+           <?endforeach;?>
         </ul>
     </div>
     <div class="profile-box">
@@ -40,6 +63,11 @@
 <div id="dialog-form" title="Darse de baja">
     <div>
         <p>&iquest;Desea darse de baja de La Butaca escarlata?</p>
+    </div>
+</div>
+<div id="dialog-form-cancel" title="Dejar de apoyar el proyecto">
+    <div>
+        <p>&iquest;Desea cancelar completame este apoyo?</p>
     </div>
 </div>
 <div id="dialog-form-image" title="Cambiar imagen">

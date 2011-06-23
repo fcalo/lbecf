@@ -398,6 +398,8 @@ class UserController extends Zend_Controller_Action
         }
 
 
+        $modelSupport=new Model_Supports();
+        $this->view->supports=$modelSupport->fetchSupportsByUser($this->view->user->id_usuario);
         
     }
 
