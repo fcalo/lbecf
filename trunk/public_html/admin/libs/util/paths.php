@@ -18,12 +18,15 @@ function ensurePath_($path){
 	$r="";
 	for ($i=0;$i<$c;$i++){
 		$r.=$a[$i]."/";
+                $permisos=false;
 		if (!file_exists($r)){
 			//echo "no existe";
+                        $permisos=true;
 			if (!mkdir($r))
 				die("No se pudo crear ".$path);
 		}
-		chmod($r,0777);
+                if($permisos)
+                    chmod($r,0777);
 		
 	}
 	return $rt;
