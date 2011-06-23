@@ -24,7 +24,7 @@ class SupportController extends Zend_Controller_Action
         $paypalConfig['returnUrl']=$hostname.$config->payment->paypal->return;
         $paypalConfig['paypalUrl']=$config->payment->paypal->paypal_url;
         $paypalConfig['notifyUrl']=$hostname.$config->payment->paypal->notify_url;
-        $paypalConfig['bussines']=$hostname.$config->payment->paypal->bussines;
+        $paypalConfig['bussines']=$config->payment->paypal->bussines;
         
 
         //TODO: Obtener datos de conexion del local.ini
@@ -48,6 +48,41 @@ class SupportController extends Zend_Controller_Action
         $Support->saveSupport($data);
 
         $this->_redirect($paypal->getUrlPayPal($paypal->getCmdPreapproval($preapprovalKey)));
+    }
+    
+    
+    public function confirmAction(){
+
+        $config = Zend_Registry::get('config');
+        $idSupport = $this->getRequest()->getParam('support');
+
+        $modelSupport=new Model_Supports();
+        $support=$modelSupport->fetch($idSupport);
+
+        $hostname=Service_Urls::getHost();
+
+        $paypalConfig['cancelUrl']=$hostname.$config->payment->paypal->return_cancel;
+        $paypalConfig['returnUrl']=$hostname.$config->payment->paypal->return;
+        $paypalConfig['paypalUrl']=$config->payment->paypal->paypal_url;
+        $paypalConfig['bussines']=$config->payment->paypal->bussines;
+
+
+        //TODO: Obtener datos de conexion del local.ini
+        $params=array();
+        $paypal=new Service_Paypal($params);
+
+
+        $pay=$paypal->CallPay("PAY", $paypalConfig['cancelUrl'], $paypalConfig['returnUrl'] , "EUR", array($paypalConfig['bussines']), array($support['apoyo']), null, null, null, null, null, $pin, $support['preapproved_key'], null, null, null);
+
+        if($pay['paymentExecStatus']=="COMPLETED"){
+            $modelSupport->setPayed($idSupport);
+            echo "Pagado ".$support['apoyo']." del apoyo".$idSupport;
+        }else{
+            echo "Fallo!<br>";
+            var_dump($pay);
+        }
+        die;
+        
     }
 
     public function cancelAction(){
@@ -120,6 +155,7 @@ class SupportController extends Zend_Controller_Action
          die;
 
     }
+
 
     public function indexAction(){}
 
