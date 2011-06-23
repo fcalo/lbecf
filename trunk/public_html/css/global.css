@@ -436,6 +436,9 @@ input[type='text'], input[type='password']{
     display:block;
     padding:20px;
 }
+#panel-project #recompensas p{
+    padding:0 20px;
+}
 #panel-project #recompensas ul{
     padding:0 10px 0 20px;
 }

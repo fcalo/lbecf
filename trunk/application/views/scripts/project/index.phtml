@@ -48,16 +48,14 @@
 	</div>
 	<div id="tabs-2">
             <div id="colaboradores">
-                <div class="colaborador">
-                    <h2>colaborador requerido</h2>
-                    <p class="contacto">Envíar mail a contacto@contacto.es</p>
-                    <p>Descripción del colaborador requerido,  Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                </div>
-                <div class="colaborador">
-                    <h2>colaborador requerido</h2>
-                    <p class="contacto">Envíar mail a contacto@contacto.es</p>
-                    <p>Descripción del colaborador requerido,  Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                </div>
+                <?foreach($this->collaborators as $collaborator):?>
+                    <div class="colaborador">
+                        <h2><?=$collaborator['colaborador']?></h2>
+                        <p class="contacto"><?=$collaborator['contacto']?></p>
+                        <p><?=$collaborator['descripcion']?></p>
+                    </div>
+                <?endforeach;?>
+                
             </div>
 	</div>
 	<div id="tabs-3">
@@ -155,7 +153,7 @@
         </ul>
         <?if(count($this->rewardsSale)>0):?>
             <span>Recompensas limitadas</span>
-            Solo se tendrá en cuenta el apoyo más alto
+            <p>Solo se tendrá en cuenta el apoyo más alto</p>
             <ul class="scroll-content-item ui-widget-header">
                 <?foreach($this->rewardsSale as $reward):?>
                 <li>

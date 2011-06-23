@@ -59,7 +59,8 @@ class ProjectController extends Zend_Controller_Action
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
             $this->view->url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
             $this->view->votos=$model->getVotes($project->id_proyecto);
-
+            $modelCollaborators=New Model_Collaborators();
+            $this->view->collaborators=$modelCollaborators->fetchByProject($project->id_proyecto);
         }
         
     }
