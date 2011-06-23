@@ -42,7 +42,7 @@
                         
                     </div>
                     <h2>Descripci&oacute;n del Proyecto</h2>
-                    <span><?=$this->project->descripcion?></span>
+                    <span id="descripcion"><?=nl2br($this->project->descripcion)?></span>
                 </div>
             </div>
 	</div>
@@ -103,7 +103,7 @@
                     </div>
                     <div id="entrada" >
                         <div><textarea name="comentario-XX" cols="40" rows="1"></textarea></div>
-                        <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
+                        <div><input type="button" id="add-comentario-XX" class="btn-red" value="Comentar"/></div>
                     </div>
                 </div>
                 <div class="propuesta">
@@ -131,7 +131,7 @@
                     
                     <div id="entrada" >
                         <div><textarea name="comentario-XX" cols="40" rows="1"></textarea></div>
-                        <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
+                        <div><input type="button" id="add-comentario_XX" class="btn-red" value="Comentar"/></div>
                     </div>
                 </div>
                 <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Proponer"/></div>
@@ -197,10 +197,11 @@
                 hace 3 días
             </div>
         </div>
-        <div id="entrada" >
-            <div><textarea name="comentario" cols="80" rows="4"></textarea></div>
-            <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
-        </div>
+        
+    </div>
+    <div id="entrada" >
+        <div><textarea name="comentario" id="txt-comentario" cols="80" rows="4"></textarea></div>
+        <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
     </div>
     <div class="cl"></div>
 </div>
