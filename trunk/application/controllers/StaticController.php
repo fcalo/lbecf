@@ -19,11 +19,11 @@ class StaticController extends Zend_Controller_Action
         $data=$model->fetchRow($model->select());
         $rt=array();
         $this->view->headScript()->appendFile( '/js/funciona.js');
-        $rt[]=nl2br(utf8_encode($data['text_1']));
-        $rt[]=nl2br(utf8_encode($data['text_2']));
-        $rt[]=nl2br(utf8_encode($data['text_3']));
-        $rt[]=nl2br(utf8_encode($data['text_4']));
-        $rt[]=nl2br(utf8_encode($data['text_5']));
+        $rt[]=nl2br($data['text_1']);
+        $rt[]=nl2br($data['text_2']);
+        $rt[]=nl2br($data['text_3']);
+        $rt[]=nl2br($data['text_4']);
+        $rt[]=nl2br($data['text_5']);
         return $rt;
     }
 

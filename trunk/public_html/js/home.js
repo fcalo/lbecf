@@ -6,7 +6,7 @@
 
 $(function() {
         $( "#progressbar" ).progressbar({
-                value: $("#porcentaje").html()
+                value: ($("#porcentaje").html()*1)
         });
 
         //scrollpane parts

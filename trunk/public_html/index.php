@@ -9,7 +9,7 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-if ( APPLICATION_ENV != 'development' )
+if ( APPLICATION_ENV != 'development' && $_SERVER['REQUEST_URI']!="/apoyo/ipn/")
     require('sas.php');
 
 
@@ -23,6 +23,7 @@ else
 
 $includePath = array();
 $includePath[] = realpath(APPLICATION_PATH.'/forms/');
+$includePath[] = realpath(APPLICATION_PATH.'/lib/');
 $includePath[] = realpath(APPLICATION_PATH . '/../library');
 $includePath = implode(PATH_SEPARATOR,$includePath);
 set_include_path($includePath);

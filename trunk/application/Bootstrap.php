@@ -53,6 +53,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //set the user profile route
         $routeAddProject = new Zend_Controller_Router_Route( '/proyecto/crear/', array( 'controller' => 'project', 'action' => 'create') );
         $routeVoteProject = new Zend_Controller_Router_Route( '/proyecto/voto/:link', array( 'controller' => 'project', 'action' => 'vote') );
+        $routeCommentProject = new Zend_Controller_Router_Route( '/proyecto/comentario/:link', array( 'controller' => 'project', 'action' => 'comment') );
         $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
@@ -77,6 +78,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'project', $routeProject);
         $router->addRoute ( 'add_project', $routeAddProject);
         $router->addRoute ( 'vote_project', $routeVoteProject);
+        $router->addRoute ( 'comment_project', $routeCommentProject);
         
         $router->addRoute ( 'user', $routeUser);
         $router->addRoute ( 'profile', $routeProfile);
