@@ -25,9 +25,9 @@ class Form_Project extends Zend_Form {
                 $this->addElement ( 'text', 'fecha', array ('decorators' => $decorator, 'label' => '¿Cuando vence?:', 'filters' => array ('StringTrim' ),'required' => true ));
                 $this->addElement ( 'text', 'importe', array ('decorators' => $decorator, 'label' => '¿Cuanto necesitas?:', 'filters' => array ('StringTrim' ),'required' => true ));
 
-                $this->addElement ( 'text', 'recompensa', array ('decorators' => $decorator, 'label' => '¿Qué Ofreces?:', 'filters' => array ('StringTrim' ),'required' => true ));
-                $this->addElement ( 'text', 'minimo', array ('decorators' => $decorator, 'label' => '¿A cambio de cuánto?:', 'filters' => array ('StringTrim' ),'required' => true ));
-                $this->addElement ( 'checkbox', 'subasta', array ('decorators' => $decorator, 'label' => '¿Se subasta?:'));
+                //$this->addElement ( 'text', 'recompensa', array ('decorators' => $decorator, 'label' => '¿Qué Ofreces?:', 'filters' => array ('StringTrim' ),'required' => true ));
+                //$this->addElement ( 'text', 'minimo', array ('decorators' => $decorator, 'label' => '¿A cambio de cuánto?:', 'filters' => array ('StringTrim' ),'required' => true ));
+                //$this->addElement ( 'checkbox', 'subasta', array ('decorators' => $decorator, 'label' => '¿Se subasta?:'));
 
 
                 
