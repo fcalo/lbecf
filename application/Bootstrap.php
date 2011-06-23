@@ -71,6 +71,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward', array( 'controller' => 'support', 'action' => 'pago') );
         $routeCancelPayment = new Zend_Controller_Router_Route( '/apoyo/cancel/:preapproval_key', array( 'controller' => 'support', 'action' => 'cancel') );
         $routeSupport = new Zend_Controller_Router_Route( '/apoyo/:action/*', array( 'controller' => 'support', 'action' => 'index') );
+        $routeConfirm = new Zend_Controller_Router_Route( '/apoyo/confirm/:support/', array( 'controller' => 'support', 'action' => 'confirm') );
 
         //set the api route
         //$routeApi = new Zend_Controller_Router_Route('/api/:action/*', array(  'controller' => 'api', 'action' => 'index') );
@@ -94,6 +95,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'politica', $routePolitica);
         $router->addRoute ( 'sobre', $routeSobre);
         $router->addRoute ( 'support', $routeSupport );
+        $router->addRoute ( 'confirm', $routeConfirm);
         $router->addRoute ( 'payment', $routePayment );
         $router->addRoute ( 'cancelPayment', $routeCancelPayment );
 

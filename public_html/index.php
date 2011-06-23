@@ -9,7 +9,7 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-if ( APPLICATION_ENV != 'development' && $_SERVER['REQUEST_URI']!="/apoyo/ipn/")
+if ( APPLICATION_ENV != 'development' && $_SERVER['REQUEST_URI']!="/apoyo/ipn/" && $_SERVER['REQUEST_URI']!="/apoyo/payipn/")
     require('sas.php');
 
 

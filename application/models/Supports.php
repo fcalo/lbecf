@@ -23,6 +23,14 @@ class Model_Supports
         );
         return $row;
     }
+    public function fetch($idSupport)
+    {
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('id_apoyo= "'.$idSupport.'"')
+        );
+        return $row;
+    }
     public function fetchSupportsByUser($idUser)
     {
 
@@ -53,6 +61,9 @@ class Model_Supports
     }
     public function setApproved($idSupport){
         return $this->db->update(array("approved"=>"S"), "id_apoyo=".$idSupport);
+    }
+    public function setPayed($idSupport){
+        return $this->db->update(array("pagado"=>"S"), "id_apoyo=".$idSupport);
     }
 
     public function fetchSupportsByProject($idProject){
