@@ -28,16 +28,16 @@ class Service_Paypal {
 	// Replace <API_SIGNATURE> with your Signature
 	//------------------------------------
 
-        private $API_UserName = "fernan_1308771699_biz_api1.gmail.com";
-        private $API_Password = "1308771707";
-        private $API_Signature = "A.y6-5L0MBLxPrgTR9z.v2XX5v9fAHqzh1k-tujBzHsZxCXJd67m5Qu-";
+        private $API_UserName = null;
+        private $API_Password = null;
+        private $API_Signature = null;
 
 	// AppID is preset for sandbox use
 	//   If your application goes live, you will be assigned a value for the live environment by PayPal as part of the live onboarding process
-	private $API_AppID = "APP-80W284485P519543T";
+	private $API_AppID = null;
 	private $API_Endpoint = "";
 
-        public function  __construct($params) {
+        public function  __construct() {
 
             if ($this->Env == "sandbox"){
                     $this->API_Endpoint = "https://svcs.sandbox.paypal.com/AdaptivePayments";
@@ -46,14 +46,12 @@ class Service_Paypal {
                     $this->API_Endpoint = "https://svcs.paypal.com/AdaptivePayments";
             }
 
-            if(isset($params['username']))
-                $this->API_UserName=$params['username'];
-            if(isset($params['password']))
-                $this->API_Password=$params['password'];
-            if(isset($params['signature']))
-                $this->API_Signature=$params['signature'];
-            if(isset($params['appId']))
-                $this->API_AppID=$params['appId'];
+            $config = Zend_Registry::get('config');
+
+            $this->API_UserName=$config->payment->paypal->apiUsername;
+            $this->API_Password=$config->payment->paypal->apiPassword;
+            $this->API_Signature=$config->payment->paypal->apiSignature;
+            $this->API_AppID=$config->payment->paypal->apiAppID;
 
             $this->USE_PROXY = false;
 
@@ -478,6 +476,10 @@ class Service_Paypal {
 
                 If ( $resArray["responseEnvelope.ack"] == "Success")
                     return $resArray["preapprovalKey"];
+                else{
+                    var_dump($resArray);
+                    die;
+                }
 	}
 
 	/**

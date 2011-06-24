@@ -47,6 +47,20 @@ class Model_Supports
 
         return $this->db->getAdapter()->query($sql, array($idUser))->fetchAll();
     }
+    public function fetchOutstanding()
+    {
+        $sql="SELECT a.id_apoyo";
+        $sql.=" FROM apoyo a";
+        $sql.=" INNER JOIN proyectos p ON p.id_proyecto=a.id_proyecto";
+        $sql.=" WHERE coalesce(a.pagado,'N')!='S'";
+        $sql.=" AND coalesce(a.cancelado,'N')!='S'";
+        $sql.=" AND coalesce(a.approved,'N')='S'";
+        $sql.=" AND coalesce(p.completo,'N')='S'";
+
+        return $this->db->getAdapter()->query($sql)->fetchAll();
+    }
+
+
     public function fetchSupportByRewardSubasta($reward)
     {
         $row=$this->db->fetchRow(

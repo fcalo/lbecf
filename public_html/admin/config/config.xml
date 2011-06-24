@@ -80,7 +80,7 @@
                 <in_list>S</in_list>
             </field>
         </fields>
-        <entity>
+         <entity>
             <id_entity>11</id_entity>
             <title>Recompensas</title>
             <table>recompensa</table>
@@ -114,51 +114,7 @@
                 </field>
             </fields>
         </entity>
-        <entity>
-            <id_entity>12</id_entity>
-            <title>Apoyos</title>
-            <table>apoyo</table>
-            <fields>
-                <field>
-                    <name>id_apoyo</name>
-                    <description>id</description>
-                    <type>int(11)</type>
-                    <null>N</null>
-                    <auto_increment>S</auto_increment>
-                    <primary_key>S</primary_key>
-                </field>
-                <field>
-                    <name>id_usuario_apoyo</name>
-                    <description>Usuario</description>
-                    <type>int(11)</type>
-                    <entity_ref>3</entity_ref>
-                    <null>N</null>
-                    <in_list>S</in_list>
-                </field>
-                <field>
-                    <name>apoyo</name>
-                    <description>Apoyo</description>
-                    <type>float(10,2)</type>
-                    <null>N</null>
-                </field>
-                <field>
-                    <name>fecha</name>
-                    <description>Fecha</description>
-                    <type>date</type>
-                    <null>N</null>
-                </field>
-                <field>
-                    <name>preapproved_key</name>
-                    <description>Clave Preaprobado</description>
-                    <type>varchar(25)</type>
-                </field>
-                <field>
-                    <name>approved</name>
-                    <description>Aprobado</description>
-                    <type>char(1)</type>
-                </field>
-            </fields>
-        </entity>
+        
         <entity>
             <id_entity>13</id_entity>
             <title>Colaboradores</title>

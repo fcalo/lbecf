@@ -10,6 +10,7 @@
             <div id="ficha">
                 <div id="ficha-iconos"></div>
                 <input type="hidden" id="link" value="<?=$this->project->link_rewrite?>"/>
+                <input type="hidden" id="closed" value="<?=$this->closed?"1":""?>"/>
                 <div id="votos">
                     <div>
                         <a id="down"><img src="/img/down.png"></a>
@@ -29,8 +30,13 @@
                     <div class="text"><?=round($this->recaudado,0)?> de <?=round($this->project->importe_solicitado,0)?> &euro;</div>
                     <div class="number margin"><?=$this->numApoyos?></div>
                     <div class="text">apoyos</div>
+                    <?if(!$this->closed):?>
                     <div class="number margin"><?=$this->days?></div>
                     <div class="text">días</div>
+                    <?else:?>
+                    <div class="number margin">Cerrado</div>
+                    <div class="text">El plazo ha finalizado</div>
+                    <?endif;?>
                 </div>
 
                 <div id="ficha-bottom">
