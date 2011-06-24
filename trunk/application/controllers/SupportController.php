@@ -29,11 +29,12 @@ class SupportController extends Zend_Controller_Action
 
         //TODO: Obtener datos de conexion del local.ini
         $params=array();
-        $paypal=new Service_Paypal($params);
+        $paypal=new Service_Paypal();
 
-        
+        $cd = strtotime($project->fec_fin);
+        $fecPago= date('Y-m-d', mktime(0,0,0,date('m',$cd),date('d',$cd)+15,date('Y',$cd)));
 
-        $preapprovalKey=$paypal->CallPreapproval($paypalConfig['notifyUrl'],$paypalConfig['returnUrl'], $paypalConfig['cancelUrl'], "EUR", $project->fec_fin, $project->fec_fin, $support, "", 1, "", "", "", "", "", "");
+        $preapprovalKey=$paypal->CallPreapproval($paypalConfig['notifyUrl'],$paypalConfig['returnUrl'], $paypalConfig['cancelUrl'], "EUR", $project->fec_fin, $fecPago, $support, "", 1, "", "", "", "", "", "");
         //Se guarda la clave
 
         $Support=new Model_Supports();
@@ -69,7 +70,7 @@ class SupportController extends Zend_Controller_Action
 
         //TODO: Obtener datos de conexion del local.ini
         $params=array();
-        $paypal=new Service_Paypal($params);
+        $paypal=new Service_Paypal();
 
 
         $pay=$paypal->CallPay("PAY", $paypalConfig['cancelUrl'], $paypalConfig['returnUrl'] , "EUR", array($paypalConfig['bussines']), array($support['apoyo']), null, null, null, null, null, $pin, $support['preapproved_key'], null, null, null);
@@ -101,7 +102,7 @@ class SupportController extends Zend_Controller_Action
 
         $params=array();
 
-        $paypal=New Service_Paypal($params);
+        $paypal=New Service_Paypal();
 
         $rt=$paypal->CallCancelPreapproval($preapprovalKey);
         if($rt['responseEnvelope.ack']!="Success")

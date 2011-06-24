@@ -94,6 +94,24 @@ class Model_Projects
         return true;
     }
 
-   
+    public function fetchClosed()
+    {
+
+        $sql="SELECT p.id_proyecto, p.importe_solicitado, sum(a.apoyo) apoyo ";
+        $sql.=" FROM proyectos p";
+        $sql.=" INNER JOIN apoyo a ON a.id_proyecto=p.id_proyecto";
+        $sql.=" WHERE coalesce(p.completo,'N')!='S'";
+        $sql.=" AND p.fec_fin<now()";
+        $sql.=" AND a.approved='S'";
+        $sql.=" AND a.cancelado='N'";
+        $sql.=" group by p.id_proyecto";
+
+        return $this->db->getAdapter()->query($sql)->fetchAll();
+    }
+    
+
+   public function setCompleted($idProject){
+        return $this->db->update(array("completo"=>"S"), "id_proyecto=".$idProject);
+    }
 }
 

@@ -13,15 +13,19 @@ $(function() {
                 value: ($("#porcentaje").html()*1)
         });
         $("#recompensas .btn-red").click(function(){
-            if($("#idUser").length==0 || $("#idUser").val()=="")
-                location.href="/usuario/login";
-            else{
-                var a=$(this).attr("id").split("_");
-                $("#id-recompensa").val(a[0]);
-                $("#apoyo-minimo").val(a[1]);
-                $("#amount").val($("#apoyo-minimo").val());
+            if($("#closed").length==0 || $("#closed").val()==""){
+                if($("#idUser").length==0 || $("#idUser").val()=="")
+                    location.href="/usuario/login";
+                else{
+                    var a=$(this).attr("id").split("_");
+                    $("#id-recompensa").val(a[0]);
+                    $("#apoyo-minimo").val(a[1]);
+                    $("#amount").val($("#apoyo-minimo").val());
 
-                $( "#dialog-form" ).dialog( "open" );
+                    $( "#dialog-form" ).dialog( "open" );
+                }
+            }else{
+                alert("Proyecto cerrado.");
             }
         });
 

@@ -25,8 +25,8 @@ class ProjectController extends Zend_Controller_Action
         //->from(array("proyectos"), array("*","days"=>"abs(datediff(now(),p.fec_fin)"))
         $project=$dbProject->fetchRow(
                 $dbProject->select()
-                ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("abs(datediff(now(),fec_fin))")))
-                ->where('link_rewrite = "'.$linkRewrite.'"')
+                ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("datediff(fec_fin,now())")))
+                ->where('link_rewrite = "'.$linkRewrite.'" AND activo="S"')
                 );
 
         if(count($project)==0)
@@ -56,6 +56,7 @@ class ProjectController extends Zend_Controller_Action
             //$now=new Datetime();
             //$interval = $this->dateDifference(date(), $project->fec_fin);
             $this->view->days=$project->days;
+            $this->view->closed=$project->days<1;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
             $this->view->url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
             $this->view->votos=$model->getVotes($project->id_proyecto);
