@@ -80,7 +80,9 @@ $helperDate=new View_Helper_Date();?>
             <div id="concurso">
                 <h2><?=$this->project->titulo_concurso?></h2>
 		<p><?=nl2br($this->project->descripcion_concurso)?></p>
-
+                <?if(count($this->proposals)==0):?>
+                    <div class="propuesta">A&uacute;n no hay propuestas, puedes ser el primero.</div>
+                <?endif;?>
 
                 <?foreach($this->proposals as $proposal):?>
                     <div class="propuesta">
@@ -94,13 +96,13 @@ $helperDate=new View_Helper_Date();?>
                                 <span id="lup-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['positivos']?>)</span>
                             </div>
                         </div>
-                        <h3>Propuesta de <?=$proposal['username']?></h3>
+                        <h3>Propuesta de <?=$proposal['username']?></h3> 
 
                             <p><?=nl2br($proposal['propuesta'])?></p>
                             <?if($proposal['adjunto']!=""):?>
                             <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Ver adjunto</a>
                             <?endif;?>
-                        <img src="<?=$helper->image($proposal['id_usuario'], $proposal['imagen'])?>">
+                        <!--<img src="<?=$helper->image($proposal['id_usuario'], $proposal['imagen'])?>">-->
                         <div class="fecha"><?=$helperDate->Date2DateComment($proposal['fecha'])?></div>
                         <div>
                             <a class="show_comments" id="<?=$proposal['id_propuesta']?>"><?=(count($proposal['comments'])==0)?"Comentar":"Mostrar comentarios(".count($proposal['comments']).")"?></a>

@@ -418,7 +418,7 @@ input[type='text'], input[type='password']{
 }
 #panel-project #concurso .propuesta .comentario-concurso img{
     float:left;
-    margin:5px;
+    margin:0 5px;
 }
 #panel-project #concurso .propuesta .comentarios-concurso{
     display:none;
@@ -487,7 +487,7 @@ input[type='text'], input[type='password']{
 }
 #panel-project #comentarios .comentario img{
     float:left;
-    margin:5px;
+    margin:0 5px;
 }
 #panel-project #comentarios .comentario span{
     font-weight: bold;

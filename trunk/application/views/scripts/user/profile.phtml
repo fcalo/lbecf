@@ -18,7 +18,7 @@
             $first=true;
             $latsProject="";
             foreach($this->supports as $support):
-                    if($lastProjecto!=$support['titulo']){
+                    if($lastProject!=$support['titulo']){
                         if(!$first)
                             echo '</ul></li>';
                         $first=false;?>
@@ -26,7 +26,7 @@
                     <ul>
 
                 <?}
-                    $lastProjecto=$support['titulo'];
+                    $lastProject=$support['titulo'];
 
                     ?>
 
@@ -61,9 +61,9 @@
         <ul>
               <?
             $first=true;
-            $latsProject="";
+            $lastProject="";
             foreach($this->proposalsComments as $item):
-                    if($lastProjecto!=$item['titulo']){
+                    if($lastProject!=$item['titulo']){
                         if(!$first)
                             echo '</ul></li>';
                         $first=false;?>
@@ -71,7 +71,7 @@
                     <ul>
 
                 <?}
-                    $lastProjecto=$item['titulo'];
+                    $lastProject=$item['titulo'];
 
                     ?>
 
