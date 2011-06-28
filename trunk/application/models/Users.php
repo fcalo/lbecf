@@ -149,5 +149,16 @@ class Model_Users
         return true;
     }
 
+     public function getComments($idUser){
+
+        $sql="SELECT count(*) comentarios, p.titulo, p.link_rewrite ";
+        $sql.=" FROM comentarios_proyectos c";
+        $sql.=" INNER JOIN proyectos p ON p.id_proyecto=c.id_proyecto";
+        $sql.=" WHERE  c.id_usuario= ?";
+        $sql.=" GROUP BY p.titulo, p.link_rewrite";
+        $sql.=" ORDER BY p.id_proyecto ASC";
+        return $this->db->getAdapter()->fetchAll($sql,array($idUser));
+    }
+
 }
 

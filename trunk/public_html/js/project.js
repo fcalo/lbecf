@@ -6,6 +6,30 @@
 
 $(function() {
 
+        $("#back-project").click(function(){
+            $("#panel-form").hide();
+            $("#panel-project").show();
+        })
+
+        $("#add-propuesta").click(function(){
+            if($("#closed").length==0 || $("#closed").val()==""){
+                if($("#idUser").length==0 || $("#idUser").val()=="")
+                    location.href="/usuario/login";
+                else{
+                    $( "#dialog-form-proposal" ).dialog( "open" );
+                }
+            }else{
+                alert("Proyecto cerrado.");
+            }
+
+        });
+
+        $(".show_comments").click(function(){
+           $("#comentarios_concurso_"+$(this).attr("id")).show();
+           $(this).remove();
+        });
+
+
         $("#descripcion").html(unescape($("#descripcion").html()));
         $( "#tabs" ).tabs();
         
@@ -61,6 +85,36 @@ $(function() {
 			}
 		});
 
+         $( "#dialog-form-proposal" ).dialog({
+                autoOpen: false,
+                height: 260,
+                width: 350,
+                modal: true,
+                buttons: {
+                        "Proponer": function() {
+                                var bValid = true;
+                                $("#proposal").removeClass( "ui-state-error" );
+
+                                bValid=$("#proposal").val()!="";
+
+                                if ( bValid ) {
+                                        $("#dialog-form div").hide();
+                                        $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
+                                        setTimeout('$("#do-proposal").submit()',1000);
+                                        //$( this ).dialog( "close" );
+                                }else{
+                                    $("#proposal").addClass( "ui-state-error" );
+                                }
+                        },
+                        "Cerrar": function() {
+                                $( this ).dialog( "close" );
+                        }
+                },
+                close: function() {
+                        $("#amount").removeClass( "ui-state-error" );
+                }
+        });
+
                 $("#amount").keyup(function(){
                     if ($(this).val() != '')
                         $(this).val($(this).attr('value').replace(/[^0-9]/g, ""));
@@ -87,6 +141,14 @@ $(function() {
                 voto(1);
             }
          });
+         $(".up").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                var a=$(this).attr("id").split("-");
+                votoPropuesta(1,a[1]);
+            }
+         });
          $("#down").click(function(){
             if($("#idUser").length==0 || $("#idUser").val()=="")
                 location.href="/usuario/login";
@@ -94,11 +156,26 @@ $(function() {
                 voto(-1);
             }
          });
+         $(".down").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                var a=$(this).attr("id").split("-");
+                votoPropuesta(-1,a[1]);
+            }
+         });
          $("#add-comentario").click(function(){
             if($("#idUser").length==0 || $("#idUser").val()=="")
                 location.href="/usuario/login";
             else{
                 comentario();
+            }
+         });
+         $(".add-comentario").click(function(){
+            if($("#idUser").length==0 || $("#idUser").val()=="")
+                location.href="/usuario/login";
+            else{
+                comentarioPropuesta($(this).attr("id"));
             }
          });
 });
@@ -117,6 +194,20 @@ function voto(valor){
 
     });
 }
+function votoPropuesta(valor, idPropuesta){
+    $.ajax({
+        url: '/proyecto/voto-propuesta/'+$("#link").val(),
+        data: "valor="+valor+"&propuesta="+idPropuesta,
+        type: 'post',
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+                $("#lup-"+idPropuesta).html("("+data['positivos']+")");
+                $("#ldown-"+idPropuesta).html("("+data['negativos']+")");
+        }
+
+    });
+}
 function comentario(){
     if($("#txt-comentario").val()=="")
         return false;
@@ -127,7 +218,26 @@ function comentario(){
         cache: false,
         dataType: 'json',
         success: function (data) {
-            $("#comentarios").append('<div class="comentario"><div><span>'+data['username']+'</span>\n'+data['txt']+'</div><div class="fecha">hace unos segundos</div></div>');
+            $("#comentarios").append('<div class="comentario"><img src="'+data['imagen']+'"><div><span>'+data['username']+'</span>\n'+data['txt']+'</div><div class="fecha">hace unos segundos</div></div>');
+            $("#txt-comentario").val();
+            $("#txt-comentario").html();
+        }
+
+    });
+}
+function comentarioPropuesta(idPropuesta){
+    if($("#txt-comentario"+idPropuesta).val()=="")
+        return false;
+    $.ajax({
+        url: '/proyecto/comentario-propuesta/'+$("#link").val(),
+        data: "comentario="+$("#txt-comentario-"+idPropuesta).val()+"&propuesta="+idPropuesta,
+        type: 'post',
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            $("#comentarios_"+data['propuesta']).append('<div class="comentario-concurso"><img src="'+data['imagen']+'"><div><span>'+data['username']+'</span>\n'+data['txt']+'</div><div class="fecha">hace unos segundos</div></div>');
+            $("#txt-comentario-"+data['propuesta']).val();
+            $("#txt-comentario-"+data['propuesta']).html();
         }
 
     });

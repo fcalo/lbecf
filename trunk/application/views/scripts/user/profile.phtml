@@ -43,19 +43,42 @@
     <div class="profile-box">
         <h3>Tus propuestas</h3>
         <ul>
-            <li><a href="#">La butaca escarlata</a></li>
+            <?foreach($this->proposals as $item):?>
+                <li>has realizado <?=$item['c']?> propuesta<?=($item['c']>1?"s":"")?> al proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
+            <?endforeach;?>
         </ul>
     </div>
     <div class="profile-box">
         <h3>Proyectos que has comentado</h3>
         <ul>
-            <li><a href="#">La butaca escarlata</a></li>
+            <?foreach($this->comments as $item):?>
+                <li><a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a> (<?=$item['comentarios']?> comentario<?=($item['comentarios']>1?"s":"")?>)</li>
+            <?endforeach;?>
         </ul>
     </div>
     <div class="profile-box">
-        <h3>Concursos que has comentado</h3>
+        <h3>Propuestas de concursos que has comentado</h3>
         <ul>
-            <li><a href="#">La butaca escarlata</a></li>
+              <?
+            $first=true;
+            $latsProject="";
+            foreach($this->proposalsComments as $item):
+                    if($lastProjecto!=$item['titulo']){
+                        if(!$first)
+                            echo '</ul></li>';
+                        $first=false;?>
+                       <li>Has comentado el concurso del proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                    <ul>
+
+                <?}
+                    $lastProjecto=$item['titulo'];
+
+                    ?>
+
+
+                        <li>La propuesta de <i><?=$item['username']?></i></li>
+
+           <?endforeach;?>
         </ul>
     </div>
     <div class="cl"></div>
