@@ -400,6 +400,14 @@ class UserController extends Zend_Controller_Action
 
         $modelSupport=new Model_Supports();
         $this->view->supports=$modelSupport->fetchSupportsByUser($this->view->user->id_usuario);
+
+        $modelUser=new Model_Users();
+        $this->view->comments=$modelUser->getComments($this->view->user->id_usuario);
+
+        $modelProposal=new Model_Proposals();
+        $this->view->proposals=$modelProposal->fetchByUser($this->view->user->id_usuario);
+
+        $this->view->proposalsComments=$modelProposal->getCommentsByUser($this->view->user->id_usuario);
         
     }
 

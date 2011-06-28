@@ -1,4 +1,13 @@
-<div id="panel-project">
+<?$helper=new View_Helper_Image();
+$helperDate=new View_Helper_Date();?>
+<?if (isset($this->proposalUpload)):?>
+    <div id="panel-form">
+        <h2><?=($this->proposalUpload)?"Su propuesta se ha registrador correctamente.":"Ha ocurrido un error al registrar su propuesta"?></h2>
+        <div><a id="back-project">Volver al proyecto</a></div>
+    </div>
+<?endif;?>
+
+<div id="panel-project" <?=isset($this->proposalUpload)?"style='display:none'":""?>>
     
     <div id="tabs">
 	<ul>
@@ -23,6 +32,9 @@
                 </div>
                 <h1><span>Proyecto: </span><?=$this->project->titulo?></h1>
                 <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
+                <?if (strlen($this->project->video_embed)>10):?>
+                    <div id="ficha-video"><?=$this->project->video_embed?></div>
+                <?endif;?>
                 <div id="ficha-info">
                     <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
                     <div class="text">recaudado</div>
@@ -66,78 +78,56 @@
 	</div>
 	<div id="tabs-3">
             <div id="concurso">
-                <h2>Título del concurso</h2>
-		<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                <h2><?=$this->project->titulo_concurso?></h2>
+		<p><?=nl2br($this->project->descripcion_concurso)?></p>
 
-                <div class="propuesta">
-                    <div id="votos">
-                            <a href="#" id="xx" class="down"><img src="/img/down.png"></a>
-                            <a href="#" id="x_x" class="up"><img src="/img/up.png"></a>
+
+                <?foreach($this->proposals as $proposal):?>
+                    <div class="propuesta">
+                        <div id="votos">
+                            <div>
+                                <a id="down-<?=$proposal['id_propuesta']?>" class="down"><img src="/img/down.png"></a>
+                                <span id="ldown-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['negativos']?>)</span>
+                            </div>
+                            <div>
+                                <a id="up-<?=$proposal['id_propuesta']?>"" class="up"><img src="/img/up.png"></a>
+                                <span id="lup-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['positivos']?>)</span>
+                            </div>
                         </div>
-                    <h3>Propuesta</h3>
-                        
-                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                    <span>Nombre de usuario</span><div class="fecha">hace 3 días</div>
-                    <div class="comentario-concurso">
+                        <h3>Propuesta de <?=$proposal['username']?></h3>
+
+                            <p><?=nl2br($proposal['propuesta'])?></p>
+                            <?if($proposal['adjunto']!=""):?>
+                            <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Ver adjunto</a>
+                            <?endif;?>
+                        <img src="<?=$helper->image($proposal['id_usuario'], $proposal['imagen'])?>">
+                        <div class="fecha"><?=$helperDate->Date2DateComment($proposal['fecha'])?></div>
                         <div>
-                            <span>Nombre de usuario</span>
-                            Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-                        </div>
-                        <div class="fecha">
-                            hace 3 días
-                        </div>
-                    </div>
-                    <div class="comentario-concurso">
-                        <div>
-                            <span>Nombre de usuario</span>
-                            Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-                        </div>
-                        <div class="fecha">
-                            hace 3 días
-                        </div>
-                    </div>
-                    <div class="comentario-concurso">
-                        <div>
-                            <span>Nombre de usuario</span>
-                            Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-                        </div>
-                        <div class="fecha">
-                            hace 3 días
-                        </div>
-                    </div>
-                    <div id="entrada" >
-                        <div><textarea name="comentario-XX" cols="40" rows="1"></textarea></div>
-                        <div><input type="button" id="add-comentario-XX" class="btn-red" value="Comentar"/></div>
-                    </div>
-                </div>
-                <div class="propuesta">
-                    <h3>Propuesta</h3
-                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                    <span>Nombre de usuario</span><div class="fecha">hace 3 días</div>
-                    <div class="comentario-concurso">
-                        <div>
-                            <span>Nombre de usuario</span>
-                            Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-                        </div>
-                        <div class="fecha">
-                            hace 3 días
+                            <a class="show_comments" id="<?=$proposal['id_propuesta']?>"><?=(count($proposal['comments'])==0)?"Comentar":"Mostrar comentarios(".count($proposal['comments']).")"?></a>
+                            </div>
+                        <div id="comentarios_concurso_<?=$proposal['id_propuesta']?>" class="comentarios-concurso">
+
+                            <div id="comentarios_<?=$proposal['id_propuesta']?>">
+                                <?if(is_array($proposal['comments'])):
+                                        foreach($proposal['comments'] as $comment):?>
+                                    <div class="comentario-concurso">
+                                        <img src="<?=$helper->image($comment['id_usuario'], $comment['imagen'])?>">
+                                        <div>
+                                            <span><?=$comment['username']?></span>
+                                            <?=$comment['comentario']?>
+                                        </div>
+                                        <div class="fecha"><?=$helperDate->Date2DateComment($comment['fecha'])?></div>
+                                    </div>
+                                <?endforeach;
+                                        endif;?>
+                            </div>
+                            <div id="entrada" >
+                                <div><textarea name="txt-comentario-<?=$proposal['id_propuesta']?>" id="txt-comentario-<?=$proposal['id_propuesta']?>"  cols="40" rows="1"></textarea></div>
+                                <div><input type="button" id="<?=$proposal['id_propuesta']?>" class="add-comentario btn-red" value="Comentar"/></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="comentario-concurso">
-                        <div>
-                            <span>Nombre de usuario</span>
-                            Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-                        </div>
-                        <div class="fecha">
-                            hace 3 días
-                        </div>
-                    </div>
-                    
-                    <div id="entrada" >
-                        <div><textarea name="comentario-XX" cols="40" rows="1"></textarea></div>
-                        <div><input type="button" id="add-comentario_XX" class="btn-red" value="Comentar"/></div>
-                    </div>
-                </div>
+                <?endforeach;?>
                 <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Proponer"/></div>
                 
             </div>
@@ -174,37 +164,21 @@
     </div>
     <div class="cl"></div>
     <div id="comentarios">
-        <div class="comentario">
-            <div>
-                <span>Nombre de usuario</span>
-                Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. 
+        <?foreach($this->comments as $comentario):?>
+            <div class="comentario">
+                <img src="<?=$helper->image($comentario['id_usuario'], $comentario['imagen'])?>">
+                <div>
+                    <span><?=$comentario['username']?></span>
+                    <?=$comentario['comentario']?>
+                </div>
+                <div class="fecha">
+                    <?=$helperDate->Date2DateComment($comentario['fecha'])?>
+                </div>
             </div>
-            <div class="fecha">
-                hace 3 días
-            </div>
-        </div>
-        <div class="comentario">
-            <div>
-                <span>Nombre de usuario</span>
-                Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-            </div>
-            <div class="fecha">
-                hace 3 días
-            </div>
-        </div>
-        <div class="comentario">
-            <div>
-                <span>Nombre de usuario</span>
-                Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus.
-            </div>
-            <div class="fecha">
-                hace 3 días
-            </div>
-        </div>
-        
+        <?endforeach?>
     </div>
     <div id="entrada" >
-        <div><textarea name="comentario" id="txt-comentario" cols="80" rows="4"></textarea></div>
+        <div><textarea name="comentario" id="txt-comentario" cols="80" rows="2"></textarea></div>
         <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
     </div>
     <div class="cl"></div>
@@ -217,6 +191,21 @@
 	<fieldset>
 		<label for="amount">Cantidad con la que apoyar</label>
 		<input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+    </div>
+</div>
+
+<div id="dialog-form-proposal" title="Realiza tu propuesta">
+    <div>
+	<p class="validateTips"></p>
+
+        <form id="do-proposal" enctype="multipart/form-data"  method="post">
+	<fieldset>
+		<label for="proposal">Describe tu propuesta</label><br/>
+		<textarea name="proposal" id="proposal" class="text ui-widget-content ui-corner-all"></textarea><br/>
+                <label for="attached">Adjunto(si es necesario)</label><br/>
+		<input type="file" name="attached" id="attached" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
     </div>

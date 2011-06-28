@@ -29,12 +29,18 @@
                 <null>N</null>
             </field>
             <field>
+                <name>breve_descripcion</name>
+                <description>Breve Descripción</description>
+                <type>varchar(255)</type>
+            </field>
+            <field>
                 <name>descripcion</name>
                 <description>Descripción</description>
                 <type>text</type>
                 <null>N</null>
                 <fckeditor>N</fckeditor>
             </field>
+
             <field>
                 <name>activo</name>
                 <description>Activo</description>
@@ -68,6 +74,11 @@
                 <null>N</null>
             </field>
             <field>
+                <name>video_embed</name>
+                <description>Vídeo</description>
+                <type>varchar(512)</type>
+            </field>
+            <field>
                 <name>imagen</name>
                 <description>Imagen</description>
                 <type>varchar(255)</type>
@@ -78,6 +89,17 @@
                     </size>
                 </sizes>
                 <in_list>S</in_list>
+            </field>
+            <field>
+                <name>titulo_concurso</name>
+                <description>Título concurso</description>
+                <type>varchar(128)</type>
+            </field>
+            <field>
+                <name>descripcion_concurso</name>
+                <description>Descripción concurso</description>
+                <type>text</type>
+                <fckeditor>N</fckeditor>
             </field>
         </fields>
          <entity>
@@ -148,6 +170,47 @@
                     <null>S</null>
                 </field>
                 
+            </fields>
+        </entity>
+        <entity>
+            <id_entity>14</id_entity>
+            <title>Propuestas</title>
+            <table>propuestas</table>
+            <fields>
+                <field>
+                    <name>id_propuesta</name>
+                    <description>id</description>
+                    <type>int(11)</type>
+                    <null>N</null>
+                    <auto_increment>S</auto_increment>
+                    <primary_key>S</primary_key>
+                </field>
+                <field>
+                    <name>id_usuario_propuesta</name>
+                    <description>Usuario</description>
+                    <type>int(11)</type>
+                    <entity_ref>3</entity_ref>
+                    <null>N</null>
+                    <in_list>S</in_list>
+                </field>
+                <field>
+                    <name>propuesta</name>
+                    <description>Propuesta</description>
+                    <type>text</type>
+                    <null>N</null>
+                </field>
+                <field>
+                    <name>fecha</name>
+                    <description>Fecha</description>
+                    <type>date</type>
+                    <null>N</null>
+                </field>
+                <field>
+                    <name>adjunto</name>
+                    <description>Adjunto</description>
+                    <type>varchar(255)</type>
+                    <file>S</file>
+                </field>
             </fields>
         </entity>
    </entity>

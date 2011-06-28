@@ -8,6 +8,7 @@ class Model_Projects
     public function  __construct() {
         $this->db=new Application_Model_DbTable_Projects();
         $this->dbComments=new Application_Model_DbTable_CommentsProjects();
+        $this->dbCommentsProposal=new Application_Model_DbTable_CommentsProposal();
     }
 
 
@@ -40,9 +41,34 @@ class Model_Projects
 
         $this->db->getAdapter()->query($sql, array($data['id_usuario'], $data['id_proyecto'],$data['valor'],$data['valor']));
     }
+    public function voteProposal($data){
+        $sql="INSERT INTO votos_propuestas ";
+        $sql.=" (id_usuario, id_propuesta, valor)";
+        $sql.=" VALUES (?,?,?)";
+        $sql.=" ON DUPLICATE KEY UPDATE";
+        $sql.=" valor=?,";
+        $sql.=" fecha=now()";
+
+        $this->db->getAdapter()->query($sql, array($data['id_usuario'], $data['id_propuesta'],$data['valor'],$data['valor']));
+    }
     public function comment($data){
-        $data['fecha']=date(DATE_ATOM);
+        $data['fecha']=new Zend_Db_Expr("now()");
         $this->dbComments->insert($data);
+    }
+    public function commentProposal($data){
+        $data['fecha']=new Zend_Db_Expr("now()");
+        $this->dbCommentsProposal->insert($data);
+    }
+
+    public function getComments($idProject){
+        
+        $sql="SELECT u.username, u.imagen, u.id_usuario ";
+        $sql.=", c.fecha, c.comentario";
+        $sql.=" FROM comentarios_proyectos c";
+        $sql.=" INNER JOIN usuario u ON u.id_usuario=c.id_usuario";
+        $sql.=" WHERE  c.id_proyecto= ?";
+        $sql.=" ORDER BY c.fecha ASC";
+        return $this->db->getAdapter()->fetchAll($sql,array($idProject));
     }
 
     public function getVotes($idProject){

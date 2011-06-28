@@ -60,11 +60,56 @@ class ProjectController extends Zend_Controller_Action
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
             $this->view->url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
             $this->view->votos=$model->getVotes($project->id_proyecto);
+            $this->view->comments=$model->getComments($project->id_proyecto);
             $modelCollaborators=New Model_Collaborators();
             $this->view->collaborators=$modelCollaborators->fetchByProject($project->id_proyecto);
+
+            $modelProposal=New Model_Proposals();
+            
+
+            $request = $this->getRequest ();
+            if($request->isPost()){
+                if($request->proposal!=""){
+                    $data['id_usuario_propuesta']=$project->id_usuario;
+                    $data['id_proyecto']=$project->id_proyecto;
+                    $data['propuesta']=$request->proposal;
+
+                    $idProposal=$modelProposal->saveProposal($data);
+                    $this->view->proposalUpload=$idProposal;
+
+                }
+                if ($_FILES["attached"]['name']!=""){
+                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/propuesta/".$idProposal."/";
+                     $helper=new View_Helper_Image();
+
+                     $helper->ensurePath($path);
+                     chmod($path,0777);
+                     $path.=basename($_FILES["attached"]['name']);
+
+                     if(!move_uploaded_file($_FILES["attached"]['tmp_name'], $path))
+                            die("Ocurrio un error subiendo la imagen");
+                     chmod($path,0777);
+
+                     $a=explode("/admin",$path);
+                     $data["adjunto"]=$a[1];
+                     $modelProposal->updateProposal($idProposal,$data);
+
+                }
+            }
+
+            $this->view->proposals=$modelProposal->fetchByProject($project->id_proyecto);
+            //Carga los comentarios de las propuestas
+            foreach($this->view->proposals as $key=>$proposal){
+                $proposal['comments']=$modelProposal->getComments($proposal['id_propuesta']);
+                $proposal['votes']=$modelProposal->getVotes($proposal['id_propuesta']);
+                $this->view->proposals[$key]=$proposal;
+            }
+
         }
         
     }
+
+    
 
     public function createAction(){
         $auth=Zend_Auth::getInstance();
@@ -149,6 +194,33 @@ class ProjectController extends Zend_Controller_Action
 
         
     }
+    public function voteproposalAction(){
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+
+            $request = $this->getRequest ();
+
+            if($request->isPost()){
+                $post=$request->getPost();
+                $data['valor']=$post['valor'];
+                $data['id_propuesta']=$post['propuesta'];
+
+                $model=new Model_Projects();
+
+                $data['id_proyecto']=$project['id_proyecto'];
+                $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                $model->voteProposal($data);
+                $modelProposal=new Model_Proposals();
+                echo json_encode($modelProposal->getVotes($data['id_propuesta']));
+                die;
+
+
+
+            }
+        }
+
+
+    }
     public function commentAction(){
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
@@ -157,7 +229,7 @@ class ProjectController extends Zend_Controller_Action
 
             if($request->isPost()){
                 $post=$request->getPost();
-                $data['comentario']=$post['comentario'];
+                $data['comentario']=htmlentities(utf8_decode($post['comentario']));
 
                 $model=new Model_Projects();
 
@@ -165,8 +237,42 @@ class ProjectController extends Zend_Controller_Action
 
                 $data['id_proyecto']=$project['id_proyecto'];
                 $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                $helper=new View_Helper_Image();
+                $modelUser=new Model_Users();
+                $user=$modelUser->fetchUser($auth->getIdentity()->id_usuario);
+                $imagen=$helper->image($auth->getIdentity()->id_usuario, $user['imagen']) ;
                 $model->comment($data);
-                echo json_encode(array("username"=>$auth->getIdentity()->username,"txt"=>$data['comentario']));
+                echo json_encode(array("username"=>$auth->getIdentity()->username,"txt"=>$data['comentario'],"imagen"=>$imagen));
+                die;
+
+
+
+            }
+        }
+
+
+    }
+
+    public function commentproposalAction(){
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+
+            $request = $this->getRequest ();
+
+            if($request->isPost()){
+                $post=$request->getPost();
+                $data['comentario']=htmlentities(utf8_decode($post['comentario']));
+                $data['id_propuesta']=$post['propuesta'];
+
+                $model=new Model_Projects();
+
+                $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                $helper=new View_Helper_Image();
+                $modelUser=new Model_Users();
+                $user=$modelUser->fetchUser($auth->getIdentity()->id_usuario);
+                $imagen=$helper->image($auth->getIdentity()->id_usuario, $user['imagen']) ;
+                $model->commentProposal($data);
+                echo json_encode(array("propuesta"=>$post['propuesta'], "username"=>$auth->getIdentity()->username,"txt"=>$data['comentario'],"imagen"=>$imagen));
                 die;
 
 
