@@ -355,12 +355,13 @@ input[type='text'], input[type='password']{
     display: block;
     height:16px;
     cursor: pointer;
+    float:right;
 }
 #panel-project #tabs #votos img{
     border:0;
 }
 
-#panel-project #ficha-imagen{
+#panel-project #ficha-imagen, #panel-project #ficha-video{
     float:left;
 }
 #panel-project #ficha-info{
@@ -406,10 +407,21 @@ input[type='text'], input[type='password']{
     margin:10px;
     background-color: #ddd;
 }
+#panel-project #concurso .propuesta a{
+    display:block;
+    margin-bottom: 15px;
+}
 #panel-project #concurso .propuesta .comentario-concurso{
     background-color: #eee;
     padding:10px;
     margin:10px;
+}
+#panel-project #concurso .propuesta .comentario-concurso img{
+    float:left;
+    margin:5px;
+}
+#panel-project #concurso .propuesta .comentarios-concurso{
+    display:none;
 }
 #panel-project #concurso .fecha{
     color:#333;
@@ -464,12 +476,18 @@ input[type='text'], input[type='password']{
     color:#000;
     width:920px;
 }
-
+#panel-project #entrada{
+    margin-left:10px;
+}
 #panel-project #comentarios .comentario{
     background-color: #f7f7f7;
     width:100%;
     padding:15px;
     margin-bottom: 15px;
+}
+#panel-project #comentarios .comentario img{
+    float:left;
+    margin:5px;
 }
 #panel-project #comentarios .comentario span{
     font-weight: bold;
@@ -548,6 +566,7 @@ input[type='text'], input[type='password']{
 }
 #content #panel-form a{
     color:#900;
+    text-decoration: underline;
 }
 #content #panel-form dt{
     float:left;
@@ -679,7 +698,7 @@ input[type='text'], input[type='password']{
 	margin:60px auto
 }
 /* FIN static */
-div .msg{
+.msg{
     padding:10px 30px 50px 30px;
 }
 
