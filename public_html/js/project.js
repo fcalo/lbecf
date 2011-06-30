@@ -6,6 +6,8 @@
 
 $(function() {
 
+
+
         $("#back-project").click(function(){
             $("#panel-form").hide();
             $("#panel-project").show();
@@ -25,13 +27,26 @@ $(function() {
         });
 
         $(".show_comments").click(function(){
-           $("#comentarios_concurso_"+$(this).attr("id")).show();
-           $(this).remove();
+            if($(this).html()=="Ocultar"){
+                $("#comentarios_concurso_"+$(this).attr("id")).fadeOut();
+                $(this).html($(this).attr("lb"));
+            }else{
+                $(this).attr("lb",$(this).html());
+                $("#comentarios_concurso_"+$(this).attr("id")).fadeIn();
+                $(this).html("Ocultar");
+            }
         });
 
 
         $("#descripcion").html(unescape($("#descripcion").html()));
+        $(".unescape").each(function(index){
+            $(this).html(unescape($(this).html()));
+        });
+        
         $( "#tabs" ).tabs();
+        if($("#set_concurso").length>0)
+            $( "#tabs" ).tabs( "select" , 2 );
+        
         
         $( "#progressbar" ).progressbar({
                 value: ($("#porcentaje").html()*1)

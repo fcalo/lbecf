@@ -63,6 +63,7 @@ class ProjectController extends Zend_Controller_Action
             $this->view->comments=$model->getComments($project->id_proyecto);
             $modelCollaborators=New Model_Collaborators();
             $this->view->collaborators=$modelCollaborators->fetchByProject($project->id_proyecto);
+            $this->view->setConcurso=(isset($request->concurso) && $request->concurso==1);
 
             $modelProposal=New Model_Proposals();
             

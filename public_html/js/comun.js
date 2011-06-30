@@ -6,7 +6,7 @@
 
 $(function() {
         $( "#logo" ).click(function(){
-            location.href="/";
+            location.href="/proyecto/la-butaca-escarlata/concurso/";
         });
         $( ".fb" ).click(function(){
             location.href="/usuario/oauth/login";

@@ -20,11 +20,14 @@ $helperDate=new View_Helper_Date();?>
                 <div id="ficha-iconos"></div>
                 <input type="hidden" id="link" value="<?=$this->project->link_rewrite?>"/>
                 <input type="hidden" id="closed" value="<?=$this->closed?"1":""?>"/>
+                <?if ($this->setConcurso):?>
+                    <input type="hidden" id="set_concurso" value="1"/>
+                <?endif;?>
                 <div id="votos">
-                    <div>
+                    <!--<div>
                         <a id="down"><img src="/img/down.png"></a>
                         <span id="ldown">(<?=$this->votos['negativos']?>)</span>
-                    </div>
+                    </div>-->
                     <div>
                         <a id="up"><img src="/img/up.png"></a>
                         <span id="lup">(<?=$this->votos['positivos']?>)</span>
@@ -32,9 +35,7 @@ $helperDate=new View_Helper_Date();?>
                 </div>
                 <h1><span>Proyecto: </span><?=$this->project->titulo?></h1>
                 <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
-                <?if (strlen($this->project->video_embed)>10):?>
-                    <div id="ficha-video"><?=$this->project->video_embed?></div>
-                <?endif;?>
+                
                 <div id="ficha-info">
                     <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
                     <div class="text">recaudado</div>
@@ -50,6 +51,9 @@ $helperDate=new View_Helper_Date();?>
                     <div class="text">El plazo ha finalizado</div>
                     <?endif;?>
                 </div>
+                <?if (strlen($this->project->video_embed)>10):?>
+                    <div id="ficha-video"><?=$this->project->video_embed?></div>
+                <?endif;?>
 
                 <div id="ficha-bottom">
                     <div id="project-social">
@@ -78,8 +82,8 @@ $helperDate=new View_Helper_Date();?>
 	</div>
 	<div id="tabs-3">
             <div id="concurso">
-                <h2><?=$this->project->titulo_concurso?></h2>
-		<p><?=nl2br($this->project->descripcion_concurso)?></p>
+                <h2 class="unescape"><?=$this->project->titulo_concurso?></h2>
+		<p class="unescape"><?=nl2br($this->project->descripcion_concurso)?></p>
                 <?if(count($this->proposals)==0):?>
                     <div class="propuesta">A&uacute;n no hay propuestas, puedes ser el primero.</div>
                 <?endif;?>
@@ -87,10 +91,10 @@ $helperDate=new View_Helper_Date();?>
                 <?foreach($this->proposals as $proposal):?>
                     <div class="propuesta">
                         <div id="votos">
-                            <div>
+                            <!--<div>
                                 <a id="down-<?=$proposal['id_propuesta']?>" class="down"><img src="/img/down.png"></a>
                                 <span id="ldown-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['negativos']?>)</span>
-                            </div>
+                            </div>-->
                             <div>
                                 <a id="up-<?=$proposal['id_propuesta']?>"" class="up"><img src="/img/up.png"></a>
                                 <span id="lup-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['positivos']?>)</span>
@@ -99,8 +103,15 @@ $helperDate=new View_Helper_Date();?>
                         <h3>Propuesta de <?=$proposal['username']?></h3> 
 
                             <p><?=nl2br($proposal['propuesta'])?></p>
-                            <?if($proposal['adjunto']!=""):?>
-                            <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Ver adjunto</a>
+                            <?if($proposal['adjunto']!=""):
+
+                                    $path=$_SERVER['DOCUMENT_ROOT']."/admin/".$proposal['adjunto'];
+                                    $imagen=(@imagecreatefromjpeg($path) || @imagecreatefromgif($path) || @imagecreatefrompng($path));
+                                    if($imagen):?>
+                                    <a href="/admin/<?=$proposal['adjunto']?>" target="_blank"><img alt="Abrir en otra ventana" title="Abrir en otra ventana" src="/admin/<?=$proposal['adjunto']?>"></a>
+                                <?else:?>
+                                    <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Ver adjunto<?=$type?></a>
+                                <?endif;?>
                             <?endif;?>
                         <!--<img src="<?=$helper->image($proposal['id_usuario'], $proposal['imagen'])?>">-->
                         <div class="fecha"><?=$helperDate->Date2DateComment($proposal['fecha'])?></div>
@@ -119,6 +130,7 @@ $helperDate=new View_Helper_Date();?>
                                             <?=$comment['comentario']?>
                                         </div>
                                         <div class="fecha"><?=$helperDate->Date2DateComment($comment['fecha'])?></div>
+                                        <div class="cl"></div>
                                     </div>
                                 <?endforeach;
                                         endif;?>
@@ -176,6 +188,7 @@ $helperDate=new View_Helper_Date();?>
                 <div class="fecha">
                     <?=$helperDate->Date2DateComment($comentario['fecha'])?>
                 </div>
+                <div class="cl"></div>
             </div>
         <?endforeach?>
     </div>
