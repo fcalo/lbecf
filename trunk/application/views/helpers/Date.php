@@ -3,6 +3,7 @@ class View_Helper_Date extends Zend_View_Helper_Abstract
 {
     public function Date2DateComment($date){
         $today = strtotime(date(DATE_ATOM));
+        $today+=3600;
         $commentDate = strtotime($date);
         $minutos=round(abs($today-$commentDate)/60);
         if($minutos<1)

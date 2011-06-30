@@ -17,12 +17,13 @@ class Model_Proposals
     }
     public function fetchByProject($idProject)
     {
-        $sql="SELECT u.username, u.imagen, u.id_usuario ";
+        $sql="SELECT t.votos, u.username, u.imagen, u.id_usuario ";
         $sql.=", p.fecha, p.propuesta, p.id_propuesta, p.adjunto";
         $sql.=" FROM propuestas p";
         $sql.=" INNER JOIN usuario u ON u.id_usuario=p.id_usuario_propuesta";
+        $sql.=" LEFT JOIN (SELECT sum(valor) votos, id_propuesta FROM votos_propuestas GROUP BY id_propuesta) t ON t.id_propuesta=p.id_propuesta";
         $sql.=" WHERE  p.id_proyecto= ?";
-        $sql.=" ORDER BY p.fecha ASC";
+        $sql.=" ORDER BY t.votos DESC, p.fecha ASC";
         return $this->db->getAdapter()->fetchAll($sql,array($idProject));
     }
     public function fetchByUser($idUser)
