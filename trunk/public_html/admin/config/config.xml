@@ -29,6 +29,11 @@
                 <null>N</null>
             </field>
             <field>
+                <name>categoria</name>
+                <description>Categoría</description>
+                <type>varchar(45)</type>
+            </field>
+            <field>
                 <name>breve_descripcion</name>
                 <description>Breve Descripción</description>
                 <type>varchar(255)</type>
