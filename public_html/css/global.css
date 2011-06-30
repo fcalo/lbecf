@@ -132,6 +132,13 @@ input[type='text'], input[type='password']{
         clear:both;
 }
 
+#footer #pp_horizontal{
+    float:left;
+    background:url(../img/horizontal_solution_PP.gif) no-repeat;
+    width:240px;
+    height:80px;
+    margin:50px 0 0 20px;
+}
 .cl{clear:both;}
 #footer div.panel{
 	background-color:#990000;
@@ -410,6 +417,10 @@ input[type='text'], input[type='password']{
 #panel-project #concurso .propuesta a{
     display:block;
     margin-bottom: 15px;
+}
+#panel-project #concurso .propuesta a img{
+    border:0;
+    max-width:550px;
 }
 #panel-project #concurso .propuesta .comentario-concurso{
     background-color: #eee;
