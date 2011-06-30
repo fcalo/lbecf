@@ -30,10 +30,11 @@ input[type='text'], input[type='password']{
 	width:259px;
 	height:160px;
 	cursor:pointer;
+        float:left;
 
 }
 #header #social{
-	width:600px;
+	width:300px;
 	height:32px;
 	float:right;
 

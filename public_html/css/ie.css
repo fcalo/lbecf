@@ -1,0 +1,21 @@
+/* 
+    Document   : ie
+    Created on : 30-jun-2011, 18:53:23
+    Author     : fer
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#header #user .fb{
+    float:left;
+    margin:-24px 0 0 20px;
+}
+
+#panel-project #tabs #votos{
+    width:20px;
+}
