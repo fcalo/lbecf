@@ -6,7 +6,7 @@
 
 $(function() {
 
-
+        $(".reward input").val("");
 
         $("#back-project").click(function(){
             $("#panel-form").hide();
@@ -140,6 +140,7 @@ $(function() {
                     $("#reward-item").clone().appendTo(".reward");
                     var count=$(".reward-item").length;
                     $(".reward-item:nth-child("+count+") span b").html(count);
+                    $(".reward-item:nth-child("+count+") input").val("");
 
                 });
                 $("#btn-reward-delete").click(function(){

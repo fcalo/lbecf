@@ -13,7 +13,10 @@
             <form action="<?=$this->escape ( $this->form->getAction () )?>" method="<?=$this->escape ( $this->form->getMethod () )?>" enctype="multipart/form-data">
                 <?
                 echo $this->form->titulo;
-                echo $this->form->descripcion;?>
+                echo $this->form->breve_descripcion;
+                echo $this->form->descripcion;
+                echo $this->form->video_embed;?>
+
                 <div id="fecha-imagen">
                     <label class="required" for="imagen">Imagen del proyecto:</label>
                 </div>
@@ -22,18 +25,17 @@
                 </span>
                 <?echo $this->form->fecha;
                 echo $this->form->importe;?>
-                <!--<div class="reward">
+                <div class="reward">
                     <div id="reward-item" class="reward-item">
                         <span>Recompensa nº <b>1</b></span>
                         <?echo  str_replace("recompensa","recompensa[]", $this->form->recompensa);
                             echo str_replace("minimo","minimo[]", $this->form->minimo);
-                            echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
+                            //echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
                             ?>
                     </div>
                 </div>
                 <input type="button" id="btn-reward" class="btn-red" value="Más"/>
                 <input type="button" id="btn-reward-delete" class="btn-red" value="Menos"/>
-                -->
                 <?echo $this->form->submit; ?>
             </form>
         </fieldset>

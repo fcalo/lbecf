@@ -8,6 +8,10 @@ class Model_Rewards
         $this->db=new Application_Model_DbTable_Rewards();
     }
 
+    public function save(array $data){
+        return $this->db->insert($data);
+    }
+
 
 
     public function isSubasta($idReward)
