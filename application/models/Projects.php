@@ -82,7 +82,8 @@ class Model_Projects
      public function saveProject(array $data){
         if(!isset($data['activo']))
                 $data['activo']='N';
-
+        if(!isset($data['destacado']))
+                $data['destacado']='N';
 
         return $this->db->insert($data);
     }

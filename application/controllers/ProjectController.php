@@ -142,7 +142,22 @@ class ProjectController extends Zend_Controller_Action
                  $data['link_rewrite']=Service_Urls::amigables($data['titulo']);
                  $data['id_usuario']=$auth->getIdentity()->id_usuario;
 
+                 $recompensas=$_POST['recompensa'];unset($data['recompensa']);
+                 $minimos=$_POST['minimo'];unset($data['minimo']);
                  $idProject=$model->saveProject($data);
+
+                 $modelReward=new Model_Rewards();
+
+                 foreach($recompensas as $key=>$recompensa){
+                     if($recompensa!="" && $minimos[$key]!=""){
+                         $dataRecompensa=array();
+                         $dataRecompensa['id_proyecto']=$idProject;
+                         $dataRecompensa['apoyo_minimo']=$minimos[$key];
+                         $dataRecompensa['recompensa']=$recompensa;
+                         $dataRecompensa['subasta']="N";
+                         $modelReward->save($dataRecompensa);
+                     }
+                 }
 
                  $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/proyectos/".$idProject."/";
                  $helper=new View_Helper_Image();
