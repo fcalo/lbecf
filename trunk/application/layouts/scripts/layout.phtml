@@ -15,11 +15,12 @@ echo $this->doctype(); ?>
         <?=$this->jQuery()->setUiLocalPath( STATIC_PATH.'/js/jquery-ui-1.8.13.custom.min.js');?>
         <?=$this->jQuery()->uiEnable();?>
         <?= $this->headScript()->prependFile($this->baseUrl().'/js/comun.js'); ?>
+        <!--[if lt IE 8]> <link href="/css/ie.css" rel="stylesheet" type="text/css"> <![endif]-->
     </head>
     <body>
         <div id="body">
 		<div id="header">
-
+                        <div id="logo"></div>
 			<div id="user">
                             <?
                                 $auth = Zend_Auth::getInstance ();
@@ -65,7 +66,8 @@ echo $this->doctype(); ?>
 				</ul>
 				<div class="cl"></div>
 			</div>
-			<div id="logo"></div>
+			
+                        <div class="cl"></div>
 		</div>
                 <div id="content">
                     <?php echo $this->layout()->content; ?>
