@@ -22,7 +22,7 @@
             </div>
             <div id="ficha">
                 <div id="ficha-iconos"></div>
-                <h1>Proyecto: <?=$this->project->titulo?></h1>
+                <h1>Proyecto: <a href="/proyecto/<?=$this->project->link_rewrite?>"><?=$this->project->titulo?></a></h1>
                 <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
                 <div id="ficha-info">
                     <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
@@ -36,8 +36,8 @@
                 </div>
                 
                 <div id="ficha-bottom">
-                    <h2>COMUNIDAD ONLINE DE "CROWFUNDING & CROWSORCING" EMPRESARIAL</h2>
-                    <span><?=$this->project->breve_descripcion?></span>
+                    <!--<h2>COMUNIDAD ONLINE DE "CROWFUNDING & CROWSORCING" EMPRESARIAL</h2>-->
+                    <h2><?=$this->project->breve_descripcion?></h2>
                 </div>
             </div>
         </div>

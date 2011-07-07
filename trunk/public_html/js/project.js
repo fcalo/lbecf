@@ -141,6 +141,8 @@ $(function() {
                     var count=$(".reward-item").length;
                     $(".reward-item:nth-child("+count+") span b").html(count);
                     $(".reward-item:nth-child("+count+") input").val("");
+                    $(".reward-item:nth-child("+count+") .check_subasta").attr("checked",0);
+                    $(".reward-item:nth-child("+count+") .check_subasta").attr("name","subasta_"+count);
 
                 });
                 $("#btn-reward-delete").click(function(){
