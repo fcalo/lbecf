@@ -31,8 +31,14 @@
                         <span>Recompensa nº <b>1</b></span>
                         <?echo  str_replace("recompensa","recompensa[]", $this->form->recompensa);
                             echo str_replace("minimo","minimo[]", $this->form->minimo);
-                            //echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
+                            echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
                             ?>
+                        <div>
+                            <span class="data">
+                                ¿Se subasta?
+                                <input class="check_subasta" type="checkbox" value="" name="subasta_1">
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <input type="button" id="btn-reward" class="btn-red" value="Más"/>

@@ -177,6 +177,7 @@ input[type='text'], input[type='password']{
     background-color:#900;
     color:#fff;
     padding:0 10px 20px 20px;
+    min-height:465px;
 }
 
 #panel-home #destacado .destacado-content #noticias{
@@ -237,6 +238,11 @@ input[type='text'], input[type='password']{
     font-weight: bold;
     font-size: 18px;
     margin-bottom:15px;
+}
+
+#panel-home #destacado .destacado-content h1 a{
+    color:#fff;
+    text-decoration: none;
 }
 
 

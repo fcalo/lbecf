@@ -144,6 +144,7 @@ class ProjectController extends Zend_Controller_Action
 
                  $recompensas=$_POST['recompensa'];unset($data['recompensa']);
                  $minimos=$_POST['minimo'];unset($data['minimo']);
+                 
                  $idProject=$model->saveProject($data);
 
                  $modelReward=new Model_Rewards();
@@ -153,8 +154,9 @@ class ProjectController extends Zend_Controller_Action
                          $dataRecompensa=array();
                          $dataRecompensa['id_proyecto']=$idProject;
                          $dataRecompensa['apoyo_minimo']=$minimos[$key];
+                         
+                         $dataRecompensa['subasta']=isset($_POST['subasta_'.($key+1)])?"S":"N";
                          $dataRecompensa['recompensa']=$recompensa;
-                         $dataRecompensa['subasta']="N";
                          $modelReward->save($dataRecompensa);
                      }
                  }
