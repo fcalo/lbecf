@@ -29,6 +29,10 @@ class Form_Register extends Zend_Form {
                 $this->addElement ( 'password', 'password2', array ('decorators' => $decorator, 'filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
                     'label' => 'Repetir contraseña:' ) );
 
+                $this->addElement ( 'text', 'patrocinador', array ('decorators' => $decorator, 'label' => 'Código del patrocinador:', 'filters' => array ('StringTrim'),
+                    'validators' => array ('alnum', array ('StringLength', false, array (10, 10 ) ) ), 'required' => false )
+                );
+
 		/*$this->addElement ( 'captcha', 'captcha', array (
                     'label' => 'Please, insert the 5 characters shown:', 'required' => true,
                     'captcha' => array ('captcha' => 'Image', 'wordLen' => 5, 'height' => 50, 'width' => 160, 'gcfreq' => 50, 'timeout' => 300,

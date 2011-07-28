@@ -14,6 +14,8 @@ class ProjectController extends Zend_Controller_Action
 
         $request = $this->getRequest ();
 
+        $msg = $this->getRequest()->getParam('msg');
+
         $linkRewrite=$request->project;
 
         //TODO:old
@@ -64,6 +66,9 @@ class ProjectController extends Zend_Controller_Action
             $modelCollaborators=New Model_Collaborators();
             $this->view->collaborators=$modelCollaborators->fetchByProject($project->id_proyecto);
             $this->view->setConcurso=(isset($request->concurso) && $request->concurso==1);
+            switch($msg){
+                case 1:$this->view->msg="Código de patrocinador no válido";
+            }
 
             $modelProposal=New Model_Proposals();
             

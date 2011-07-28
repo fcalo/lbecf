@@ -25,6 +25,31 @@ class Model_Users
         }else
             return $this->db->insert($data);
     }
+    public function generateCodSponsor($idUser){
+        $cod=$this->randomString();
+        return $this->db->update(array("cod_patrocinador"=>$cod), "id_usuario=".$idUser);
+    }
+
+    private function randomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){
+	$source = 'abcdefghijklmnopqrstuvwxyz';
+	if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	if($n==1) $source .= '1234567890';
+	if($sc==1) $source .= '|@#~$%()=^*+[]{}-_';
+	if($length>0){
+		$rstr = "";
+		$source = str_split($source,1);
+		for($i=1; $i<=$length; $i++){
+			mt_srand((double)microtime() * 1000000);
+			$num = mt_rand(1,count($source));
+			$rstr .= $source[$num-1];
+		}
+
+	}
+	return $rstr;
+    }
+
+
+
     public function updateUser($idUser, array $data){
         return $this->db->update($data, "id_usuario=".$idUser);
     }
@@ -60,6 +85,14 @@ class Model_Users
         ->where('username= "'.$username.'" and activo="S" and fec_baja is null')
         );
         return count($row)==0;
+    }
+    public function existsSponsor($codSponsor)
+    {
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('cod_patrocinador= "'.$codSponsor.'"')
+        );
+        return count($row)>0;
     }
 
     public function getUserToken($email)

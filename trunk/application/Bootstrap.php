@@ -57,7 +57,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeCommentProject = new Zend_Controller_Router_Route( '/proyecto/comentario/:link', array( 'controller' => 'project', 'action' => 'comment') );
         $routeCommentProposal = new Zend_Controller_Router_Route( '/proyecto/comentario-propuesta/:link', array( 'controller' => 'project', 'action' => 'commentProposal') );
         $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
+        $routeProjectAlert = new Zend_Controller_Router_Route( '/proyecto/:project/alert/:msg', array( 'controller' => 'project', 'action' => 'index',) );
         $routeProjectConcurso = new Zend_Controller_Router_Route( '/proyecto/:project/concurso', array( 'controller' => 'project', 'action' => 'index', 'concurso'=>1) );
+        
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
         $routeOauth = new Zend_Controller_Router_Route( '/usuario/oauth/:step', array( 'controller' => 'user', 'action' => 'oauth') );
@@ -71,7 +73,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeFunciona = new Zend_Controller_Router_Route( '/funciona/', array( 'controller' => 'static', 'action' => 'funciona') );
         $routePolitica = new Zend_Controller_Router_Route( '/politica/', array( 'controller' => 'static', 'action' => 'politica') );
         $routeSobre = new Zend_Controller_Router_Route( '/sobre/', array( 'controller' => 'static', 'action' => 'sobre') );
-        $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward', array( 'controller' => 'support', 'action' => 'pago') );
+        $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward/', array( 'controller' => 'support', 'action' => 'pago') );
+        $routePayment2 = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward/:sponsor', array( 'controller' => 'support', 'action' => 'pago') );
         $routeCancelPayment = new Zend_Controller_Router_Route( '/apoyo/cancel/:preapproval_key', array( 'controller' => 'support', 'action' => 'cancel') );
         $routeSupport = new Zend_Controller_Router_Route( '/apoyo/:action/*', array( 'controller' => 'support', 'action' => 'index') );
         $routeConfirm = new Zend_Controller_Router_Route( '/apoyo/confirm/:support/', array( 'controller' => 'support', 'action' => 'confirm') );
@@ -82,6 +85,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'default', $routeDefault );//important, put the default route first!
         $router->addRoute ( 'project', $routeProject);
         $router->addRoute ( 'project_concurso', $routeProjectConcurso);
+        $router->addRoute ( 'project_alert', $routeProjectAlert);
         $router->addRoute ( 'add_project', $routeAddProject);
         $router->addRoute ( 'vote_project', $routeVoteProject);
         $router->addRoute ( 'vote_proposal', $routeVoteProposal);
@@ -103,6 +107,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'support', $routeSupport );
         $router->addRoute ( 'confirm', $routeConfirm);
         $router->addRoute ( 'payment', $routePayment );
+        $router->addRoute ( 'payment2', $routePayment2 );
         $router->addRoute ( 'cancelPayment', $routeCancelPayment );
 
         //set all routes

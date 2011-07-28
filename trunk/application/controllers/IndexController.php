@@ -16,7 +16,7 @@ class IndexController extends Zend_Controller_Action
 
         $project=$dbProject->fetchRow(
                 $dbProject->select()
-                ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("abs(datediff(now(),fec_fin))")))
+                ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("datediff(fec_fin,now())")))
                 ->where('destacado = "S"')
                 ->order("id_proyecto DESC")
                 );
@@ -38,6 +38,7 @@ class IndexController extends Zend_Controller_Action
             $this->view->porcentaje=($supports->sum_apoyo/$project->importe_solicitado)*100;
             $this->view->news=$news;
             $this->view->days=$project->days;
+            $this->view->closed=$project->days<1;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
         }
         

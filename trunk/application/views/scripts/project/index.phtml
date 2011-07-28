@@ -8,7 +8,6 @@ $helperDate=new View_Helper_Date();?>
 <?endif;?>
 
 <div id="panel-project" <?=isset($this->proposalUpload)?"style='display:none'":""?>>
-    
     <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Home</a></li>
@@ -204,12 +203,26 @@ $helperDate=new View_Helper_Date();?>
 
 	<form>
 	<fieldset>
-		<label for="amount">Cantidad con la que apoyar</label>
-		<input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" />
+            <table>
+                <tr>
+		<td><label for="amount">Cantidad con la que apoyar</label></td>
+		<td><input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" /></td>
+                </tr><tr>
+		<td><label for="sponsor">Código Patrocinador</label></td>
+                <td><input type="text" name="sponsor" id="sponsor" maxlength="10" size="12" class="text ui-widget-content ui-corner-all" /></td>
+                </tr>
+                </table>
 	</fieldset>
 	</form>
     </div>
 </div>
+<?if($this->msg!=""):?>
+    <div id="dialog-form-aviso" title="Aviso">
+        <div>
+            <?=$this->msg?>
+        </div>
+    </div>
+<?endif;?>
 
 <div id="dialog-form-proposal" title="Realiza tu propuesta">
     <div>

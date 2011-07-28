@@ -60,6 +60,7 @@ $(function() {
                     $("#id-recompensa").val(a[0]);
                     $("#apoyo-minimo").val(a[1]);
                     $("#amount").val($("#apoyo-minimo").val());
+                    $("#sponsor").val($("#user_sponsor").val());
 
                     $( "#dialog-form" ).dialog( "open" );
                 }
@@ -71,7 +72,7 @@ $(function() {
 
         $( "#dialog-form" ).dialog({
 			autoOpen: false,
-			height: 210,
+			height: 225,
 			width: 350,
 			modal: true,
 			buttons: {
@@ -84,7 +85,7 @@ $(function() {
 					if ( bValid ) {
                                                 $("#dialog-form div").hide();
                                                 $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
-						setTimeout('location.href="/apoyo/pago/'+($("#link").val())+'/'+($("#amount").val())+'/'+$("#id-recompensa").val()+'"',1000);
+						setTimeout('location.href="/apoyo/pago/'+($("#link").val())+'/'+($("#amount").val())+'/'+$("#id-recompensa").val()+'/'+$("#sponsor").val()+'"',1000);
 						//$( this ).dialog( "close" );
 					}else{
                                             $("#amount").addClass( "ui-state-error" );
@@ -99,6 +100,7 @@ $(function() {
 				$("#amount").removeClass( "ui-state-error" );
 			}
 		});
+
 
          $( "#dialog-form-proposal" ).dialog({
                 autoOpen: false,
@@ -196,6 +198,25 @@ $(function() {
                 comentarioPropuesta($(this).attr("id"));
             }
          });
+         
+         if($("#dialog-form-aviso").length>0){
+             $( "#dialog-form-aviso" ).dialog({
+			autoOpen: true,
+			height: 125,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Cerrar": function() {
+					$( this ).dialog( "close" );
+				}
+			},
+			close: function() {
+				$( this ).dialog( "close" );
+			}
+		});
+
+         }
+                
 });
 
 function voto(valor){

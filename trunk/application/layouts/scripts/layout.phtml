@@ -29,6 +29,7 @@ echo $this->doctype(); ?>
                                     <div>Hola, <a href="/usuario/perfil/<?=$auth->getIdentity()->username?>"><?=$auth->getIdentity()->username?></a></div>
                                     <div><a href="/usuario/logout">Desconectar</a></div>
                                     <input type="hidden" id="idUser" value="<?=$auth->getIdentity()->id_usuario?>"/>
+                                    <input type="hidden" id="user_sponsor" value="<?=$auth->getIdentity()->cod_patrocinio?>"/>
                                 </div>
                             <?else:?>
                                 <form action="/usuario/login" method="post">
