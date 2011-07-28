@@ -548,10 +548,10 @@ input[type='text'], input[type='password']{
     background:none;
     border:0;
 }
-#amount{
+#amount, #sponsor{
     font-size:12px;
     text-align: right;
-    width:55px;
+    width:70px;
     padding: 1px 10px;
 }
 #panel-form #reward-item{
@@ -729,6 +729,10 @@ input[type='text'], input[type='password']{
 #content #panel-profile #datos img{
     float:left;
     margin: 5px 20px;
+}
+#content #panel-profile #datos div{
+    margin: 5px 20px;
+    color:#333;
 }
 #content #panel-profile #acciones{
     float:right;
