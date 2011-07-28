@@ -13,7 +13,15 @@ class SupportController extends Zend_Controller_Action
         $config = Zend_Registry::get('config');
         $support = $this->getRequest()->getParam('support');
         $reward = $this->getRequest()->getParam('reward');
+        $sponsor = $this->getRequest()->getParam('sponsor');
         $linkRewrite = $this->getRequest()->getParam('proyect');
+
+
+        $userModel=new Model_Users();
+        if($sponsor!="" && !$userModel->existsSponsor($sponsor)){
+            //redirecciona con cod_mensaje= 1
+            $this->_redirect("/proyecto/".$linkRewrite."/alert/1");
+        }
 
         $Project=new Model_Projects();
         $project=$Project->fetchProjectByLinkRewrite($linkRewrite);
@@ -34,6 +42,7 @@ class SupportController extends Zend_Controller_Action
         $cd = strtotime($project->fec_fin);
         $fecPago= date('Y-m-d', mktime(0,0,0,date('m',$cd),date('d',$cd)+15,date('Y',$cd)));
 
+
         $preapprovalKey=$paypal->CallPreapproval($paypalConfig['notifyUrl'],$paypalConfig['returnUrl'], $paypalConfig['cancelUrl'], "EUR", $project->fec_fin, $fecPago, $support, "", 1, "", "", "", "", "", "");
         //Se guarda la clave
 
@@ -46,6 +55,8 @@ class SupportController extends Zend_Controller_Action
         $data['id_recompensa']=$reward;
         $data['fecha']=date("Y-m-d H:i:s");
         $data['preapproved_key']=$preapprovalKey;
+        if($sponsor!="")
+            $data['cod_patrocinio_apoyo']=$sponsor;
         $Support->saveSupport($data);
 
         $this->_redirect($paypal->getUrlPayPal($paypal->getCmdPreapproval($preapprovalKey)));
@@ -71,6 +82,8 @@ class SupportController extends Zend_Controller_Action
         //TODO: Obtener datos de conexion del local.ini
         $params=array();
         $paypal=new Service_Paypal();
+
+        
 
 
         $pay=$paypal->CallPay("PAY", $paypalConfig['cancelUrl'], $paypalConfig['returnUrl'] , "EUR", array($paypalConfig['bussines']), array($support['apoyo']), null, null, null, null, null, $pin, $support['preapproved_key'], null, null, null);
@@ -151,6 +164,31 @@ class SupportController extends Zend_Controller_Action
 
 
              $modelSupport->setApproved($support['id_apoyo']);
+             $support=$modelSupport->fetch($support['id_apoyo']);
+             /********************
+              * Código de recompensa al que se le asocia el código de patrocinador
+              */
+             $idRecompensaPatrocinador=2;
+
+             if($support['id_recompensa']==$idRecompensaPatrocinador){
+                 $modelUser=new Model_Users();
+                 $modelUser->generateCodSponsor($support['id_usuario_apoyo']);
+                 $user=$modelUser->fetchUser($support['id_usuario_apoyo']);
+                 //Lo manda por correo
+                 $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
+
+                 $mail = new Zend_Mail ( );
+                 $mail->setBodyHtml ( 'Gracias por convertirse en Patrocinador del Desaf&iacute;o escarlata<br/>Est&eacute; es su c&oacute;digo de Patrocinador:<b>'.$user['cod_patrocinador']."</b><br /><br />_______________________________<br />La Butaca Escarlata");
+                 $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+
+                 $mail->addTo($user['email']);
+                 $mail->setSubject ( $user['username'].' te has convertido en patrocinador');
+                 $mail->send();
+                 
+                 
+             }
+
+
              
          }
          die;
