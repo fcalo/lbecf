@@ -19,7 +19,7 @@ class Service_Paypal {
 	private $PROXY_HOST = '127.0.0.1';
 	private $PROXY_PORT = '808';
 
-	private $Env = "sandbox";
+	private $Env = "production";
 
 	//------------------------------------
 	// PayPal API Credentials
@@ -52,6 +52,7 @@ class Service_Paypal {
             $this->API_Password=$config->payment->paypal->apiPassword;
             $this->API_Signature=$config->payment->paypal->apiSignature;
             $this->API_AppID=$config->payment->paypal->apiAppID;
+
 
             $this->USE_PROXY = false;
 

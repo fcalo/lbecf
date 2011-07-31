@@ -9,8 +9,8 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-if ( APPLICATION_ENV != 'development' && $_SERVER['REQUEST_URI']!="/apoyo/ipn/" && $_SERVER['REQUEST_URI']!="/apoyo/payipn/" && $_SERVER['REQUEST_URI']!="/cron/" && substr($_SERVER['REQUEST_URI'],0,15)!="/apoyo/confirm/")
-    require('sas.php');
+/*if ( APPLICATION_ENV != 'development' && $_SERVER['REQUEST_URI']!="/apoyo/ipn/" && $_SERVER['REQUEST_URI']!="/apoyo/payipn/" && $_SERVER['REQUEST_URI']!="/cron/" && substr($_SERVER['REQUEST_URI'],0,15)!="/apoyo/confirm/")
+    require('sas.php');*/
 
 
 if ( APPLICATION_ENV == 'development' )
