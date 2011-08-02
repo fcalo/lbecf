@@ -43,7 +43,7 @@
                 <description>Descripción</description>
                 <type>text</type>
                 <null>N</null>
-                <fckeditor>N</fckeditor>
+                <fckeditor>S</fckeditor>
             </field>
 
             <field>
@@ -337,6 +337,12 @@
                     <name>cod_patrocinio</name>
                     <description>Quién le patrocina</description>
                     <type>varchar(10)</type>
+                    <in_list>S</in_list>
+            </field>
+            <field>
+                    <name>puntos</name>
+                    <description>Puntos</description>
+                    <type>int(3)</type>
                     <in_list>S</in_list>
             </field>
             <field>
