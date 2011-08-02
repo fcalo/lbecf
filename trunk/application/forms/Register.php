@@ -29,7 +29,7 @@ class Form_Register extends Zend_Form {
                 $this->addElement ( 'password', 'password2', array ('decorators' => $decorator, 'filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
                     'label' => 'Repetir contraseña:' ) );
 
-                $this->addElement ( 'text', 'patrocinador', array ('decorators' => $decorator, 'label' => 'Código del patrocinador:', 'filters' => array ('StringTrim'),
+                $this->addElement ( 'text', 'patrocinador', array ('decorators' => $decorator, 'label' => 'Código de patrocinador que te ha invitado al Desafío(opcional):', 'filters' => array ('StringTrim'),
                     'validators' => array ('alnum', array ('StringLength', false, array (10, 10 ) ) ), 'required' => false )
                 );
 

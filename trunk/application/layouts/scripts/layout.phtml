@@ -6,6 +6,12 @@ $this->headTitle('La butaca escarlata');
 echo $this->doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
+ <meta property="og:title" content="The Rock"/>
+    <meta property="og:title" content="EL DESAFÍO ESCARLATA"/>
+    <meta property="og:url" content="http://www.labutacaescarlata.com/proyecto/la-butaca-escarlata/"/>
+    <meta property="og:image" content="http://www.labutacaescarlata.com/img/proyecto.jpg" />
+    <meta property="og:description"
+          content="¡Colabora en nuestro primer proyecto y obtén capital y granes descuentos!"/>
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
         <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
@@ -16,6 +22,7 @@ echo $this->doctype(); ?>
         <?=$this->jQuery()->uiEnable();?>
         <?= $this->headScript()->prependFile($this->baseUrl().'/js/comun.js'); ?>
         <!--[if lt IE 8]> <link href="/css/ie.css" rel="stylesheet" type="text/css"> <![endif]-->
+
     </head>
     <body>
         <div id="body">
@@ -76,8 +83,8 @@ echo $this->doctype(); ?>
                 <div id="footer">
                         <div id="pp_horizontal"></div>
 			<div class="panel">
-				<div class="terminos"><a href="/aviso/">Aviso legal</a></div>
-				<div class="terminos"><a href="/politica/">Política de privacidad</a></div>
+				<div class="terminos">&nbsp;<!--<a href="/aviso/">Aviso legal</a>--></div>
+				<div class="terminos">&nbsp;<!--<a href="/politica/">Política de privacidad</a>--></div>
 				<div class="terminos"><a href="/condiciones/">Condiciones de uso</a></div>
 				<div class="terminos"><a href="/contacto/">Contacto</a></div>
 			</div>

@@ -62,7 +62,7 @@ class StaticController extends Zend_Controller_Action
                         $body = $user_info.'<br/>'.$message;
                         $mail->setBodyHtml ( $body );
                         $mail->setFrom ( $email );
-                        $mail->addTo ( 'fercalo@hotmail.com' );
+                        $mail->addTo ( 'contacto@labutacaescarlata.com' );
 
                         $mail->setSubject ( 'labutacaescarlata.com - contacto de ' . $email );
                         $view->procesado=($mail->send());

@@ -9,9 +9,14 @@
     <div id="datos">
         <img src="<?=$helper->image($this->user->id_usuario, $this->user->imagen)?>">
         <h2><?=$this->user->username?></h2>
-        <?if ($this->user->cod_patrocinador!=""):?>
-        <div>Código de Patrocinador: <b><?=$this->user->cod_patrocinador?></b></div>
+    <?if ($this->user->cod_patrocinador!=""):?>
+        <div>Código de Patrocinador: <b><?=$this->user->cod_patrocinador?></b>
+        <?if ($this->user->puntos>0):?>
+        (Puntos Acumulados: <b><?=$this->user->puntos?></b>)
+        </div>
     <?endif;?>
+    <?endif;?>
+    
     </div>
     
     <div class="cl"></div>
