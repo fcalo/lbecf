@@ -3,9 +3,12 @@
 class SupportController extends Zend_Controller_Action
 {
 
+    private $idRecompensaPatrocinador=null;
+
     public function init()
     {
         /* Initialize action controller here */
+        $this->idRecompensaPatrocinador=2;
     }
     
     public function pagoAction(){
@@ -122,6 +125,15 @@ class SupportController extends Zend_Controller_Action
             die("ko");
 
         $modelSuport->setCanceled($support['id_apoyo']);
+        
+        if($support['id_recompensa']==$this->idRecompensaPatrocinador){
+            //Borra el código de patrocinador
+            $modelUser=new Model_Users();
+            $user=$modelUser->fetchUser($support['id_usuario_apoyo']);
+            $modelSuport->clearCodSponsor($user['cod_patrocinador']);
+        }
+
+
         die("ok");
 
 
@@ -168,9 +180,9 @@ class SupportController extends Zend_Controller_Action
              /********************
               * Código de recompensa al que se le asocia el código de patrocinador
               */
-             $idRecompensaPatrocinador=2;
+             $idRecompensaPatrocinador=$this->idRecompensaPatrocinador;
 
-             if($support['id_recompensa']==$idRecompensaPatrocinador){
+             if($support['id_recompensa']==$idRecompensaPatrocinador && $support['cancelado']=="N"){
                  $modelUser=new Model_Users();
                  $modelUser->generateCodSponsor($support['id_usuario_apoyo']);
                  $user=$modelUser->fetchUser($support['id_usuario_apoyo']);

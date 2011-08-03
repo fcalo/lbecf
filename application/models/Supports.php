@@ -89,6 +89,25 @@ class Model_Supports
                     );
     }
 
+    public function clearCodSponsor($codSponsor){
+        $rt=true;
+        $sql="UPDATE apoyo SET cod_patrocinio_apoyo=null";
+        $sql.=" WHERE cod_patrocinio_apoyo='".$codSponsor."'";
+        $rt=$rt && $this->db->getAdapter()->query($sql);
+
+        $sql="UPDATE usuario SET cod_patrocinio=null";
+        $sql.=" WHERE cod_patrocinio='".$codSponsor."'";
+        $rt=$rt && $this->db->getAdapter()->query($sql);
+
+        $sql="UPDATE usuario SET cod_patrocinador=null";
+        $sql.=" WHERE cod_patrocinador='".$codSponsor."'";
+        $rt=$rt && $this->db->getAdapter()->query($sql);
+
+        return $rt;
+        
+
+    }
+
 
 
 
