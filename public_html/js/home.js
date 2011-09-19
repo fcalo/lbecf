@@ -8,6 +8,13 @@ $(function() {
         $( "#progressbar" ).progressbar({
                 value: ($("#porcentaje").html()*1)
         });
+        i=1;
+        while($("#progressbar_"+i).length>0){
+           $( "#progressbar_"+i ).progressbar({
+                    value: ($("#porcentaje_+i").html()*1)
+            });
+            i++;
+        }
 
         //scrollpane parts
         var scrollPane = $( ".scroll-pane" ),

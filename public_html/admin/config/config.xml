@@ -29,9 +29,11 @@
                 <null>N</null>
             </field>
             <field>
-                <name>categoria</name>
-                <description>Categoría</description>
-                <type>varchar(45)</type>
+                <name>id_categoria</name>
+                <description>Categoria</description>
+                <entity_ref>10</entity_ref>
+                <type>int(11)</type>
+                <null>N</null>
             </field>
             <field>
                 <name>breve_descripcion</name>
@@ -91,6 +93,9 @@
                 <sizes>
                     <size>
                         <width>420</width>
+                    </size>
+                    <size>
+                        <width>160</width>
                     </size>
                 </sizes>
                 <in_list>S</in_list>
@@ -527,7 +532,31 @@
             </field>
         </fields>
     </entity>
-    
+
+    <entity>
+        <id_entity>10</id_entity>
+        <title>Categorias</title>
+        <table>categorias</table>
+        <maintance_type>2</maintance_type>
+        <fields>
+            <field>
+                <name>id_categoria</name>
+                <description>id</description>
+                <type>int(11)</type>
+                <null>N</null>
+                <auto_increment>S</auto_increment>
+                <primary_key>S</primary_key>
+            </field>
+            <field>
+                <name>categoria</name>
+                <description>Categoria</description>
+                <type>varchar(45)</type>
+                <null>N</null>
+                <in_list>S</in_list>
+                <combo_description>S</combo_description>
+            </field>
+       </fields>
+   </entity>
 
 
     

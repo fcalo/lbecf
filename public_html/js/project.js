@@ -6,7 +6,8 @@
 
 $(function() {
 
-        $(".reward input").val("");
+        if($("#edit-project").length==0)
+            $(".reward input").val("");
 
         $("#back-project").click(function(){
             $("#panel-form").hide();
