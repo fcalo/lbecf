@@ -29,6 +29,40 @@ class Model_Projects
         );
         return $row;
     }
+    public function fetchByUser($idUser)
+    {
+        $rs=$this->db->fetchAll(
+        $this->db->select()
+        ->where('id_usuario= "'.$idUser.'"')
+        );
+        return $rs;
+    }
+
+    public function fetchActives($idProjectExcept=null)
+    {
+
+        $params=array();
+        $params[]="S";
+
+        $sql="SELECT coalesce(t.numApoyos,0) numApoyos, datediff(p.fec_fin,now()) days, p.*";
+        $sql.=" FROM proyectos p";
+        $sql.=" LEFT JOIN (";
+        $sql.="   select count(*) numApoyos, id_proyecto";
+        $sql.="   from apoyo";
+        $sql.="   where approved='S' AND cancelado!='S'";
+        $sql.=" ) t ON t.id_proyecto=p.id_proyecto";
+        $sql.=" WHERE p.activo= ?";
+        $sql.=" AND fec_fin>now()";
+        if($idProjectExcept!=null){
+            $sql.=" AND p.id_proyecto!=?";
+            $params[]=$idProjectExcept;
+        }
+        $sql.=" ORDER BY p.id_proyecto ASC";
+
+
+        return $this->db->getAdapter()->fetchAll($sql,$params);
+
+    }
 
 
     public function vote($data){
@@ -85,13 +119,24 @@ class Model_Projects
         if(!isset($data['destacado']))
                 $data['destacado']='N';
 
+
         return $this->db->insert($data);
+    }
+
+    public function updateProject($idProject, array $data){
+        if(!isset($data['activo']))
+                $data['activo']='N';
+        if(!isset($data['destacado']))
+                $data['destacado']='N';
+
+        return $this->db->update($data, "id_proyecto=".$idProject);
     }
 
     public function uploadImage($path, $idProject){
 
 
         $sizes[]=array("420","");
+        $sizes[]=array("160","");
         $sizes[]=array("","20");
         $helper=new View_Helper_Image();
 

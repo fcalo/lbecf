@@ -1,0 +1,50 @@
+<?$helper=new View_Helper_Image();?>
+<div id="panel-profile">
+    <div id="acciones">
+        <a href="/usuario/perfil/<?=$this->user->username?>" id="mailbox">Volver al perfil</a>
+    </div>
+    <div id="datos">
+        <img src="<?=$helper->image($this->user->id_usuario, $this->user->imagen)?>">
+        <h2><?=$this->user->username?></h2>
+    
+    </div>
+    
+    <div class="cl"></div>
+    <div class="profile-box">
+        <h3>Recibidos</h3>
+        <ul>
+            <?foreach($this->messagesIn as $item):?>
+            <div class="item-mail">
+                <div>Mensaje de <a href="/usuario/perfil/<?=$item['username']?>"><?=$item['username']?></a> recibido el <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Ver</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Ocultar</a></div>
+                <div class="mensaje" id="mensaje_<?=$item['id_mensaje']?>">
+                    <?=$item['mensaje']?>
+                    <div id="entrada" >
+                        <form method="post" name="f_<?=$item['id_mensaje']?>">
+                            <div>
+
+                                <input type="hidden" name="asunto" value="RE:<?=$item['asunto']?>"/>
+                                <input type="hidden" name="id_usuario" value="<?=$item['id_usuario_remitente']?>"/>
+                                <textarea name="mensaje"  cols="40" rows="1"></textarea>
+
+                            </div>
+                            <div><input type="submit" id="<?=$proposal['id_propuesta']?>" class="add-comentario btn-red" value="Responder"/></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?endforeach;?>
+        </ul>
+    </div>
+    <div class="profile-box">
+        <h3>Enviados</h3>
+        <ul>
+            <?foreach($this->messagesOut as $item):?>
+            <div class="item-mail">
+                <div>Mensaje enviado a <a href="/usuario/perfil/<?=$item['username']?>"><?=$item['username']?></a> el <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Ver</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Ocultar</a></div>
+                <div class="mensaje" id="mensaje_<?=$item['id_mensaje']?>"><?=$item['mensaje']?></div>
+            </div>
+            <?endforeach;?>
+        </ul>
+    </div>
+    
+</div>

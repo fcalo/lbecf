@@ -41,6 +41,9 @@ class IndexController extends Zend_Controller_Action
             $this->view->closed=$project->days<1;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
         }
+
+        $modelProject=new Model_Projects();
+        $this->view->projects=$modelProject->fetchActives(isset($this->view->project)?$project->id_proyecto:null);
         
     }
 

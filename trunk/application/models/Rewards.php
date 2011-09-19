@@ -8,7 +8,9 @@ class Model_Rewards
         $this->db=new Application_Model_DbTable_Rewards();
     }
 
-    public function save(array $data){
+    public function save(array $data, $clean=false){
+        if($clean)
+            $this->db->delete("id_proyecto=".$data['id_proyecto']);
         return $this->db->insert($data);
     }
 
@@ -27,6 +29,14 @@ class Model_Rewards
         return true;
     }
 
+    public function fetchByIdProject($idProject)
+    {
+        $row=$this->db->fetchAll(
+        $this->db->select()
+        ->where('id_proyecto= "'.$idProject.'"')
+        );
+        return $row->toArray();
+    }
        
 }
 

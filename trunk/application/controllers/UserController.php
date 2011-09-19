@@ -368,39 +368,89 @@ class UserController extends Zend_Controller_Action
         $auth->clearIdentity ();
     }
 
+    public function mailAction(){
+        $auth=Zend_Auth::getInstance();
+        $request = $this->getRequest ();
+        if($auth->getIdentity()->username!=$request->username){
+                $this->_redirect("/");
+        }else{
+            $messages=new Model_Messages();
+            if($request->isPost()){
+                $data['id_usuario_remitente']=$auth->getIdentity()->id_usuario;
+                $data['id_usuario_receptor']=$_POST['id_usuario'];
+                $data['asunto']=$_POST['asunto'];
+                $data['mensaje']=$_POST['mensaje'];
+                $message=new Model_Messages();
+                $modelUser=new Model_Users();
+                $remitente=$modelUser->fetchUser($data['id_usuario_remitente']);
+                $receptor=$modelUser->fetchUser($data['id_usuario_receptor']);
+                $message->save($data, true, $remitente, $receptor);
+            }
+            $messages->setIdUser($auth->getIdentity()->id_usuario);
+            $this->view->messagesOut=$messages->fetchOut();
+            $this->view->messagesIn=$messages->fetchIn();
+            $this->view->user=$auth->getIdentity();
+
+
+        }
+
+    }
 
     public function profileAction(){
         $auth=Zend_Auth::getInstance();
         $request = $this->getRequest ();
-        if($auth->getIdentity()->username!=$request->username)
-                $this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
-
-        $this->view->user=$auth->getIdentity();
+        if($auth->getIdentity()->username!=$request->username){
+                $self=false;
+                //$this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
+                $modelUser=new Model_Users();
+                $this->view->user=$modelUser->fetchUserByUsername($request->username);
+                $this->view->logged=($auth->getIdentity()->username!="");
+        }else{
+            $self=true;
+            $this->view->user=$auth->getIdentity();
+        }
+        
         
         if($request->isPost()){
-             if ($_FILES["imagen"]['name']!=""){
-                 $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$this->view->user->id_usuario."/";
-                 $helper=new View_Helper_Image();
+            if($self){
+                //Cambio de imagen de perfil
+                 if ($_FILES["imagen"]['name']!=""){
+                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$this->view->user->id_usuario."/";
+                     $helper=new View_Helper_Image();
 
-                 $helper->ensurePath($path);
-                 chmod($path,0777);
-                 $path.=basename($_FILES["imagen"]['name']);
-                 
-                 if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
-                        die("Ocurrio un error subiendo la imagen");
-                 chmod($path,0777);
-                 
-                 $user=new Model_Users();
-                 if(!$user->uploadImage($path,$this->view->user->id_usuario))
-                       die("error");
-                 
-                 $u=$user->fetchUser($this->view->user->id_usuario);
+                     $helper->ensurePath($path);
+                     chmod($path,0777);
+                     $path.=basename($_FILES["imagen"]['name']);
 
-                 unset($u['pass']);
+                     if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
+                            die("Ocurrio un error subiendo la imagen");
+                     chmod($path,0777);
 
-                $auth->clearIdentity ();
-                $auth->getStorage ()->write ( (object)$u );
-             }
+                     $user=new Model_Users();
+                     if(!$user->uploadImage($path,$this->view->user->id_usuario))
+                           die("error");
+
+                     $u=$user->fetchUser($this->view->user->id_usuario);
+
+                     unset($u['pass']);
+
+                    $auth->clearIdentity ();
+                    $auth->getStorage ()->write ( (object)$u );
+                 }
+            }else{
+                //Mensajeria interna
+                $data['id_usuario_remitente']=$auth->getIdentity()->id_usuario;
+                $data['id_usuario_receptor']=$this->view->user->id_usuario;
+                $data['asunto']=$_POST['asunto'];
+                $data['mensaje']=$_POST['mensaje'];
+                $message=new Model_Messages();
+                $modelUser=new Model_Users();
+                $remitente=$modelUser->fetchUser($data['id_usuario_remitente']);
+                $receptor=$modelUser->fetchUser($data['id_usuario_receptor']);
+                $message->save($data, true, $remitente, $receptor);
+                
+
+            }
         }
 
         
@@ -412,13 +462,20 @@ class UserController extends Zend_Controller_Action
         $modelUser=new Model_Users();
         $this->view->comments=$modelUser->getComments($this->view->user->id_usuario);
 
-        $auth->getStorage ()->write ( (object)$modelUser->fetchUser($this->view->user->id_usuario) );
-        $this->view->user=$auth->getIdentity();
+        if($self){
+            $auth->getStorage ()->write ( (object)$modelUser->fetchUser($this->view->user->id_usuario) );
+            $this->view->user=$auth->getIdentity();
+        }
 
         $modelProposal=new Model_Proposals();
         $this->view->proposals=$modelProposal->fetchByUser($this->view->user->id_usuario);
 
+        $modelProjects=new Model_Projects();
+        $this->view->projects=$modelProjects->fetchByUser($this->view->user->id_usuario);
+
         $this->view->proposalsComments=$modelProposal->getCommentsByUser($this->view->user->id_usuario);
+
+        $this->view->self=$self;
         
     }
 

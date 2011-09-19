@@ -1,4 +1,18 @@
 $(function() {
+    
+    $(".show_mail").click(function(){
+        id=$(this).attr("id").replace("ver_","");
+        $("#mensaje_"+id).fadeIn();
+        $("#ver_"+id).hide();
+        $("#ocultar_"+id).show();
+    });
+    $(".hide_mail").click(function(){
+        id=$(this).attr("id").replace("ocultar_","");
+        $("#mensaje_"+id).fadeOut();
+        $("#ver_"+id).show();
+        $("#ocultar_"+id).hide();
+    });
+
     $(".cancel-preaproval").click(function(){
         $("#preapproval").val($(this).attr("id"));
         $( "#dialog-form-cancel" ).dialog( "open" );
@@ -10,6 +24,9 @@ $(function() {
     })
     $("#image").click(function(){
           $( "#dialog-form-image" ).dialog( "open" );
+    })
+    $("#mail").click(function(){
+          $( "#dialog-form-mail" ).dialog( "open" );
     })
     $("#new-project").click(function(){
           location.href="/proyecto/crear/";
@@ -82,4 +99,37 @@ $(function() {
 				}
 			}
 		});
+    $( "#dialog-form-mail" ).dialog({
+			autoOpen: false,
+			height: 240,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Aceptar": function() {
+                                        $("#dialog-form div").hide();
+                                        $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
+                                        setTimeout('$("#frm-mail").submit();',1000);
+				},
+				"Cerrar": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+         if($("#dialog-send").length>0){
+             $( "#dialog-send" ).dialog({
+			autoOpen: true,
+			height: 150,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Cerrar": function() {
+					$( this ).dialog( "close" );
+				}
+			},
+			close: function() {
+				$( this ).dialog( "close" );
+			}
+		});
+
+         }
 });

@@ -52,6 +52,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeDefault = new Zend_Controller_Router_Route ( ':controller/:action/*', array ('controller' => 'index', 'action' => 'index') );
         //set the user profile route
         $routeAddProject = new Zend_Controller_Router_Route( '/proyecto/crear/', array( 'controller' => 'project', 'action' => 'create') );
+        $routeEditProject = new Zend_Controller_Router_Route( '/proyecto/editar/:project', array( 'controller' => 'project', 'action' => 'edit') );
         $routeVoteProject = new Zend_Controller_Router_Route( '/proyecto/voto/:link', array( 'controller' => 'project', 'action' => 'vote') );
         $routeVoteProposal = new Zend_Controller_Router_Route( '/proyecto/voto-propuesta/:link', array( 'controller' => 'project', 'action' => 'voteProposal') );
         $routeCommentProject = new Zend_Controller_Router_Route( '/proyecto/comentario/:link', array( 'controller' => 'project', 'action' => 'comment') );
@@ -59,9 +60,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
         $routeProjectAlert = new Zend_Controller_Router_Route( '/proyecto/:project/alert/:msg', array( 'controller' => 'project', 'action' => 'index',) );
         $routeProjectConcurso = new Zend_Controller_Router_Route( '/proyecto/:project/concurso', array( 'controller' => 'project', 'action' => 'index', 'concurso'=>1) );
+        $routeProjectList = new Zend_Controller_Router_Route( '/proyectos/:page', array( 'controller' => 'project', 'action' => 'list', 'page'=>1) );
         
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
+        $routeMail = new Zend_Controller_Router_Route( '/usuario/mail/:username', array( 'controller' => 'user', 'action' => 'mail') );
         $routeOauth = new Zend_Controller_Router_Route( '/usuario/oauth/:step', array( 'controller' => 'user', 'action' => 'oauth') );
         $routeValidate = new Zend_Controller_Router_Route( '/usuario/validar/:token', array( 'controller' => 'user', 'action' => 'validate') );
         $routeDelete = new Zend_Controller_Router_Route( '/usuario/baja/', array( 'controller' => 'user', 'action' => 'delete') );
@@ -85,8 +88,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute ( 'default', $routeDefault );//important, put the default route first!
         $router->addRoute ( 'project', $routeProject);
         $router->addRoute ( 'project_concurso', $routeProjectConcurso);
+        $router->addRoute ( 'projects', $routeProjectList);
         $router->addRoute ( 'project_alert', $routeProjectAlert);
         $router->addRoute ( 'add_project', $routeAddProject);
+        $router->addRoute ( 'edit_project', $routeEditProject);
         $router->addRoute ( 'vote_project', $routeVoteProject);
         $router->addRoute ( 'vote_proposal', $routeVoteProposal);
         $router->addRoute ( 'comment_project', $routeCommentProject);
@@ -94,6 +99,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         $router->addRoute ( 'user', $routeUser);
         $router->addRoute ( 'profile', $routeProfile);
+        $router->addRoute ( 'mail', $routeMail);
         $router->addRoute ( 'oauth', $routeOauth);
         $router->addRoute ( 'validate', $routeValidate);
         $router->addRoute ( 'delete', $routeDelete);

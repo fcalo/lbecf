@@ -18,7 +18,7 @@ class Form_Project extends Zend_Form {
                             ));
 
                 $this->addElement ( 'text', 'titulo', array ('decorators' => $decorator, 'label' => 'Proyecto:', 'filters' => array ('StringTrim' ),'required' => true ));
-                $this->addElement ( 'text', 'categoria', array ('decorators' => $decorator, 'label' => 'Categoría:', 'filters' => array ('StringTrim' ),'required' => true ));
+
                 $this->addElement ( 'text', 'breve_descripcion', array ('decorators' => $decorator, 'label' => 'Breve descripción:', 'filters' => array ('StringTrim' ),'required' => true ));
 
                 $this->addElement ( 'textarea', 'descripcion',

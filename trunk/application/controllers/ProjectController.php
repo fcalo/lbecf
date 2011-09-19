@@ -114,6 +114,23 @@ class ProjectController extends Zend_Controller_Action
         }
         
     }
+    public function listAction(){
+
+        $page = $this->_getParam('page', 1);
+        $registrosXpagina = 9;
+
+        $rangoPaginas = 10;
+
+        $modelProyecto=new Model_Projects();
+        $proyectos =$modelProyecto->fetchActives();
+
+        $paginador = Zend_Paginator::factory($proyectos);
+        $paginador->setItemCountPerPage($registrosXpagina)
+              ->setCurrentPageNumber($page)
+              ->setPageRange($rangoPaginas);
+
+        $this->view->projects = $paginador;
+    }
 
     
 
@@ -122,6 +139,9 @@ class ProjectController extends Zend_Controller_Action
         if(!$auth->hasIdentity())
                 $this->_redirect("/");
         $this->view->form=new Form_Project();
+        $cat=New Model_Categories();
+        $this->view->category=$cat->fetch();
+
 
         
         $request = $this->getRequest ();
@@ -146,9 +166,11 @@ class ProjectController extends Zend_Controller_Action
 
                  $data['link_rewrite']=Service_Urls::amigables($data['titulo']);
                  $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                 $data['id_categoria']=$_POST['id_categoria'];
 
                  $recompensas=$_POST['recompensa'];unset($data['recompensa']);
                  $minimos=$_POST['minimo'];unset($data['minimo']);
+                 
                  
                  $idProject=$model->saveProject($data);
 
@@ -188,6 +210,101 @@ class ProjectController extends Zend_Controller_Action
              }
         }
 
+    }
+
+    public function editAction(){
+        $auth=Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                $this->_redirect("/");
+        $this->view->form=new Form_Project();
+        $cat=New Model_Categories();
+        $this->view->category=$cat->fetch();
+        
+        $linkRewrite=$this->getRequest()->project;
+
+        $request = $this->getRequest ();
+
+        $modelProject=new Model_Projects();
+        $data=$modelProject->fetchProjectByLinkRewrite($linkRewrite);
+        if($data['activo']=="S"){
+            //No se puede editar
+            $this->view->editable=false;
+        }else{
+            $this->view->editable=true;
+            if($request->isPost()){
+                $idProject=$data['id_proyecto'];
+                $form=$this->view->form;
+                if (!$form->isValid($request->getPost())) {
+                     // Invalid entries
+                    $this->view->error="<li>Revise todos los datos</li>";
+                    return $this->render('create'); // re-render
+                }
+
+                $model=new Model_Projects();
+                 $data=$form->getValues();
+
+
+                 $a=explode("/",$data['fecha']);
+                 $data['fec_fin']=$a[2]."-".$a[1]."-".$a[0];unset($data['fecha']);
+                 $data['importe_solicitado']=$data['importe'];unset($data['importe']);
+
+                 $data['link_rewrite']=Service_Urls::amigables($data['titulo']);
+                 $data['id_usuario']=$auth->getIdentity()->id_usuario;
+                 $data['id_categoria']=$_POST['id_categoria'];
+
+                 $recompensas=$_POST['recompensa'];unset($data['recompensa']);
+                 $minimos=$_POST['minimo'];unset($data['minimo']);
+
+                $model->updateProject($idProject, $data);
+
+                 $modelReward=new Model_Rewards();
+
+                 $clean=true;
+                 foreach($recompensas as $key=>$recompensa){
+                     if($recompensa!="" && $minimos[$key]!=""){
+                         $dataRecompensa=array();
+                         $dataRecompensa['id_proyecto']=$idProject;
+                         $dataRecompensa['apoyo_minimo']=$minimos[$key];
+
+                         $dataRecompensa['subasta']=isset($_POST['subasta_'.($key+1)])?"S":"N";
+                         $dataRecompensa['recompensa']=$recompensa;
+                         $modelReward->save($dataRecompensa, $clean);
+                         $clean=false;
+                     }
+                 }
+                 if ($_FILES["imagen"]['name']!=""){
+                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/proyectos/".$idProject."/";
+                     $helper=new View_Helper_Image();
+
+                     $helper->ensurePath($path);
+                     chmod($path,0777);
+                     $path.=basename($_FILES["imagen"]['name']);
+
+                     if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
+                            die("Ocurrio un error subiendo la imagen");
+                     chmod($path,0777);
+
+                     $user=new Model_Users();
+                     if(!$model->uploadImage($path,$idProject))
+                           die("error");
+                 }
+
+                 $this->view->msg="Proyecto modificado.";
+
+            }else{
+                foreach($data as $key=>$value){
+                    $d[$key]=$value;
+                }
+                $a=explode("-",$d['fec_fin']);
+                $d['fecha']=$a[2]."/".$a[1]."/".$a[0];
+                $d['importe']=round($d['importe_solicitado']);
+                $this->view->data=$d;
+                $this->view->form->populate($d);
+
+                $modelRewards=new Model_Rewards();
+                $this->view->rewards=$modelRewards->fetchByIdProject($d['id_proyecto']);
+            }
+        }
     }
 
     public function voteAction(){

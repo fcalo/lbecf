@@ -2,14 +2,21 @@
 <div id="panel-profile">
     <input type="hidden" id="preapproval"/>
     <div id="acciones">
-        <a href="#" id="image">Cambiar imagen de perfil</a>
-        <a href="#" id="new-project">Crear proyecto</a>
-        <a href="#" id="baja">Darse de baja</a>
+        <?if($this->self):?>
+            <a href="#" id="image">Cambiar imagen de perfil</a>
+            <a href="#" id="new-project">Crear proyecto</a>
+            <a href="#" id="baja">Darse de baja</a>
+            <a href="/usuario/mail/<?=$this->user->username?>" id="mailbox">Ver mensajes</a>
+        <?else:?>
+            <?if($this->logged):?>
+                <a href="#" id="mail">Enviar un mensaje</a>
+            <?endif;?>
+        <?endif;?>
     </div>
     <div id="datos">
         <img src="<?=$helper->image($this->user->id_usuario, $this->user->imagen)?>">
         <h2><?=$this->user->username?></h2>
-    <?if ($this->user->cod_patrocinador!=""):?>
+    <?if ($this->user->cod_patrocinador!="" && $this->self):?>
         <div>Código de Patrocinador: <b><?=$this->user->cod_patrocinador?></b>
         <?if ($this->user->puntos>0):?>
         (Puntos Acumulados: <b><?=$this->user->puntos?></b>)
@@ -20,6 +27,23 @@
     </div>
     
     <div class="cl"></div>
+    <div class="profile-box">
+        <h3><?=$this->self?"Tus proyectos":"Proyectos"?> </h3>
+        <ul>
+            <?foreach($this->projects as $item):?>
+                <?if($this->self || $item['activo']=="S") :?>
+                    <li>
+                        <?if($item['activo']=="S"):?>
+                        <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                        <?else:?>
+                            <?=$item['titulo']?> - <a href="/proyecto/editar/<?=$item['link_rewrite']?>">Editar</a>
+                        <?endif;?>
+                    </li>
+                <?endif;?>
+            <?endforeach;?>
+        </ul>
+    </div>
+    <?if($this->self):?>
     <div class="profile-box">
         <h3>Proyectos que apoyas</h3>
         <ul>
@@ -49,16 +73,17 @@
            <?endforeach;?>
         </ul>
     </div>
+    <?endif;?>
     <div class="profile-box">
-        <h3>Tus propuestas</h3>
+        <h3><?=$this->self?"Tus propuestas":"Propuestas"?></h3>
         <ul>
             <?foreach($this->proposals as $item):?>
-                <li>has realizado <?=$item['c']?> propuesta<?=($item['c']>1?"s":"")?> al proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
+                <li>ha<?=$this->self?"s":""?> realizado <?=$item['c']?> propuesta<?=($item['c']>1?"s":"")?> al proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
             <?endforeach;?>
         </ul>
     </div>
     <div class="profile-box">
-        <h3>Proyectos que has comentado</h3>
+        <h3><?=$this->self?"Proyectos que has comentado":"Proyectos que ha comentado"?></h3>
         <ul>
             <?foreach($this->comments as $item):?>
                 <li><a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a> (<?=$item['comentarios']?> comentario<?=($item['comentarios']>1?"s":"")?>)</li>
@@ -66,7 +91,7 @@
         </ul>
     </div>
     <div class="profile-box">
-        <h3>Propuestas de concursos que has comentado</h3>
+        <h3><?=$this->self?"Propuestas de concursos que has comentado":"Propuestas de concursos que ha comentado"?></h3>
         <ul>
               <?
             $first=true;
@@ -76,7 +101,7 @@
                         if(!$first)
                             echo '</ul></li>';
                         $first=false;?>
-                       <li>Has comentado el concurso del proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                       <li>Ha<?=$this->self?"s":""?> comentado el concurso del proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
                     <ul>
 
                 <?}
@@ -92,6 +117,7 @@
     </div>
     <div class="cl"></div>
 </div>
+<?if($this->self):?>
 <div id="dialog-form" title="Darse de baja">
     <div>
         <p>&iquest;Desea darse de baja de La Butaca escarlata?</p>
@@ -109,3 +135,26 @@
         </form>
     </div>
 </div>
+<?else:?>
+<div id="dialog-form-mail" title="Enviar un mensaje">
+    <div>
+        <form id="frm-mail" method="post" >
+            <table>
+                <tr>
+                    <td>Asunto</td><td><input type="text" name="asunto" maxlength="255"/></td>
+                </tr>
+                <tr>
+                    <td>Mensaje</td><td><textarea name="mensaje" rows="4" cols="25"></textarea></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<?endif;?>
+<?if($this->send):?>
+<div id="dialog-send" title="Enviado">
+    <div>
+        <p>Mensaje enviado correctamente</p>
+    </div>
+</div>
+<?endif;?>
