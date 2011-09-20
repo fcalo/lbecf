@@ -140,6 +140,15 @@ input[type='text'], input[type='password']{
     height:80px;
     margin:50px 0 0 20px;
 }
+#footer .social_widgets{
+    float:left;
+    margin:50px 0 0 20px;
+    height:80px;
+    color:#fff;
+}
+#footer .social_widgets div{
+    float:left;
+}
 .cl{clear:both;}
 #footer div.panel{
 	background-color:#990000;
@@ -147,6 +156,15 @@ input[type='text'], input[type='password']{
 	text-align:right;
 	padding:25px 10px;
 	}
+#footer div.panel #moloko{
+    text-align:center;
+    color:#fff;
+    clear:both;
+}
+
+#footer div.panel #moloko img{
+    border:0
+}
 #footer .terminos {
 	padding:5px 13px;
 	margin:0 10px;
@@ -313,6 +331,80 @@ input[type='text'], input[type='password']{
     text-align: center;
 }
 
+#panel-home #projects-home{
+    border-top: 10px solid #990000;
+    margin-top: 40px;
+    padding-bottom: 60px;
+    width: 960px;
+}
+#panel-home #projects-home .item,
+#panel-list .item{
+    background: url("../img/bg-project-item.png") no-repeat scroll 0 0 transparent;
+    width:286px;
+    height:284px;
+    padding:12px;
+    margin:10px 0 0 7px;
+    float:left;
+    color:#000;
+}
+
+#panel-home #projects-home .item .title,
+#panel-list .item .title{
+    color:#333;
+    font-size:14px;
+    font-weight: bold;
+}
+
+#panel-home #projects-home .item .title span a,
+#panel-list .item .title span a{
+    color:#990000;
+}
+
+#panel-home #projects-home .item .iconos,
+#panel-list .item .iconos{
+    background: url("../img/iconos.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 44px;
+    margin: -5px 0px 0 0;
+    width: 99px;
+}
+#panel-home #projects-home .item .project-image,
+#panel-list .item .project-image{
+    float:left;
+    margin-top: 10px;
+}
+#panel-home #projects-home .item .project-info,
+#panel-list .item .project-info{
+    float:left;
+    padding:10px;
+}
+#panel-home #projects-home .item .project-info .number,
+#panel-list .item .project-info .number{
+    color:#900;
+}
+#panel-home #projects-home .item .project-info .text,
+#panel-list .item .project-info .text{
+    color:#000;
+}
+#panel-home #projects-home .item .project-info .margin,
+#panel-list .item .project-info .margin{
+    margin-top:10px;
+}
+#panel-home #projects-home .item .project-info .ui-progressbar,
+#panel-list .item .project-info .ui-progressbar{
+
+    width:100px;
+    margin:5px 0 0 0;
+}
+
+
+#panel-home #projects-home .item .project-bottom,
+#panel-list .item .project-bottom{
+    margin-top:5px;
+    clear:both;
+}
+
+
 /*fin home*/
 /* proyecto */
 #tabs {
@@ -425,6 +517,9 @@ input[type='text'], input[type='password']{
     display:block;
     margin-bottom: 15px;
 }
+#panel-project #concurso .propuesta a.username{
+    display:inline;
+}
 #panel-project #concurso .propuesta a img{
     border:0;
     max-width:550px;
@@ -509,6 +604,9 @@ input[type='text'], input[type='password']{
 }
 #panel-project #comentarios .comentario span{
     font-weight: bold;
+    color:#900;
+}
+#panel-project #comentarios .comentario span a{
     color:#900;
 }
 #panel-project #comentarios .comentario .fecha{
@@ -769,3 +867,29 @@ input[type='text'], input[type='password']{
 #li_ui_li_gen_1308307994921_0 #li_ui_li_gen_1308307994921_0-logo {
     display: none;
 }
+
+/*Paginador*/
+.paginationControl{
+    text-align:center;
+    padding:10px 0;
+}
+.paginationControl a{
+    color:#900;
+}
+/*Fin paginador*/
+/*mail*/
+.profile-box .item-mail{
+    background-color:#ddd;
+    margin:10px;
+    padding:10px;
+}
+.profile-box .item-mail .mensaje{
+    display:none;
+    background-color:#eee;
+    padding: 10px;
+    margin:10px 0;
+}
+.profile-box .item-mail .hide_mail{
+    display:none;
+}
+/*FIN mail*/
