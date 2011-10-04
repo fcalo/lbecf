@@ -50,6 +50,7 @@ class Model_Projects
         $sql.="   select count(*) numApoyos, id_proyecto";
         $sql.="   from apoyo";
         $sql.="   where approved='S' AND cancelado!='S'";
+        $sql.="   GROUP BY id_proyecto";
         $sql.=" ) t ON t.id_proyecto=p.id_proyecto";
         $sql.=" WHERE p.activo= ?";
         $sql.=" AND fec_fin>now()";

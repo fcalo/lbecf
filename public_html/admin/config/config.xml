@@ -224,7 +224,7 @@
                     <null>N</null>
                 </field>
                 <field>
-                    <name>descripcion</name>
+                    <name>descripcion_colaborador</name>
                     <description>Descripción</description>
                     <type>text</type>
                     <null>S</null>
@@ -348,6 +348,12 @@
                     <name>puntos</name>
                     <description>Puntos</description>
                     <type>int(3)</type>
+                    <in_list>S</in_list>
+            </field>
+            <field>
+                    <name>descuento</name>
+                    <description>% Descuento</description>
+                    <type>int(2)</type>
                     <in_list>S</in_list>
             </field>
             <field>

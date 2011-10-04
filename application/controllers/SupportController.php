@@ -15,6 +15,13 @@ class SupportController extends Zend_Controller_Action
 
         $config = Zend_Registry::get('config');
         $support = $this->getRequest()->getParam('support');
+        //Comprobar si tiene descuento
+        $auth = Zend_Auth::getInstance ();
+        $data['id_usuario_apoyo']=$auth->getIdentity()->id_usuario;
+        $modelUser=New Model_Users();
+        $user=$modelUser->fetchUser($data['id_usuario_apoyo']);
+        $supportPaypal=$support*(1-($user->descuento/100));
+
         $reward = $this->getRequest()->getParam('reward');
         $sponsor = $this->getRequest()->getParam('sponsor');
         $linkRewrite = $this->getRequest()->getParam('proyect');
@@ -38,7 +45,6 @@ class SupportController extends Zend_Controller_Action
         $paypalConfig['bussines']=$config->payment->paypal->bussines;
         
 
-        //TODO: Obtener datos de conexion del local.ini
         $params=array();
         $paypal=new Service_Paypal();
 
@@ -46,15 +52,16 @@ class SupportController extends Zend_Controller_Action
         $fecPago= date('Y-m-d', mktime(0,0,0,date('m',$cd),date('d',$cd)+15,date('Y',$cd)));
 
 
-        $preapprovalKey=$paypal->CallPreapproval($paypalConfig['notifyUrl'],$paypalConfig['returnUrl'], $paypalConfig['cancelUrl'], "EUR", $project->fec_fin, $fecPago, $support, "", 1, "", "", "", "", "", "");
+        $preapprovalKey=$paypal->CallPreapproval($paypalConfig['notifyUrl'],$paypalConfig['returnUrl'], $paypalConfig['cancelUrl'], "EUR", $project->fec_fin, $fecPago, $supportPaypal, "", 1, "", "", "", "", "", "");
         //Se guarda la clave
 
         $Support=new Model_Supports();
 
         $data['id_proyecto']=$project->id_proyecto;
-        $auth = Zend_Auth::getInstance ();
+        
         $data['id_usuario_apoyo']=$auth->getIdentity()->id_usuario;
         $data['apoyo']=$support;
+        $data['descuento']=$user->descuento;
         $data['id_recompensa']=$reward;
         $data['fecha']=date("Y-m-d H:i:s");
         $data['preapproved_key']=$preapprovalKey;
@@ -86,10 +93,9 @@ class SupportController extends Zend_Controller_Action
         $params=array();
         $paypal=new Service_Paypal();
 
+        $amount=$support['apoyo']*(1-($support['descuento']/100));
         
-
-
-        $pay=$paypal->CallPay("PAY", $paypalConfig['cancelUrl'], $paypalConfig['returnUrl'] , "EUR", array($paypalConfig['bussines']), array($support['apoyo']), null, null, null, null, null, $pin, $support['preapproved_key'], null, null, null);
+        $pay=$paypal->CallPay("PAY", $paypalConfig['cancelUrl'], $paypalConfig['returnUrl'] , "EUR", array($paypalConfig['bussines']), array($amount), null, null, null, null, null, $pin, $support['preapproved_key'], null, null, null);
 
         if($pay['paymentExecStatus']=="COMPLETED"){
             $modelSupport->setPayed($idSupport);

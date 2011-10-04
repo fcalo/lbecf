@@ -6,12 +6,12 @@ $this->headTitle('La butaca escarlata');
 echo $this->doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
- <meta property="og:title" content="The Rock"/>
+    <meta name="description" content="Punto de financiación para emprendedores y ofertas de trabajo. ¡Vamos a poner fin a esta crisis!"/>
     <meta property="og:title" content="EL DESAFÍO ESCARLATA"/>
     <meta property="og:url" content="http://www.labutacaescarlata.com/proyecto/la-butaca-escarlata/"/>
     <meta property="og:image" content="http://www.labutacaescarlata.com/img/proyecto.jpg" />
     <meta property="og:description"
-          content="¡Colabora en nuestro primer proyecto y obtén capital y granes descuentos!"/>
+          content="¡Colabora en nuestro primer proyecto y obtén capital y grandes descuentos!"/>
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
         <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
@@ -111,5 +111,18 @@ echo $this->doctype(); ?>
                         
 		</div>
         </div>
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26062159-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
     </body>
 </html>
