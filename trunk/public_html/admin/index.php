@@ -4,11 +4,11 @@
 	include("libs/parser.php");
 	include("libs/config_database.php");
 	
-	if ($_POST['logout']==1){
-		unset($_SESSION["uusSerRmed"]);
-		$_SESSION['force']=1;
-		header('Location: /');
-		end;
+	if ($_REQUEST['logout']==1){
+		unset($_SESSION[constant(USER.PROJECT)]);
+		//$_SESSION['force']=1;
+		//header('Location: /admin/');
+		//end;
 	}
 
 	
@@ -94,6 +94,9 @@
 <div id="top">
 	<div id="top-bd">
 	<div id="titulo-top"></div>
+        <div id="enlaces-top">
+            <a href="/admin/index.php?logout=1">Desconectarse</a>
+        </div>
 
 	</div>
 </div>
