@@ -52,6 +52,15 @@ $(function() {
         $( "#progressbar" ).progressbar({
                 value: ($("#porcentaje").html()*1)
         });
+
+        var i=1;
+        while($( "#progressbar_"+i ).length>0){
+           $( "#progressbar_"+i ).progressbar({
+                value: ($("#porcentaje_"+i).html()*1)
+            });
+            i++;
+        }
+
         $("#recompensas .btn-red").click(function(){
             if($("#closed").length==0 || $("#closed").val()==""){
                 if($("#idUser").length==0 || $("#idUser").val()=="")

@@ -1,4 +1,12 @@
 <div id="panel-list">
+    <div id="category-list">
+        <span>Categorias</span>
+        <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>">Todas</a></div>
+        <?foreach ($this->categories as $category):?>
+            <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
+        <?endforeach;?>
+    </div>
+
     <?$i=0;
         foreach ($this->projects as $project):
           $i++?>
@@ -9,7 +17,7 @@
                 <img  src="<?="/admin/".str_replace("/".$project['id_proyecto']."/", "/".$project['id_proyecto']."/160x/thumb_", $project['imagen']);?>">
             </div>
             <div class="project-info">
-                    <div class="number"><span id="porcentaje_<?=$i?>">0</span> %</div>
+                    <div class="number"><span id="porcentaje_<?=$i?>"><?=round($project['porcentaje'],0)?></span> %</div>
                     <div class="text">recaudado</div>
                     <div id="progressbar_<?=$i?>"></div>
                     <div class="number"><?=round($project['recaudado'],0)?> de <?=round($project['importe_solicitado'],0)?> &euro;</div>
@@ -23,6 +31,9 @@
 
         </div>
     <?endforeach;?>
+    <?if($i==0):?>
+        <div class="msg">Actualmente no hay proyectos en esta categoría</div>
+    <?endif;?>
    
     <div class="cl"></div>
      <?=$this->paginationControl($this->projects,'Sliding','project/list/pagination.phtml');?>

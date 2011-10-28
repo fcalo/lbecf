@@ -4,14 +4,14 @@ $this->headTitle()->setSeparator(' - ');
 $this->headTitle('La butaca escarlata');
 
 echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
     <head>
     <meta name="description" content="Punto de financiación para emprendedores y ofertas de trabajo. ¡Vamos a poner fin a esta crisis!"/>
     <meta property="og:title" content="EL DESAFÍO ESCARLATA"/>
     <meta property="og:url" content="http://www.labutacaescarlata.com/proyecto/la-butaca-escarlata/"/>
     <meta property="og:image" content="http://www.labutacaescarlata.com/img/proyecto.jpg" />
     <meta property="og:description"
-          content="¡Colabora en nuestro primer proyecto y obtén capital y grandes descuentos!"/>
+          content="¡Regístrate y obtén capital y grandes descuentos!"/>
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
         <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
@@ -66,7 +66,7 @@ echo $this->doctype(); ?>
 			<div id="menu">
 				<ul>
 					<li <?=($_SERVER['REQUEST_URI']=="/")?"class='active'":""?>><a href="/">Inicio</a></li>
-					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/proyecto")>0)?"class='active'":""?>><a href="/proyecto/la-butaca-escarlata">Proyectos</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/proyecto")>0)?"class='active'":""?>><a href="/proyectos/">Proyectos</a></li>
 					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/sobre")>0)?"class='active'":""?>><a href="/sobre/">Sobre LBE</a></li>
 					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/funcion")>0)?"class='active'":""?>><a href="/funciona/">Cómo funciona</a></li>
 					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/faq")>0)?"class='active'":""?>><a href="/faq/">FAQ</a></li>
@@ -93,7 +93,7 @@ echo $this->doctype(); ?>
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="fb-like" data-href="http://labutacaescarlata.com" data-send="false" data-layout="box_count" data-width="50" data-show-faces="false" data-colorscheme="dark" data-font="arial"></div>
+<div class="fb-like" data-href="http://labutacaescarlata.com" data-send="true" data-layout="standard" data-width="300" data-show-faces="true" data-colorscheme="light" data-font="arial"></div>
                             </div>
 
 

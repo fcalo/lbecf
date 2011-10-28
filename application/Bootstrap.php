@@ -60,7 +60,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
         $routeProjectAlert = new Zend_Controller_Router_Route( '/proyecto/:project/alert/:msg', array( 'controller' => 'project', 'action' => 'index',) );
         $routeProjectConcurso = new Zend_Controller_Router_Route( '/proyecto/:project/concurso', array( 'controller' => 'project', 'action' => 'index', 'concurso'=>1) );
-        $routeProjectList = new Zend_Controller_Router_Route( '/proyectos/:page', array( 'controller' => 'project', 'action' => 'list', 'page'=>1) );
+        $routeProjectList = new Zend_Controller_Router_Route( '/proyectos/:page/:category', array( 'controller' => 'project', 'action' => 'list', 'page'=>1, 'category'=>0) );
         
         //set the user profile route
         $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );

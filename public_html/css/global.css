@@ -337,6 +337,40 @@ input[type='text'], input[type='password']{
     padding-bottom: 60px;
     width: 960px;
 }
+#panel-list .msg{
+    margin-top:10px;
+    font-weight: bold;
+    float:left;
+}
+
+#panel-list #category-list{
+    width:226px;
+    height:264px;
+    font-size:14px;
+    padding:20px;
+    margin:10px 30px;
+    border-right:1px solid #900;
+    border-bottom:1px solid #900;
+    float:left;
+}
+#panel-list #category-list span{
+    color:#333;
+    font-weight:bold;
+}
+#panel-list #category-list .mnu-cat{
+    margin:5px 0;
+    
+}
+#panel-list #category-list a{
+    color:#900;
+    text-decoration: none;
+    line-height: 16px;
+    height: 16px;
+}
+#panel-list #category-list a.active,#panel-list #category-list a:hover{
+    font-weight: bold;
+}
+
 #panel-home #projects-home .item,
 #panel-list .item{
     background: url("../img/bg-project-item.png") no-repeat scroll 0 0 transparent;

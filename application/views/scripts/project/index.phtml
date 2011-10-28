@@ -56,7 +56,7 @@ $helperDate=new View_Helper_Date();?>
 
                 <div id="ficha-bottom">
                     <div id="project-social">
-                        <a href="http://www.facebook.com/sharer.php?u=<?=$this->url?>&r=<?=rand(0,1000)?>" target="_blank"><img src="/img/fb_ico.png"/></a>
+                        <a href="http://www.facebook.com/sharer.php?u=<?=$this->url?>&r=<?=rand(0,1000)?>&t=<?=$this->project->titulo?>" target="_blank"><img src="/img/fb_ico.png"/></a>
                         <a href="http://twitter.com/share?original_referer=<?=$this->url?>&source=tweetbutton&text=<?=$this->project->titulo?>" target="_blank" ><img src="/img/tw.png"/></a>
                         <a href="http://www.linkedin.com/cws/share?original_referer=<?=$this->url?>&url=<?=$this->url?>" target="_blank"><img src="/img/in.png"/></a>
                         <a href="http://www.tuenti.com/share?url=<?=$this->url?>" target="_blank"><img src="/img/tu.png"/></a>
