@@ -38,16 +38,17 @@ class Model_Projects
         return $rs;
     }
 
-    public function fetchActives($idProjectExcept=null)
+    public function fetchActives($idProjectExcept=null, $idCategory=0)
     {
 
         $params=array();
         $params[]="S";
 
-        $sql="SELECT coalesce(t.numApoyos,0) numApoyos, datediff(p.fec_fin,now()) days, p.*";
+        $sql="SELECT coalesce(t.numApoyos,0) numApoyos, datediff(p.fec_fin,now()) days, p.*, t.apoyo recaudado,";
+        $sql.=" ((t.apoyo/p.importe_solicitado)*100) porcentaje";
         $sql.=" FROM proyectos p";
         $sql.=" LEFT JOIN (";
-        $sql.="   select count(*) numApoyos, id_proyecto";
+        $sql.="   select count(*) numApoyos, sum(apoyo) apoyo, id_proyecto";
         $sql.="   from apoyo";
         $sql.="   where approved='S' AND cancelado!='S'";
         $sql.="   GROUP BY id_proyecto";
@@ -57,6 +58,10 @@ class Model_Projects
         if($idProjectExcept!=null){
             $sql.=" AND p.id_proyecto!=?";
             $params[]=$idProjectExcept;
+        }
+        if($idCategory!=0){
+            $sql.=" AND p.id_categoria=?";
+            $params[]=$idCategory;
         }
         $sql.=" ORDER BY p.id_proyecto ASC";
 
