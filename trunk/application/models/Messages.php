@@ -22,8 +22,8 @@ class Model_Messages
                 $hostname = 'http://' . $_SERVER['HTTP_HOST'];
 
                 $link=$hostname.'/usuario/mail/'.$receptor->username;
-                $mail->setBodyHtml ( $receptor->username.' te ha mandado un mensaje mediante la butaca escarlata<br />'
-                        .'Lo puedes ver en <a href="'.$link.'">aqu&iacute;</a><br /><br />_______________________________<br />La Butaca Escarlata');
+                $body="The user ".$receptor->username." has sent you an email! Log in to read it.";
+                $mail->setBodyHtml ( $body);
                 $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
 
                 $mail->addTo($receptor->email);
