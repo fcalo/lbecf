@@ -23,7 +23,6 @@ class ProjectController extends Zend_Controller_Action
 
         $model=new Model_Projects();
 
-
         //->from(array("proyectos"), array("*","days"=>"abs(datediff(now(),p.fec_fin)"))
         $project=$dbProject->fetchRow(
                 $dbProject->select()
@@ -130,7 +129,7 @@ class ProjectController extends Zend_Controller_Action
         $modelProyecto=new Model_Projects();
         $proyectos =$modelProyecto->fetchActives(null, $category);
         if(count($proyectos)<=1 && $in)
-            $this->_redirect ( '/proyecto/la-butaca-escarlata');
+            $this->_redirect ( '/proyecto/el-desafio-escarlata');
 
         $paginador = Zend_Paginator::factory($proyectos);
         $paginador->setItemCountPerPage($registrosXpagina)

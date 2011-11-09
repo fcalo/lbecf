@@ -14,6 +14,14 @@ class Model_Rewards
         return $this->db->insert($data);
     }
 
+    public function fetch($id)
+    {
+        $row=$this->db->fetchRow(
+        $this->db->select()
+        ->where('id_recompensa= "'.$id.'"')
+        );
+        return $row;
+    }
 
 
     public function isSubasta($idReward)

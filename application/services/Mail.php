@@ -19,7 +19,21 @@ class Service_Mail {
         $mail->setFrom ('noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
         $mail->addTo($to);
         $mail->setSubject($subject);
-        $mail->send();
+        return $mail->send();
+    }
+    public static function sendMailFromId($idUser, $subject,$body){
+        $user=new Model_Users();
+        $r=$user->fetchUser($idUser);
+        $to=$r['email'];
+
+
+        $mail = new Zend_Mail ( );
+        $footer='<br /><br />_______________________________<br />La Butaca Escarlata';
+        $mail->setBodyHtml($body.$footer);
+        $mail->setFrom ('noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+        $mail->addTo($to);
+        $mail->setSubject($subject);
+        return $mail->send();
     }
 }
 ?>

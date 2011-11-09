@@ -385,6 +385,7 @@ class UserController extends Zend_Controller_Action
                 $remitente=$modelUser->fetchUser($data['id_usuario_remitente']);
                 $receptor=$modelUser->fetchUser($data['id_usuario_receptor']);
                 $message->save($data, true, $remitente, $receptor);
+
             }
             $messages->setIdUser($auth->getIdentity()->id_usuario);
             $this->view->messagesOut=$messages->fetchOut();

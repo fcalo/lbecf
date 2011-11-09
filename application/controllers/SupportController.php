@@ -157,7 +157,7 @@ class SupportController extends Zend_Controller_Action
              $key=$_REQUEST['preapproval_key'];
              $support=$modelSupport->fetchSupportByPreapprovedKey($key);
              $rewardSupport=new Model_Rewards();
-             var_dump($rewardSupport->isSubasta($support['id_recompensa']));
+             //var_dump($rewardSupport->isSubasta($support['id_recompensa']));
              if($rewardSupport->isSubasta($support['id_recompensa'])){
                  //cancelar el apoyo anterior
                  $supportKo=$modelSupport->fetchSupportByRewardSubasta($support['id_recompensa']);
@@ -172,7 +172,7 @@ class SupportController extends Zend_Controller_Action
                      $body.="<br/>Esto anula autom&aacute;ticamente tu apoyo, ya que solo el m&aacute;s alto es que se tiene en cuenta.";
                      $modelUser=new Model_Users();
                      $user=$modelUser->fetchUser($supportKo['id_usuario_apoyo']);
-                     Service_Mail::sendMail($user['email'], "Tu apoyo a una recompensa exclususiva ha sido superado", $body);
+                     Service_Mail::sendMail($user['email'], "Somebody has exceeded your bid in the auction! Log in an make a new one!", $body);
 
                  }
                  //Se actualiza la recompensa para que el apoyo minimo sea superior
@@ -183,6 +183,27 @@ class SupportController extends Zend_Controller_Action
 
              $modelSupport->setApproved($support['id_apoyo']);
              $support=$modelSupport->fetch($support['id_apoyo']);
+
+             if($support['cancelado']!="S"){
+                 $modelProject=new Model_Projects();
+                 $p=$modelProject->fetchById($support['id_proyecto']);
+
+                 $modelUser=new Model_Users();
+                 $u=$modelUser->fetchUser($p['id_usuario']);
+                 $uSupport=$modelUser->fetchUser($support['id_usuario_apoyo']);
+
+                //Mail al patrocinado
+                 $mail = new Zend_Mail ( );
+                 $body="The user ".$uSupport['username']." has become a supporter of your event! Congratulations!";
+                 $mail->setBodyHtml ( $body);
+                 $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+
+                 $mail->addTo($u['email']);
+                 $mail->setSubject('Nuevo apoyo');
+                 $mail->send();
+             }
+
+
              /********************
               * Código de recompensa al que se le asocia el código de patrocinador
               */
@@ -195,6 +216,8 @@ class SupportController extends Zend_Controller_Action
                  //Lo manda por correo
                  $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
 
+
+                 //Mail al que  patrocina
                  $mail = new Zend_Mail ( );
                  $mail->setBodyHtml ( 'Gracias por convertirse en Patrocinador del Desaf&iacute;o escarlata<br/>Est&eacute; es su c&oacute;digo de Patrocinador:<b>'.$user['cod_patrocinador']."</b><br /><br />_______________________________<br />La Butaca Escarlata");
                  $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
@@ -202,8 +225,8 @@ class SupportController extends Zend_Controller_Action
                  $mail->addTo($user['email']);
                  $mail->setSubject ( $user['username'].' te has convertido en patrocinador');
                  $mail->send();
-                 
-                 
+
+
              }
 
 
