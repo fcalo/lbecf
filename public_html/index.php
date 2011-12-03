@@ -16,7 +16,7 @@ defined('APPLICATION_ENV')
 if ( APPLICATION_ENV == 'development' )
     defined('STATIC_PATH') ||  define('STATIC_PATH',  'http://lbe.dev');
 else 
-    defined('STATIC_PATH') || define('STATIC_PATH',  'http://labutacaescarlata.com');
+    defined('STATIC_PATH') || define('STATIC_PATH',  'http://rockingredticket.com');
    
 // Ensure library/ is on include_path
 

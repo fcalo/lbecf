@@ -12,12 +12,12 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $dbProject=new Application_Model_DbTable_Projects();
+        /*$dbProject=new Application_Model_DbTable_Projects();
 
         $project=$dbProject->fetchRow(
                 $dbProject->select()
                 ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("datediff(fec_fin,now())")))
-                ->where('destacado = "S"')
+                ->where('destacado = "S" AND fec_fin>now()')
                 ->order("id_proyecto DESC")
                 );
 
@@ -40,11 +40,12 @@ class IndexController extends Zend_Controller_Action
             $this->view->days=$project->days;
             $this->view->closed=$project->days<1;
             $this->view->image="/admin/".str_replace("/".$project->id_proyecto."/", "/".$project->id_proyecto."/420x/thumb_", $project->imagen);
-        }
+        }*/
 
         $modelProject=new Model_Projects();
         $this->view->projects=$modelProject->fetchActives(isset($this->view->project)?$project->id_proyecto:null);
-        
+        $modelCategorias=new Model_Categories();
+        $this->view->categories=$modelCategorias->fetch();
     }
 
 

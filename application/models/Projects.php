@@ -54,7 +54,7 @@ class Model_Projects
         $sql.="   GROUP BY id_proyecto";
         $sql.=" ) t ON t.id_proyecto=p.id_proyecto";
         $sql.=" WHERE p.activo= ?";
-        //$sql.=" AND fec_fin>now()";
+        $sql.=" AND fec_fin>now()";
         if($idProjectExcept!=null){
             $sql.=" AND p.id_proyecto!=?";
             $params[]=$idProjectExcept;

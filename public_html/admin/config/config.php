@@ -1,7 +1,7 @@
 <?
 //Nombre del projecto
 DEFINE ("PROJECT" , "butaca11");
-DEFINE ("PROJECT_WELCOME" , "La butaca escarlata");
+DEFINE ("PROJECT_WELCOME" , "Rocking Red Ticket");
 DEFINE ("PRODUCTION" , false);
 DEFINE ("CHANGE_PASS" , false);
 DEFINE ("UPLOAD_DIR" , "./uploads/");

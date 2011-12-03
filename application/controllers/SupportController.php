@@ -87,6 +87,7 @@ class SupportController extends Zend_Controller_Action
         $paypalConfig['returnUrl']=$hostname.$config->payment->paypal->return;
         $paypalConfig['paypalUrl']=$config->payment->paypal->paypal_url;
         $paypalConfig['bussines']=$config->payment->paypal->bussines;
+        var_dump($paypalConfig['bussines']);
 
 
         //TODO: Obtener datos de conexion del local.ini
@@ -100,6 +101,26 @@ class SupportController extends Zend_Controller_Action
         if($pay['paymentExecStatus']=="COMPLETED"){
             $modelSupport->setPayed($idSupport);
             echo "Pagado ".$support['apoyo']." del apoyo".$idSupport;
+             //Manda mail al pagador
+            $mail = new Zend_Mail ( );
+            $modelProject=new Model_Projects();
+            $p=$modelProject->fetchById($support['id_proyecto']);
+
+            $body="The X ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
+            $body="Enjoy the event and see you soon!";
+            $mail->setBodyHtml ( $body);
+            $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+
+            $modelUser=new Model_Users();
+            $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
+
+            var_dump($u['email']);
+            die;
+
+            $mail->addTo($u['email']);
+            $mail->setSubject('Apoyo confirmado');
+            $mail->send();
+
         }else{
             echo "Fallo!<br>";
             var_dump($pay);
