@@ -49,7 +49,7 @@ class Model_Supports
     }
     public function fetchOutstanding()
     {
-        $sql="SELECT a.id_apoyo";
+        $sql="SELECT a.id_apoyo, a.id_usuario_apoyo";
         $sql.=" FROM apoyo a";
         $sql.=" INNER JOIN proyectos p ON p.id_proyecto=a.id_proyecto";
         $sql.=" WHERE coalesce(a.pagado,'N')!='S'";

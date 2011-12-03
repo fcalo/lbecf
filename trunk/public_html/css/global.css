@@ -2,7 +2,7 @@ body{
 	width:100%;
 	height:100%;
 	margin:0;
-	font-family:Arial;
+	font-family:"Bodoni MT", Arial;
 	font-size:12px;
 	text-align:center;
 	background-color:#f7f7f7;
@@ -49,7 +49,8 @@ input[type='text'], input[type='password']{
 	margin-top:10px;
 }
 #header #title span{
-	margin-left:12px;
+	margin-left:30px;
+        color:#000;
 }
 #header #title div{
 	background:url(../img/title.png) no-repeat;
@@ -332,7 +333,6 @@ input[type='text'], input[type='password']{
 }
 
 #panel-home #projects-home{
-    border-top: 10px solid #990000;
     margin-top: 40px;
     padding-bottom: 60px;
     width: 960px;
@@ -343,30 +343,34 @@ input[type='text'], input[type='password']{
     float:left;
 }
 
+#panel-home #category-list,
 #panel-list #category-list{
-    width:226px;
+    width:129px;
     height:264px;
-    font-size:14px;
-    padding:20px;
-    margin:10px 30px;
-    border-right:1px solid #900;
-    border-bottom:1px solid #900;
-    float:left;
+    font-size:12px;
+    padding:10px;
+    margin:10px 0 10px 20px;
+    border-left:1px solid #900;
+    float:right;
 }
+#panel-home #category-list span,
 #panel-list #category-list span{
     color:#333;
     font-weight:bold;
 }
+#panel-home #category-list .mnu-cat,
 #panel-list #category-list .mnu-cat{
     margin:5px 0;
     
 }
+#panel-home #category-list a,
 #panel-list #category-list a{
     color:#900;
     text-decoration: none;
     line-height: 16px;
     height: 16px;
 }
+#panel-home #category-list a.active,#panel-home #category-list a:hover,
 #panel-list #category-list a.active,#panel-list #category-list a:hover{
     font-weight: bold;
 }
@@ -374,7 +378,7 @@ input[type='text'], input[type='password']{
 #panel-home #projects-home .item,
 #panel-list .item{
     background: url("../img/bg-project-item.png") no-repeat scroll 0 0 transparent;
-    width:286px;
+    width:220px;
     height:284px;
     padding:12px;
     margin:10px 0 0 7px;
@@ -770,7 +774,7 @@ input[type='text'], input[type='password']{
     margin:10px auto;
 }
 #funciona #enlaces{
-    font-size:20px;
+    font-size:17px;
     padding:40px 20px;
 }
 #funciona #enlaces a{
@@ -779,7 +783,7 @@ input[type='text'], input[type='password']{
     font-weight:bold;
 }
 #funciona #enlaces div{
-    margin-bottom:12px;
+    margin-bottom:22px;
 }
 #content #texto-funciona{
     margin:0 115px;

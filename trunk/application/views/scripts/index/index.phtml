@@ -1,73 +1,10 @@
 <div id="panel-home">
-    <div id="destacado">
-        <div class="top"></div>
-        <div class="destacado-content">
-            <div id="noticias">
-                <div class="scroll-pane ui-widget ui-widget-header ui-corner-all">
-	            <div id="scroll-bar-wrap" class="scroll-bar-wrap ui-widget-content ui-corner-bottom">
-                            <div class="scroll-bar"></div>
-                    </div>
-                    <div class="scroll-content">
-                        <ul>
-                            <?foreach($this->news as $new):?>
-                            <li>
-                                <div class="noticias-fecha"><?=$new->fecha?></div>
-                                <?=$new->texto?>
-                            </li>
-                            <?endforeach;?>
-                        </ul>
-                    </div>
-                   
-                </div>
-            </div>
-            <div id="ficha">
-                <div id="ficha-iconos"></div>
-                <h1>Proyecto: <a href="/proyecto/<?=$this->project->link_rewrite?>"><?=$this->project->titulo?></a></h1>
-                <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
-                <div id="ficha-info">
-                    <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
-                    <div class="text">recaudado</div>
-                    <div id="progressbar"></div>
-                    <div class="text"><?=round($this->recaudado,0)?> de <?=round($this->project->importe_solicitado,0)?> &euro;</div>
-                    <div class="number margin"><?=$this->numApoyos?></div>
-                    <div class="text">apoyos</div>
-                    <?if(!$this->closed):?>
-                    <div class="number margin"><?=$this->days?></div>
-                    <div class="text">días</div>
-                    <?else:?>
-                    <div class="number margin">Cerrado</div>
-                    <div class="text">El plazo ha finalizado</div>
-                    <?endif;?>
-                </div>
-                
-                <div id="ficha-bottom">
-                    <!--<h2>COMUNIDAD ONLINE DE "CROWFUNDING & CROWSORCING" EMPRESARIAL</h2>-->
-                    <h2><?=$this->project->breve_descripcion?></h2>
-                </div>
-            </div>
-        </div>
-        <div class="bottom"></div>
-    </div>
-    <div id="bottom-home">
-        <div class="texto">Quieres...</div>
-        <div id="emprendedores">
-            <div class="datos">&iquest;Abrir tu propio negocio? &iquest;Llevar a cabo un proyecto de investigaci&oacute;n?</div>
-            <div class="datos">&iquest;Financiarte sin tener que pedir un cr&eacute;dito y manteniendo el control al 100%?</div>
-            <div class="datos">&iquest;Encontrar a los mejores colaboradores/profesionales para tu proyecto?</div>
-        </div>
-        <div id="patrocinadores">
-            <div class="datos">&iquest;Quieres obtener originales y exclusivas retribuciones?</div>
-            <div class="datos">&iquest;Invertir en empresas con altas expectativas de beneficios?</div>
-            <div class="datos">&iquest;Ayudar a los dem&aacute;s a lograr sus sue&ntilde;os?</div>
-            <div class="datos">&iquest;Incentivar la econom&iacute;a ayudando a la creaci&oacute;n de empleo?</div>
-        </div>
-        <div id="colaboradores">
-            <div class="datos">&iquest;Encontrar interesantes proyectos con los que colaborar?</div>
-            <div class="datos">&iquest;Dar a conocer tu trabajo pudiendo surgirte nuevas oportunidades profesionales?</div>
-            <div class="datos">&iquest;Trabajar en un proyecto del que dispones de gran informaci&oacute;n y que sabes que cuenta con el apoyo del p&uacute;blico?</div>
-        </div>
-        <div class="cl"></div>
-        <div class="texto">¡Entonces, &eacute;sta es tu p&aacute;gina!</div>
+    <div id="category-list">
+        <span>Categories</span>
+        <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>">Todas</a></div>
+        <?foreach ($this->categories as $category):?>
+            <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
+        <?endforeach;?>
     </div>
     <div id="projects-home">
         <?$i=0;
@@ -84,8 +21,8 @@
                         <div class="text">recaudado</div>
                         <div id="progressbar_<?=$i?>"></div>
                         <div class="number"><?=round($project['recaudado'],0)?> de <?=round($project['importe_solicitado'],0)?> &euro;</div>
-                        <div class="number margin"><?=$project['numApoyos']?> <span class="text">apoyos</span></div>
-                        <div class="number margin"><?=$project['days']?> <span class="text">dias</span></div>
+                        <div class="number margin"><?=$project['numApoyos']?> <span class="text">supports</span></div>
+                        <div class="number margin"><?=$project['days']?> <span class="text">days</span></div>
 
                 </div>
                 <div class="project-bottom">

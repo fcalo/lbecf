@@ -27,7 +27,7 @@ class ProjectController extends Zend_Controller_Action
         $project=$dbProject->fetchRow(
                 $dbProject->select()
                 ->from(array("proyectos"), array("*","days"=>new Zend_Db_Expr("datediff(fec_fin,now())")))
-                ->where('link_rewrite = "'.$linkRewrite.'" AND activo="S"')
+                ->where('link_rewrite = "'.$linkRewrite.'" AND activo="S" AND fec_fin>now()')
                 );
 
         if(count($project)==0)

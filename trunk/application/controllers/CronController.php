@@ -83,22 +83,7 @@ class CronController extends Zend_Controller_Action
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_exec($ch);
             curl_close($ch);
-            //Manda mail al pagador
-            $mail = new Zend_Mail ( );
-            $modelProject=new Model_Projects();
-            $p=$modelProject->fetchById($support['id_proyecto']);
-
-            $body="The X ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
-            $body="Enjoy the event and see you soon!";
-            $mail->setBodyHtml ( $body);
-            $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
-
-            $modelUser=new Model_Users();
-            $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
-
-            $mail->addTo($u['email']);
-            $mail->setSubject('Apoyo confirmado');
-            $mail->send();
+           
             
         }
         echo "<br/>Terminado</br>";

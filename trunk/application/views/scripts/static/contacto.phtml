@@ -1,7 +1,7 @@
 <div id="panel-form">
-    <h2>Contacto</h2>
+    <h2>Contact</h2>
     <?if ($this->procesado):?>
-        <div class="msg">Gracias por ponerse en contacto con nosotros, hemos recibido su mensaje.</div>
+        <div class="msg">Please contact us, we have received your message.</div>
     <?else:?>
         <?php
         if (isset ( $this->error )) :
@@ -16,7 +16,7 @@
                     echo $this->form->email;
                     echo $this->form->message;?>
                     <span id="agree">
-                    <?=$this->form->agree?> He leido y acepto los <a href="/condiciones/">Condiciones de uso</a> y la <a href="/politica/">Pol&iacute;tica de privacidad</a>
+                    <?=$this->form->agree?> i have read and accepted the <a href="/condiciones/">Terms of use</a>
                     </span>
                     <? echo $this->form->submit; ?>
             </form>

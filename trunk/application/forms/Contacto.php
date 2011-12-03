@@ -14,7 +14,7 @@ class Form_Contacto extends Zend_Form {
                 $this->addElement ( 'text', 'email', array ('label' => 'Email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
 
                 $this->addElement ( 'textarea', 'message', 
-                        array ('label' => 'Mensaje:', 'validators' => array (array ('StringLength', false, array (0, 8000 ) ) ), 'required' => true,'rows' => 4,'cols' => 40 )
+                        array ('label' => 'Message:', 'validators' => array (array ('StringLength', false, array (0, 8000 ) ) ), 'required' => true,'rows' => 4,'cols' => 40 )
 
                  );
 
@@ -34,7 +34,7 @@ class Form_Contacto extends Zend_Form {
 
                 // add the submit button
                 $this->addElement ( 'submit', 'submit', array (
-                    'label' => 'Enviar',
+                    'label' => 'Send',
                     'class' => 'btn-red') );
         }
 }
