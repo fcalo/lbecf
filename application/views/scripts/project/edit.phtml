@@ -1,12 +1,12 @@
 <div id="edit-project"></div>
 <div id="panel-form" class="create-project">
     <?if (!$this->editable):?>
-        <h2>Este Proyecto no es editable</h2>
+        <h2>This event is not editable</h2>
     <?elseif ($this->msg!=""):?>
-        <h2>Proceso finalizado correctamente</h2>
+        <h2>Process succeeded</h2>
         <div class="msg"><?=$this->msg?></div>
     <?else:?>
-        <h2>Edita tu proyecto </h2>
+        <h2>Upgrade your event</h2>
          <?php if (isset ( $this->error )) :?>
             <ul class="errors">
                  <?=$this->error ;?>
@@ -24,14 +24,14 @@
                             $sel="selected='selected'";
                     $option.="<option ".$sel." value='".$cat['id_categoria']."'>".$cat['categoria']."</option>";
                 }
-                echo '<div id="categoria-label"><label class="required" for="id_categoria">Categoría:</label></div>';
+                echo '<div id="categoria-label"><label class="required" for="id_categoria">Category:</label></div>';
                 echo '<span class="data"><select name="id_categoria" id="id_categoria">'.$option."</select></span>";
                 echo $this->form->breve_descripcion;
                 echo $this->form->descripcion;
                 echo $this->form->video_embed;?>
 
                 <div id="fecha-imagen">
-                    <label class="required" for="imagen">Imagen del proyecto:</label>
+                    <label class="required" for="imagen">Image:</label>
                 </div>
                 <span class="data">
                     <input type="file" name="imagen"/>
@@ -44,21 +44,21 @@
                         foreach ($this->rewards as $reward):
                                 $i++;?>
                     <div id="reward-item" class="reward-item">
-                        <span>Recompensa nº <b><?=$i?></b></span>
+                        <span>Reward nº <b><?=$i?></b></span>
                         <?echo  str_replace('value=""','value="'.$reward['recompensa'].'"', str_replace("recompensa","recompensa[]", $this->form->recompensa));
                             echo str_replace('value=""','value="'.$reward['apoyo_minimo'].'"', str_replace("minimo","minimo[]", $this->form->minimo));
                             ?>
                         <div>
                             <span class="data">
-                                ¿Se subasta?
+                                Auctioned?
                                 <input class="check_subasta" type="checkbox" <?=($reward['subasta']=="S"?"checked='checked'":"")?> value="" name="subasta_<?=$i?>">
                             </span>
                         </div>
                     </div>
                     <?endforeach;?>
                 </div>
-                <input type="button" id="btn-reward" class="btn-red" value="Más"/>
-                <input type="button" id="btn-reward-delete" class="btn-red" value="Menos"/>
+                <input type="button" id="btn-reward" class="btn-red" value="More"/>
+                <input type="button" id="btn-reward-delete" class="btn-red" value="Less"/>
                 <?echo $this->form->submit; ?>
             </form>
         </fieldset>

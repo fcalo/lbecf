@@ -16,12 +16,12 @@ class Form_Forgot extends Zend_Form {
                                 array(array('row' => 'HtmlTag'), array('tag' => 'span')),
                             ));
 
-		$this->addElement ( 'text', 'emailforgot', array ('decorators' => $decorator, 'label' => 'Introduce tu Email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
+		$this->addElement ( 'text', 'emailforgot', array ('decorators' => $decorator, 'label' => 'Enter your Email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
 
                
 		// add the submit button
 		$this->addElement ( 'submit', 'submit', 
-                        array ('label' => 'Enviar'
+                        array ('label' => 'Send'
                              ,'class'=>'btn-red')
                         );
 	}

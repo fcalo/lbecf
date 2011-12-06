@@ -19,17 +19,17 @@ class Form_Register extends Zend_Form {
 
 		$this->addElement ( 'text', 'email', array ('decorators' => $decorator, 'label' => 'email:', 'required' => true, 'filters' => array ('StringTrim' ), 'validators' => array ('EmailAddress' ) ) );
 
-                $this->addElement ( 'text', 'username', array ('decorators' => $decorator, 'label' => 'nombre de usuario:', 'filters' => array ('StringTrim', 'StringToLower' ),
+                $this->addElement ( 'text', 'username', array ('decorators' => $decorator, 'label' => 'username:', 'filters' => array ('StringTrim', 'StringToLower' ),
                     'validators' => array ('alnum', array ('regex', false, array ('/^[a-z]/i' ) ), array ('StringLength', false, array (3, 20 ) ) ), 'required' => true )
                 );
 
                 $this->addElement ( 'password', 'password1', array ('decorators' => $decorator, 'filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
-                    'label' => 'Contraseña:' ) );
+                    'label' => 'Password:' ) );
 
                 $this->addElement ( 'password', 'password2', array ('decorators' => $decorator, 'filters' => array ('StringTrim' ), 'validators' => array (array ('StringLength', false, array (5, 20 ) ) ), 'required' => true,
-                    'label' => 'Repetir contraseña:' ) );
+                    'label' => 'Repeat password:' ) );
 
-                $this->addElement ( 'text', 'patrocinador', array ('decorators' => $decorator, 'label' => 'Código de patrocinador que te ha invitado al Desafío(opcional):', 'filters' => array ('StringTrim'),
+                $this->addElement ( 'text', 'patrocinador', array ('decorators' => $decorator, 'label' => 'Sponsor code:', 'filters' => array ('StringTrim'),
                     'validators' => array ('alnum', array ('StringLength', false, array (10, 10 ) ) ), 'required' => false )
                 );
 
@@ -49,7 +49,7 @@ class Form_Register extends Zend_Form {
 
   
                 $this->addElement ( 'submit', 'submit',
-                        array ('label' => 'Aceptar',
+                        array ('label' => 'Ok',
                             'class'=>'btn-red'));
 
                 $fb = $this->addElement('button', 'fb', array(
