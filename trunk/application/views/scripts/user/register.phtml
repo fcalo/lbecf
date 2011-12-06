@@ -1,7 +1,7 @@
 <div id="panel-form">
-    <h2>Nuevo Usuario</h2>
+    <h2>New user</h2>
     <?if ($this->procesado):?>
-        <div class="msg">Hemos enviado a tu correo electr&oacute;nico las instrucciones para que puedas completar tu registro. Comprueba la bandeja de SPAM, por si acaso ;)</div>
+        <div class="msg">We have have just send an email with the instructions to fulfill your registration. Check your SPAM folder in case you don’t receive it! ;)</div>
     <?else:?>
         <?php
         if (isset ( $this->error )) :
@@ -11,7 +11,7 @@
         </ul>
         <?php endif;?>
         <fieldset>
-            <p>Si ya est&aacute;s registrado, &nbsp;<a href="/usuario/login" title="user login">Entra aqu&iacute;</a></p>
+            <p>If you are already registered, &nbsp;<a href="/usuario/login" title="user login">click here</a></p>
             <form action="<?=$this->escape ( $this->form->getAction () )?>" method="<?=$this->escape ( $this->form->getMethod () )?>">
                 <?
                 echo $this->form->email;
@@ -20,7 +20,7 @@
                 echo $this->form->password2;
                 echo $this->form->patrocinador;?>
                 <span id="agree">
-                <?=$this->form->agree;?> He leido y acepto los <a href="/condiciones/">Condiciones de uso</a> y la <a href="/politica/">Pol&iacute;tica de privacidad</a>
+                <?=$this->form->agree;?> I have read and accepted the <a href="/condiciones/">Terms of use</a>
                 </span>
                 <? echo $this->form->submit; ?>
                 <? echo $this->form->fb; ?>

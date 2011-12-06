@@ -1,9 +1,9 @@
 <div id="panel-form" class="create-project">
      <?if ($this->msg!=""):?>
-        <h2>Proceso finalizado correctamente</h2>
+        <h2>Process succeeded</h2>
         <div class="msg"><?=$this->msg?></div>
     <?else:?>
-        <h2>Introduce tu proyecto en La Butaca Escarlata </h2>
+        <h2>Creat your event in the Rocket Red Ticket</h2>
          <?php if (isset ( $this->error )) :?>
             <ul class="errors">
                  <?=$this->error ;?>
@@ -18,14 +18,14 @@
                 foreach($this->category as $cat){
                     $option.="<option value='".$cat['id_categoria']."'>".$cat['categoria']."</option>";
                 }
-                echo '<div id="categoria-label"><label class="required" for="id_categoria">Categoría:</label></div>';
+                echo '<div id="categoria-label"><label class="required" for="id_categoria">Category:</label></div>';
                 echo '<span class="data"><select name="id_categoria" id="id_categoria">'.$option."</select></span>";
                 echo $this->form->breve_descripcion;
                 echo $this->form->descripcion;
                 echo $this->form->video_embed;?>
 
                 <div id="fecha-imagen">
-                    <label class="required" for="imagen">Imagen del proyecto:</label>
+                    <label class="required" for="imagen">Image:</label>
                 </div>
                 <span class="data">
                     <input type="file" name="imagen"/>
@@ -34,21 +34,21 @@
                 echo $this->form->importe;?>
                 <div class="reward">
                     <div id="reward-item" class="reward-item">
-                        <span>Recompensa nº <b>1</b></span>
+                        <span>Reward nº <b>1</b></span>
                         <?echo  str_replace("recompensa","recompensa[]", $this->form->recompensa);
                             echo str_replace("minimo","minimo[]", $this->form->minimo);
                             echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
                             ?>
                         <div>
                             <span class="data">
-                                ¿Se subasta?
+                                Auctioned?
                                 <input class="check_subasta" type="checkbox" value="" name="subasta_1">
                             </span>
                         </div>
                     </div>
                 </div>
-                <input type="button" id="btn-reward" class="btn-red" value="Más"/>
-                <input type="button" id="btn-reward-delete" class="btn-red" value="Menos"/>
+                <input type="button" id="btn-reward" class="btn-red" value="More"/>
+                <input type="button" id="btn-reward-delete" class="btn-red" value="Less"/>
                 <?echo $this->form->submit; ?>
             </form>
         </fieldset>

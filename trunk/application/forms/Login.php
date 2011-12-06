@@ -9,7 +9,7 @@ class Form_Login extends Zend_Form
                 array('StringLength', false, array(3, 20)),
             ),
             'required'   => true,
-            'label'      => 'Usuario:',
+            'label'      => 'User:',
         ));
 
         $password = $this->addElement('password', 'password', array(
@@ -19,13 +19,13 @@ class Form_Login extends Zend_Form
                 array('StringLength', false, array(6, 20)),
             ),
             'required'   => true,
-            'label'      => 'Contraseña:',
+            'label'      => 'Password:',
         ));
 
         $login = $this->addElement('submit', 'login', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'Acceder',
+            'label'    => 'Login',
             'class'=>'btn-red'
         ));
         $fb = $this->addElement('button', 'fb', array(

@@ -7,20 +7,20 @@ class View_Helper_Date extends Zend_View_Helper_Abstract
         $commentDate = strtotime($date);
         $minutos=round(abs($today-$commentDate)/60);
         if($minutos<1)
-            return "Hace algunos segundos";
+            return "a few seconds";
         if ($minutos<2)
-            return "Hace ".$minutos." minuto";
+            return $minutos." minute ago";
         if ($minutos<60)
-            return "Hace ".$minutos." minutos";
+            return $minutos." minutes ago";
         if ($minutos<360)
-            return "Hace ".round($minutos/60,0)." hora".(($horas<120)?"":"s")." y ".($minutos%60)." minutos";
+            return round($minutos/60,0)." hour".(($horas<120)?"":"s")." and ".($minutos%60)." minute ago";
 
         if ($minutos<1440)
-            return "Hace ".round($minutos/60,0)." horas";
+            return "".round($minutos/60,0)." hours ago";
 
         $da=explode(" ", $date);
         $d=explode("-", $da[0]);
-        return "El ".$d[2]." del ".$d[1]." del ".$d[0];
+        return $d[2]."/".$d[1]."/".$d[0];
 
         
     }

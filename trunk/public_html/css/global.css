@@ -178,7 +178,7 @@ input[type='text'], input[type='password']{
 
 /*home*/
 #panel-home{
-    margin:7px 7px 0 7px;
+    margin:0px 7px 0 7px;
 }
 
 #panel-home #destacado .top{
@@ -333,7 +333,6 @@ input[type='text'], input[type='password']{
 }
 
 #panel-home #projects-home{
-    margin-top: 40px;
     padding-bottom: 60px;
     width: 960px;
 }
@@ -378,9 +377,9 @@ input[type='text'], input[type='password']{
 #panel-home #projects-home .item,
 #panel-list .item{
     background: url("../img/bg-project-item.png") no-repeat scroll 0 0 transparent;
-    width:220px;
+    width:234px;
     height:284px;
-    padding:12px;
+    padding:12px 5px;
     margin:10px 0 0 7px;
     float:left;
     color:#000;
@@ -414,7 +413,7 @@ input[type='text'], input[type='password']{
 #panel-home #projects-home .item .project-info,
 #panel-list .item .project-info{
     float:left;
-    padding:10px;
+    padding:2px;
 }
 #panel-home #projects-home .item .project-info .number,
 #panel-list .item .project-info .number{
@@ -426,7 +425,7 @@ input[type='text'], input[type='password']{
 }
 #panel-home #projects-home .item .project-info .margin,
 #panel-list .item .project-info .margin{
-    margin-top:10px;
+    margin-top:1px;
 }
 #panel-home #projects-home .item .project-info .ui-progressbar,
 #panel-list .item .project-info .ui-progressbar{

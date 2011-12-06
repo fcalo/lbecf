@@ -2,8 +2,8 @@
 $helperDate=new View_Helper_Date();?>
 <?if (isset($this->proposalUpload)):?>
     <div id="panel-form">
-        <h2><?=($this->proposalUpload)?"Su propuesta se ha registrador correctamente.":"Ha ocurrido un error al registrar su propuesta"?></h2>
-        <div><a id="back-project">Volver al proyecto</a></div>
+        <h2><?=($this->proposalUpload)?"His proposal is properly registered.":"An error occurred when registering your proposal"?></h2>
+        <div><a id="back-project">Back</a></div>
     </div>
 <?endif;?>
 
@@ -11,8 +11,8 @@ $helperDate=new View_Helper_Date();?>
     <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Home</a></li>
-		<li><a href="#tabs-2">Colaboradores</a></li>
-		<li><a href="#tabs-3">Concursos</a></li>
+		<li><a href="#tabs-2">Collaborators</a></li>
+		<li><a href="#tabs-3">Contests</a></li>
 	</ul>
 	<div id="tabs-1">
             <div id="ficha">
@@ -37,17 +37,17 @@ $helperDate=new View_Helper_Date();?>
                 
                 <div id="ficha-info">
                     <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
-                    <div class="text">recaudado</div>
+                    <div class="text">raised</div>
                     <div id="progressbar"></div>
                     <div class="text"><?=round($this->recaudado,0)?> de <?=round($this->project->importe_solicitado,0)?> &euro;</div>
                     <div class="number margin"><?=$this->numApoyos?></div>
-                    <div class="text">apoyos</div>
+                    <div class="text">supports</div>
                     <?if(!$this->closed):?>
                     <div class="number margin"><?=$this->days?></div>
-                    <div class="text">días</div>
+                    <div class="text">days</div>
                     <?else:?>
-                    <div class="number margin">Cerrado</div>
-                    <div class="text">El plazo ha finalizado</div>
+                    <div class="number margin">Closed</div>
+                    <div class="text">The deadline has ended</div>
                     <?endif;?>
                 </div>
                 <?if (strlen($this->project->video_embed)>10):?>
@@ -62,7 +62,7 @@ $helperDate=new View_Helper_Date();?>
                         <a href="http://www.tuenti.com/share?url=<?=$this->url?>" target="_blank"><img src="/img/tu.png"/></a>
                         
                     </div>
-                    <h2>Descripci&oacute;n del Proyecto</h2>
+                    <h2>Description</h2>
                     <span id="descripcion"><?=nl2br($this->project->descripcion)?></span>
                 </div>
             </div>
@@ -84,7 +84,7 @@ $helperDate=new View_Helper_Date();?>
                 <h2 class="unescape"><?=$this->project->titulo_concurso?></h2>
 		<p class="unescape"><?=nl2br($this->project->descripcion_concurso)?></p>
                 <?if(count($this->proposals)==0):?>
-                    <div class="propuesta">A&uacute;n no hay propuestas, puedes ser el primero.</div>
+                    <div class="propuesta">There are still no proposals can be the first.</div>
                 <?endif;?>
 
                 <?foreach($this->proposals as $proposal):?>
@@ -99,7 +99,7 @@ $helperDate=new View_Helper_Date();?>
                                 <span id="lup-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['positivos']?>)</span>
                             </div>
                         </div>
-                        <h3>Propuesta de <a class="username "href="/usuario/perfil/<?=$proposal['username']?>"><?=$proposal['username']?></a></h3>
+                        <h3<a class="username "href="/usuario/perfil/<?=$proposal['username']?>"><?=$proposal['username']?> proposal</a></h3>
 
                             <p><?=nl2br($proposal['propuesta'])?></p>
                             <?if($proposal['adjunto']!=""):
@@ -109,7 +109,7 @@ $helperDate=new View_Helper_Date();?>
                                     if($imagen):?>
                                     <a href="/admin/<?=$proposal['adjunto']?>" target="_blank"><img alt="Abrir en otra ventana" title="Abrir en otra ventana" src="/admin/<?=$proposal['adjunto']?>"></a>
                                 <?else:?>
-                                    <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Ver adjunto<?=$type?></a>
+                                    <a href="/admin/<?=$proposal['adjunto']?>" target="_blank">Attached<?=$type?></a>
                                 <?endif;?>
                             <?endif;?>
                         <!--<img src="<?=$helper->image($proposal['id_usuario'], $proposal['imagen'])?>">-->
@@ -136,12 +136,12 @@ $helperDate=new View_Helper_Date();?>
                             </div>
                             <div id="entrada" >
                                 <div><textarea name="txt-comentario-<?=$proposal['id_propuesta']?>" id="txt-comentario-<?=$proposal['id_propuesta']?>"  cols="40" rows="1"></textarea></div>
-                                <div><input type="button" id="<?=$proposal['id_propuesta']?>" class="add-comentario btn-red" value="Comentar"/></div>
+                                <div><input type="button" id="<?=$proposal['id_propuesta']?>" class="add-comentario btn-red" value="Comment"/></div>
                             </div>
                         </div>
                     </div>
                 <?endforeach;?>
-                <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Proponer"/></div>
+                <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Propose"/></div>
                 
             </div>
 	</div>
@@ -155,20 +155,20 @@ $helperDate=new View_Helper_Date();?>
             <li>
                 <div class="recompensa-valor"><?=$reward->apoyo_minimo?>&euro;</div>
                 <div class="recompensa-desc"><?=$reward->recompensa?></div>
-                <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Apoyar</div>
+                <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Support</div>
             </li>
             <?endforeach;?>
             
         </ul>
         <?if(count($this->rewardsSale)>0):?>
-            <span>Recompensas limitadas</span>
-            <p>Solo se tendrá en cuenta el apoyo más alto</p>
+            <span>Limited rewards</span>
+            <p>Only taken into account the highest support</p>
             <ul class="scroll-content-item ui-widget-header">
                 <?foreach($this->rewardsSale as $reward):?>
                 <li>
                     <div class="recompensa-valor"><?=$reward->apoyo_minimo?>&euro;</div>
                     <div class="recompensa-desc"><?=$reward->recompensa?></div>
-                    <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Apoyar</div>
+                    <div id="<?=$reward->id_recompensa."_".$reward->apoyo_minimo?>" class="btn-red">Support</div>
                 </li>
                 <?endforeach;?>
 
@@ -193,11 +193,11 @@ $helperDate=new View_Helper_Date();?>
     </div>
     <div id="entrada" >
         <div><textarea name="comentario" id="txt-comentario" cols="80" rows="2"></textarea></div>
-        <div><input type="button" id="add-comentario" class="btn-red" value="Comentar"/></div>
+        <div><input type="button" id="add-comentario" class="btn-red" value="Comment"/></div>
     </div>
     <div class="cl"></div>
 </div>
-<div id="dialog-form" title="Apoyar el proyecto">
+<div id="dialog-form" title="Support the event">
     <div>
 	<p class="validateTips"></p>
 
@@ -205,10 +205,10 @@ $helperDate=new View_Helper_Date();?>
 	<fieldset>
             <table>
                 <tr>
-		<td><label for="amount">Cantidad con la que apoyar</label></td>
+		<td><label for="amount">Amount by which support</label></td>
 		<td><input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" /></td>
                 </tr><tr>
-		<td><label for="sponsor">Código de patrocinador que te ha invitado al Desafío(Opcional):</label></td>
+		<td><label for="sponsor">Sponsor code(Opcional):</label></td>
                 <td><input type="text" name="sponsor" id="sponsor" maxlength="10" size="12" class="text ui-widget-content ui-corner-all" /></td>
                 </tr>
                 </table>
@@ -217,22 +217,22 @@ $helperDate=new View_Helper_Date();?>
     </div>
 </div>
 <?if($this->msg!=""):?>
-    <div id="dialog-form-aviso" title="Aviso">
+    <div id="dialog-form-aviso" title="Notice">
         <div>
             <?=$this->msg?>
         </div>
     </div>
 <?endif;?>
 
-<div id="dialog-form-proposal" title="Realiza tu propuesta">
+<div id="dialog-form-proposal" title="Make your proposal">
     <div>
 	<p class="validateTips"></p>
 
         <form id="do-proposal" enctype="multipart/form-data"  method="post">
 	<fieldset>
-		<label for="proposal">Describe tu propuesta</label><br/>
+		<label for="proposal">Describe your proposal</label><br/>
 		<textarea name="proposal" id="proposal" class="text ui-widget-content ui-corner-all"></textarea><br/>
-                <label for="attached">Adjunto(si es necesario)</label><br/>
+                <label for="attached">attached(optional)</label><br/>
 		<input type="file" name="attached" id="attached" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	</form>
