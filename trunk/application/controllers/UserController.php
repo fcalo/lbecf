@@ -48,7 +48,7 @@ class UserController extends Zend_Controller_Action
                 $this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
             }else{
                 // Invalid credentials
-                $form->setDescription('Usuario o contraseña incorrectos');
+                $form->setDescription('incorrect user or password');
                 $this->view->form = $form;
                 return $this->render('login'); // re-render the login form
             }
@@ -58,7 +58,7 @@ class UserController extends Zend_Controller_Action
 
     public function registerAction()
     {
-        $this->view->headTitle()->append('Nuevo Usuario');
+        $this->view->headTitle()->append('New user');
         $request = $this->getRequest ();
         $form = $this->getFormRegister();
         $this->view->form=$form;
@@ -74,12 +74,12 @@ class UserController extends Zend_Controller_Action
                 if ($formulario['password1']!= $formulario['password2'] )
                 {
                     $view = $this->initView();
-                    $view->error .= '<li>Las contraseñas no coinciden.</li>';
+                    $view->error .= '<li>the passwords doesn\'t match.</li>';
                 }
                 $view = $this->initView();
                 //check agree tos and privacy
                 if ($formulario['agree'] != '1' ){
-                    $view->error .= '<li>Debe aceptar las condiciones de uso y la política de privacidad</li>';
+                    $view->error .= '<li>You must agree to the terms of use</li>';
 
                 }
                 $model = new Model_Users();
@@ -87,21 +87,21 @@ class UserController extends Zend_Controller_Action
 
                 //not allow to use the email as username
                 if ( $formulario['email'] == $formulario['username']){
-                    $view->error .= '<li>No puede usar de Nombre de Usuario el Email</li>';
+                    $view->error .= '<li>The username and the email must be different</li>';
                 }
 
                 //check user email and nick if exists
                 if (!$model->checkUserEmail($formulario ['email'])){
-                    $view->error .= '<li>Ya está dado de alta el Email en el sistema.</li>';
+                    $view->error .= '<li>Email is already in the system.</li>';
 
                 }
 
                 if (!$model->checkUsername ( $formulario ['username'] )){
-                    $view->error .= '<li>El nombre de usuario no está libre.</li>';
+                    $view->error .= '<li>The username is taken.</li>';
                 }
 
                 if($formulario ['patrocinador']!="" && !$model->existsSponsor($formulario ['patrocinador'])){
-                        $view->error .= '<li>Código de patrocinador no válido.</li>';
+                        $view->error .= '<li>Wrong sponsor code.</li>';
                 }
 
                 if (!isset($view->error))
@@ -124,12 +124,12 @@ class UserController extends Zend_Controller_Action
 
                     $mail = new Zend_Mail ( );
                     $link=$hostname  . '/usuario/validar/'  . $token;
-                    $mail->setBodyHtml ( 'Por favor, pulsa el siguiente enlace para terminar el registro<br />'
-                            .'<a href="'.$link.'">'.$link.'</a><br /><br />_______________________________<br />La Butaca Escarlata');
-                    $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                    $mail->setBodyHtml ( 'Please click the link to complete registration<br />'
+                            .'<a href="'.$link.'">'.$link.'</a><br /><br />_______________________________<br />Rocking Red Ticket');
+                    $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                     $mail->addTo($formulario['email']);
-                    $mail->setSubject ( $formulario ['username'].', confirma tu email');
+                    $mail->setSubject ( $formulario ['username'].', confirm your email');
                     $this->view->procesado=$mail->send();
 
                 }
@@ -140,7 +140,7 @@ class UserController extends Zend_Controller_Action
 
      public function forgotAction()
     {
-        $this->view->headTitle()->append($this->view->translate('¿Has olvidado tu contraseña?'));
+        $this->view->headTitle()->append($this->view->translate('Forgot password?'));
         $request = $this->getRequest ();
         $form = $this->getFormForgot();
 
@@ -158,7 +158,7 @@ class UserController extends Zend_Controller_Action
                 $view = $this->initView ();
                 if ($mailcheck == NULL){
                     // failure: email does not exists on ddbb
-                    $view->error = '<li>Email no registrado.</li>';
+                    $view->error = '<li>Email not found.</li>';
 
                 } else{ // success: the email exists , so lets change the password and send to user by mail
                     //regenerate the token
@@ -346,11 +346,11 @@ class UserController extends Zend_Controller_Action
                 $this->_redirect ( '/usuario/perfil/'.$data ['username'] );
 
             } else{
-                $this->view->error='Lo lamentamos, el token no existe o ya ha sido utilizado';
+                $this->view->error='Sorry, the token does not exist or has expired';
             }
 
         } else{
-            $this->view->error='Lo lamentamos, la url no es valida o ha caducado';
+            $this->view->error='Sorry, the url is not valid or has expired';
         }
     }
 
@@ -424,7 +424,7 @@ class UserController extends Zend_Controller_Action
                      $path.=basename($_FILES["imagen"]['name']);
 
                      if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
-                            die("Ocurrio un error subiendo la imagen");
+                            die("an error occurred in upload photo");
                      chmod($path,0777);
 
                      $user=new Model_Users();

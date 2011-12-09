@@ -396,6 +396,11 @@ input[type='text'], input[type='password']{
 #panel-list .item .title span a{
     color:#990000;
 }
+#panel-home #projects-home .item .locate,
+#panel-list .item .locate{
+    float: right;
+    margin-right: 10px;
+}
 
 #panel-home #projects-home .item .iconos,
 #panel-list .item .iconos{

@@ -29,6 +29,19 @@
                 <null>N</null>
             </field>
             <field>
+                <name>ciudad</name>
+                <description>Ciudad</description>
+                <type>varchar(45)</type>
+                <null>S</null>
+                <in_list>N</in_list>
+            </field>
+            <field>
+                <name>fecha</name>
+                <description>Fecha evento</description>
+                <type>date</type>
+                <null>S</null>
+            </field>
+            <field>
                 <name>id_categoria</name>
                 <description>Categoria</description>
                 <entity_ref>10</entity_ref>

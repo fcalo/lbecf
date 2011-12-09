@@ -106,10 +106,10 @@ class SupportController extends Zend_Controller_Action
             $modelProject=new Model_Projects();
             $p=$modelProject->fetchById($support['id_proyecto']);
 
-            $body="The X ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
+            $body="The ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
             $body="Enjoy the event and see you soon!";
             $mail->setBodyHtml ( $body);
-            $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+            $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
             $modelUser=new Model_Users();
             $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
@@ -118,7 +118,7 @@ class SupportController extends Zend_Controller_Action
             die;
 
             $mail->addTo($u['email']);
-            $mail->setSubject('Apoyo confirmado');
+            $mail->setSubject('Support confirm');
             $mail->send();
 
         }else{
@@ -189,11 +189,11 @@ class SupportController extends Zend_Controller_Action
                      $modelProject=new Model_Projects();
                      $project=$modelProject->fetchById($supportKo['id_proyecto']);
                      $link=Service_Urls::getHost()."/proyecto/".$project['link_rewrite'];
-                     $body="El apoyo que has realizado de ".$supportKo['apoyo']."&euro; al proyecto <a href='".$link."'>".$project['titulo']."</a> ha sido superado por otro patrocinador.";
-                     $body.="<br/>Esto anula autom&aacute;ticamente tu apoyo, ya que solo el m&aacute;s alto es que se tiene en cuenta.";
+                     //$body="El apoyo que has realizado de ".$supportKo['apoyo']."&euro; al proyecto <a href='".$link."'>".$project['titulo']."</a> ha sido superado por otro patrocinador.";
+                     //$body.="<br/>Esto anula autom&aacute;ticamente tu apoyo, ya que solo el m&aacute;s alto es que se tiene en cuenta.";
                      $modelUser=new Model_Users();
                      $user=$modelUser->fetchUser($supportKo['id_usuario_apoyo']);
-                     Service_Mail::sendMail($user['email'], "Somebody has exceeded your bid in the auction! Log in an make a new one!", $body);
+                     Service_Mail::sendMail($user['email'],"Your bid has been exceeded", "Somebody has exceeded your bid in the auction! Log in an make a new one!");
 
                  }
                  //Se actualiza la recompensa para que el apoyo minimo sea superior
@@ -217,10 +217,10 @@ class SupportController extends Zend_Controller_Action
                  $mail = new Zend_Mail ( );
                  $body="The user ".$uSupport['username']." has become a supporter of your event! Congratulations!";
                  $mail->setBodyHtml ( $body);
-                 $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                 $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                  $mail->addTo($u['email']);
-                 $mail->setSubject('Nuevo apoyo');
+                 $mail->setSubject('New support');
                  $mail->send();
              }
 
@@ -240,11 +240,11 @@ class SupportController extends Zend_Controller_Action
 
                  //Mail al que  patrocina
                  $mail = new Zend_Mail ( );
-                 $mail->setBodyHtml ( 'Gracias por convertirse en Patrocinador del Desaf&iacute;o escarlata<br/>Est&eacute; es su c&oacute;digo de Patrocinador:<b>'.$user['cod_patrocinador']."</b><br /><br />_______________________________<br />La Butaca Escarlata");
-                 $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                 $mail->setBodyHtml ( 'Thank you for becoming a Sponsor<br/>Sponsor code:<b>'.$user['cod_patrocinador']."</b><br /><br />_______________________________<br />Rocking Red Ticket");
+                 $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                  $mail->addTo($user['email']);
-                 $mail->setSubject ( $user['username'].' te has convertido en patrocinador');
+                 $mail->setSubject ( $user['username'].' you have become a sponsor');
                  $mail->send();
 
 

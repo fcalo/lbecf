@@ -45,7 +45,7 @@ class Model_Projects
         $params[]="S";
 
         $sql="SELECT coalesce(t.numApoyos,0) numApoyos, datediff(p.fec_fin,now()) days, p.*, t.apoyo recaudado,";
-        $sql.=" ((t.apoyo/p.importe_solicitado)*100) porcentaje";
+        $sql.=" ((t.apoyo/p.importe_solicitado)*100) porcentaje, p.ciudad, date_format(p.fecha,'%e/%c/%Y') fecha ";
         $sql.=" FROM proyectos p";
         $sql.=" LEFT JOIN (";
         $sql.="   select count(*) numApoyos, sum(apoyo) apoyo, id_proyecto";

@@ -162,7 +162,7 @@ class ProjectController extends Zend_Controller_Action
             $form=$this->view->form;
             if (!$form->isValid($request->getPost())) {
                  // Invalid entries
-                $this->view->error="<li>Revise todos los datos</li>";
+                $this->view->error="<li>review all data</li>";
                  return $this->render('create'); // re-render the login form
              }
 
@@ -173,6 +173,8 @@ class ProjectController extends Zend_Controller_Action
              if ($_FILES["imagen"]['name']!=""){
                  $a=explode("/",$data['fecha']);
                  $data['fec_fin']=$a[2]."-".$a[1]."-".$a[0];unset($data['fecha']);
+                 $a=explode("/",$data['fecha_evento']);
+                 $data['fecha']=$a[2]."-".$a[1]."-".$a[0];unset($data['fecha_evento']);
                  $data['importe_solicitado']=$data['importe'];unset($data['importe']);
 
                  $data['link_rewrite']=Service_Urls::amigables($data['titulo']);
@@ -207,17 +209,17 @@ class ProjectController extends Zend_Controller_Action
                  $path.=basename($_FILES["imagen"]['name']);
 
                  if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
-                        die("Ocurrio un error subiendo la imagen");
+                        die("an error occurred in upload photo");
                  chmod($path,0777);
 
                  $user=new Model_Users();
                  if(!$model->uploadImage($path,$idProject))
                        die("error");
 
-                 $this->view->msg="Gracias por crear tu proyecto.";
+                 $this->view->msg="thank you for create your event.";
 
              }else{
-                 $this->view->error="<li>Debe seleccionar una imagen para el proyecto</li>";
+                 $this->view->error="<li>You should select a photo for the event</li>";
              }
         }
 
@@ -247,7 +249,7 @@ class ProjectController extends Zend_Controller_Action
                 $form=$this->view->form;
                 if (!$form->isValid($request->getPost())) {
                      // Invalid entries
-                    $this->view->error="<li>Revise todos los datos</li>";
+                    $this->view->error="<li>Reqiev all data</li>";
                     return $this->render('create'); // re-render
                 }
 
@@ -257,6 +259,8 @@ class ProjectController extends Zend_Controller_Action
 
                  $a=explode("/",$data['fecha']);
                  $data['fec_fin']=$a[2]."-".$a[1]."-".$a[0];unset($data['fecha']);
+                 $a=explode("/",$data['fecha_evento']);
+                 $data['fecha']=$a[2]."-".$a[1]."-".$a[0];unset($data['fecha_evento']);
                  $data['importe_solicitado']=$data['importe'];unset($data['importe']);
 
                  $data['link_rewrite']=Service_Urls::amigables($data['titulo']);
@@ -292,7 +296,7 @@ class ProjectController extends Zend_Controller_Action
                      $path.=basename($_FILES["imagen"]['name']);
 
                      if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
-                            die("Ocurrio un error subiendo la imagen");
+                            die("an error occurred in upload photo");
                      chmod($path,0777);
 
                      $user=new Model_Users();
@@ -300,7 +304,7 @@ class ProjectController extends Zend_Controller_Action
                            die("error");
                  }
 
-                 $this->view->msg="Proyecto modificado.";
+                 $this->view->msg="Event modified.";
 
             }else{
                 foreach($data as $key=>$value){

@@ -36,13 +36,13 @@ class CronController extends Zend_Controller_Action
                 }
 
                 $mail->setBodyHtml ($body);
-                $mail->setFrom ('noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                $mail->setFrom ('noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                 $modelUser=new Model_Users();
                 $u=$modelUser->fetchUser($project['id_usuario']);
 
                 $mail->addTo($u['email']);
-                $mail->setSubject('Proyecto finalizado');
+                $mail->setSubject('Event finish');
                 $mail->send();
             }else{
                 echo "completando el proyecto no conseguido ".$project['id_proyecto'];
@@ -55,13 +55,13 @@ class CronController extends Zend_Controller_Action
                 $body.="Check the new events alive! <a href='".$link."'>".$link."</a></br></br>";
                 $body.="See you soon!";
                  $mail->setBodyHtml ($body);
-                $mail->setFrom ('noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                $mail->setFrom ('noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                 $modelUser=new Model_Users();
                 $u=$modelUser->fetchUser($project['id_usuario']);
 
                 $mail->addTo($u['email']);
-                $mail->setSubject('Proyecto finalizado');
+                $mail->setSubject('Event finish');
                 $mail->send();
             }
         }
