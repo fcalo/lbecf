@@ -24,10 +24,10 @@ class Model_Messages
                 $link=$hostname.'/usuario/mail/'.$receptor->username;
                 $body="The user ".$receptor->username." has sent you an email! Log in to read it.";
                 $mail->setBodyHtml ( $body);
-                $mail->setFrom ( 'noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+                $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
                 $mail->addTo($receptor->email);
-                $mail->setSubject ( "La butaca escarlata, ".$data['asunto']);
+                $mail->setSubject ( "Rocking Red Ticket, ".$data['asunto']);
                 return $mail->send();
             }else{
                 return true;

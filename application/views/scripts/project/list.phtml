@@ -12,6 +12,10 @@
           $i++?>
         <div class="item">
             <!--<div class="iconos"></div>-->
+            <div class="locate">
+                <div><?=$project['ciudad']?></div>
+                <div><?=$project['fecha']?></div>
+            </div>
             <div class="title">Event:<br/><span><a href="/proyecto/<?=$project['link_rewrite']?>"><?=$project['titulo']?></a></span></div>
             <div class="project-image">
                 <img width="123"  src="<?="/admin/".str_replace("/".$project['id_proyecto']."/", "/".$project['id_proyecto']."/160x/thumb_", $project['imagen']);?>">

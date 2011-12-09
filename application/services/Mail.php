@@ -14,9 +14,9 @@ class Service_Mail {
     public static function sendMail($to, $subject,$body){
         //now lets send the validation token by email to confirm the user email
         $mail = new Zend_Mail ( );
-        $footer='<br /><br />_______________________________<br />La Butaca Escarlata';
+        $footer='<br /><br />_______________________________<br />Rocking Red Ticket';
         $mail->setBodyHtml($body.$footer);
-        $mail->setFrom ('noresponder@labutacaescarlata.com', 'labutacaescarlata.com' );
+        $mail->setFrom ('noresponder@rockingredticket.com', 'rockingredticket.com' );
         $mail->addTo($to);
         $mail->setSubject($subject);
         return $mail->send();

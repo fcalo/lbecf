@@ -45,7 +45,7 @@ class StaticController extends Zend_Controller_Action
                         $view->error="";
 
                         if ( $this->_request->getPost ( 'agree' ) != '1'  ){
-                            $view->error.= '<li>Por favor, Acepte la política de privacidad y condiciones de uso</li>';
+                            $view->error.= '<li>Please accept the terms of use</li>';
                         } else {
 
 
