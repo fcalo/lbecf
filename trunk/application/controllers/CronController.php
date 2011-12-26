@@ -50,7 +50,7 @@ class CronController extends Zend_Controller_Action
 
                 $mail = new Zend_Mail ( );
                 $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
-                $link= $hostname .'/proyectos/';
+                $link= $hostname .'/events/';
                 $body="We are sorry to inform you that X has not achieved its collecting goal. The charge in your account has already been cancelled.<br/>";
                 $body.="Check the new events alive! <a href='".$link."'>".$link."</a></br></br>";
                 $body.="See you soon!";

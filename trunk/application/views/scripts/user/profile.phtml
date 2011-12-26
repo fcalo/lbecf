@@ -6,7 +6,7 @@
             <a href="#" id="image">Change profile picture</a>
             <a href="#" id="new-project">Create new event</a>
             <a href="#" id="baja">Unsuscribe RRT</a>
-            <a href="/usuario/mail/<?=$this->user->username?>" id="mailbox">inbox</a>
+            <a href="/user/mail/<?=$this->user->username?>" id="mailbox">inbox</a>
         <?else:?>
             <?if($this->logged):?>
                 <a href="#" id="mail">Send message</a>
@@ -34,9 +34,9 @@
                 <?if($this->self || $item['activo']=="S") :?>
                     <li>
                         <?if($item['activo']=="S"):?>
-                        <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                        <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
                         <?else:?>
-                            <?=$item['titulo']?> - <a href="/proyecto/editar/<?=$item['link_rewrite']?>">Editar</a>
+                            <?=$item['titulo']?> - <a href="/event/editar/<?=$item['link_rewrite']?>">Editar</a>
                         <?endif;?>
                     </li>
                 <?endif;?>
@@ -55,7 +55,7 @@
                         if(!$first)
                             echo '</ul></li>';
                         $first=false;?>
-                       <li><a href="/proyecto/<?=$support['link_rewrite']?>"><?=$support['titulo']?></a>
+                       <li><a href="/event/<?=$support['link_rewrite']?>"><?=$support['titulo']?></a>
                     <ul>
 
                 <?}
@@ -78,7 +78,7 @@
         <h3><?=$this->self?"Your proposal":"Proposal"?></h3>
         <ul>
             <?foreach($this->proposals as $item):?>
-                <li>Proposal <?=$item['c']?>  on <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
+                <li>Proposal <?=$item['c']?>  on <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
             <?endforeach;?>
         </ul>
     </div>
@@ -86,7 +86,7 @@
         <h3><?=$this->self?"Your Comments":"Comments"?></h3>
         <ul>
             <?foreach($this->comments as $item):?>
-                <li><a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a> (<?=$item['comentarios']?> comentario<?=($item['comentarios']>1?"s":"")?>)</li>
+                <li><a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a> (<?=$item['comentarios']?> comentario<?=($item['comentarios']>1?"s":"")?>)</li>
             <?endforeach;?>
         </ul>
     </div>
@@ -101,7 +101,7 @@
                         if(!$first)
                             echo '</ul></li>';
                         $first=false;?>
-                       <li>Ha<?=$this->self?"s":""?> comentado el concurso del proyecto <a href="/proyecto/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                       <li>Ha<?=$this->self?"s":""?> comentado el concurso del proyecto <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
                     <ul>
 
                 <?}

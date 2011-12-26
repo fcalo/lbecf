@@ -1,7 +1,7 @@
 <?$helper=new View_Helper_Image();?>
 <div id="panel-profile">
     <div id="acciones">
-        <a href="/usuario/perfil/<?=$this->user->username?>" id="mailbox">Back</a>
+        <a href="/user/perfil/<?=$this->user->username?>" id="mailbox">Back</a>
     </div>
     <div id="datos">
         <img src="<?=$helper->image($this->user->id_usuario, $this->user->imagen)?>">
@@ -15,7 +15,7 @@
         <ul>
             <?foreach($this->messagesIn as $item):?>
             <div class="item-mail">
-                <div>Message of <a href="/usuario/perfil/<?=$item['username']?>"><?=$item['username']?></a> on <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Show</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Hide</a></div>
+                <div>Message of <a href="/user/perfil/<?=$item['username']?>"><?=$item['username']?></a> on <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Show</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Hide</a></div>
                 <div class="mensaje" id="mensaje_<?=$item['id_mensaje']?>">
                     <?=$item['mensaje']?>
                     <div id="entrada" >
@@ -40,7 +40,7 @@
         <ul>
             <?foreach($this->messagesOut as $item):?>
             <div class="item-mail">
-                <div>Sent to <a href="/usuario/perfil/<?=$item['username']?>"><?=$item['username']?></a> on <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Show</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Hide</a></div>
+                <div>Sent to <a href="/user/perfil/<?=$item['username']?>"><?=$item['username']?></a> on <?=$item['fecha']?> <b><?=$item['asunto']?></b> - <a class="show_mail" id="ver_<?=$item['id_mensaje']?>">Show</a><a class="hide_mail" id="ocultar_<?=$item['id_mensaje']?>">Hide</a></div>
                 <div class="mensaje" id="mensaje_<?=$item['id_mensaje']?>"><?=$item['mensaje']?></div>
             </div>
             <?endforeach;?>

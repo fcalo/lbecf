@@ -116,7 +116,7 @@ class ProjectController extends Zend_Controller_Action
     public function listAction(){
 
         
-        $in=(strtolower($_SERVER['REQUEST_URI'])=="/proyectos")||(strtolower($_SERVER['REQUEST_URI'])=="/proyectos/");
+        $in=(strtolower($_SERVER['REQUEST_URI'])=="/events")||(strtolower($_SERVER['REQUEST_URI'])=="/events/");
 
         $page = $this->_getParam('page', 1);
         $category = $this->_getParam('category', 0);
@@ -128,8 +128,8 @@ class ProjectController extends Zend_Controller_Action
 
         $modelProyecto=new Model_Projects();
         $proyectos =$modelProyecto->fetchActives(null, $category);
-        if(count($proyectos)<=1 && $in)
-            $this->_redirect ( '/proyecto/el-desafio-escarlata');
+        /*if(count($proyectos)<=1 && $in)
+            $this->_redirect ( '/proyecto/el-desafio-escarlata');*/
 
         $paginador = Zend_Paginator::factory($proyectos);
         $paginador->setItemCountPerPage($registrosXpagina)

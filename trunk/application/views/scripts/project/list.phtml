@@ -1,9 +1,9 @@
 <div id="panel-list">
     <div id="category-list">
         <span>Categories</span>
-        <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>">All</a></div>
+        <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>">All</a></div>
         <?foreach ($this->categories as $category):?>
-            <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/proyectos/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
+            <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
         <?endforeach;?>
     </div>
 
@@ -16,7 +16,7 @@
                 <div><?=$project['ciudad']?></div>
                 <div><?=$project['fecha']?></div>
             </div>
-            <div class="title">Event:<br/><span><a href="/proyecto/<?=$project['link_rewrite']?>"><?=$project['titulo']?></a></span></div>
+            <div class="title"><span><a href="/event/<?=$project['link_rewrite']?>"><?=$project['titulo']?></a></span></div>
             <div class="project-image">
                 <img width="123"  src="<?="/admin/".str_replace("/".$project['id_proyecto']."/", "/".$project['id_proyecto']."/160x/thumb_", $project['imagen']);?>">
             </div>
@@ -25,7 +25,7 @@
                     <div class="text">Raised</div>
                     <div id="progressbar_<?=$i?>"></div>
                     <div class="number"><?=round($project['recaudado'],0)?> de <?=round($project['importe_solicitado'],0)?> &euro;</div>
-                    <div class="number margin"><?=$project['numApoyos']?> <span class="text">supports</span></div>
+                    <div class="number margin"><?=$project['numApoyos']?> <span class="text">attendees</span></div>
                     <div class="number margin"><?=$project['days']?> <span class="text">days</span></div>
 
             </div>

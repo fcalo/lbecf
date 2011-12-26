@@ -99,7 +99,7 @@ $helperDate=new View_Helper_Date();?>
                                 <span id="lup-<?=$proposal['id_propuesta']?>">(<?=$proposal['votes']['positivos']?>)</span>
                             </div>
                         </div>
-                        <h3<a class="username "href="/usuario/perfil/<?=$proposal['username']?>"><?=$proposal['username']?> proposal</a></h3>
+                        <h3<a class="username "href="/user/perfil/<?=$proposal['username']?>"><?=$proposal['username']?> proposal</a></h3>
 
                             <p><?=nl2br($proposal['propuesta'])?></p>
                             <?if($proposal['adjunto']!=""):
@@ -125,7 +125,7 @@ $helperDate=new View_Helper_Date();?>
                                     <div class="comentario-concurso">
                                         <img src="<?=$helper->image($comment['id_usuario'], $comment['imagen'])?>">
                                         <div>
-                                            <span><a href="/usuario/perfil/<?=$comment['username']?>"><?=$comment['username']?></a></span>
+                                            <span><a href="/user/perfil/<?=$comment['username']?>"><?=$comment['username']?></a></span>
                                             <?=$comment['comentario']?>
                                         </div>
                                         <div class="fecha"><?=$helperDate->Date2DateComment($comment['fecha'])?></div>
@@ -181,7 +181,7 @@ $helperDate=new View_Helper_Date();?>
             <div class="comentario">
                 <img src="<?=$helper->image($comentario['id_usuario'], $comentario['imagen'])?>">
                 <div>
-                    <span><a href="/usuario/perfil/<?=$comentario['username']?>"><?=$comentario['username']?></a></span>
+                    <span><a href="/user/perfil/<?=$comentario['username']?>"><?=$comentario['username']?></a></span>
                     <?=$comentario['comentario']?>
                 </div>
                 <div class="fecha">

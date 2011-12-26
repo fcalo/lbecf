@@ -29,7 +29,7 @@ $(function() {
           $( "#dialog-form-mail" ).dialog( "open" );
     })
     $("#new-project").click(function(){
-          location.href="/proyecto/crear/";
+          location.href="/event/crear/";
     })
     $( "#dialog-form" ).dialog({
 			autoOpen: false,
@@ -40,7 +40,7 @@ $(function() {
 				"Aceptar": function() {
                                         $("#dialog-form div").hide();
                                         $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
-                                        setTimeout('location.href="/usuario/baja/"',1000);
+                                        setTimeout('location.href="/user/baja/"',1000);
 				},
 				"Cerrar": function() {
 					$( this ).dialog( "close" );
