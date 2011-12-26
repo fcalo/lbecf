@@ -24,9 +24,11 @@ input[type='text'], input[type='password']{
 	text-align:left;
 
 }
-
+#header{
+    font-family:Arial;
+}
 #header #logo{
-	background:url(../img/logo.png) no-repeat;
+	background:url(../img/logo.png) no-repeat scroll center center transparent;
 	width:259px;
 	height:160px;
 	cursor:pointer;
@@ -129,6 +131,7 @@ input[type='text'], input[type='password']{
 	background-color:#fff;
 }
 #footer{
+        font-family:Arial;
 	background-color:#fff;
 	padding:10px 0;
         clear:both;
@@ -772,7 +775,7 @@ input[type='text'], input[type='password']{
     padding-top: 20px;
 }
 #content #funciona{
-    background:url(../img/funciona.jpg) no-repeat;
+    background:url(../img/howitworks.gif) no-repeat;
     height:268px;
     width: 933px;
     margin:10px auto;
