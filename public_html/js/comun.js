@@ -6,10 +6,10 @@
 
 $(function() {
         $( "#logo" ).click(function(){
-            location.href="/proyecto/la-butaca-escarlata/concurso/";
+            location.href="/";
         });
         $( ".fb" ).click(function(){
-            location.href="/usuario/oauth/login";
+            location.href="/user/oauth/login";
         });
 
 });

@@ -21,7 +21,7 @@ class Model_Messages
                 $mail = new Zend_Mail ( );
                 $hostname = 'http://' . $_SERVER['HTTP_HOST'];
 
-                $link=$hostname.'/usuario/mail/'.$receptor->username;
+                $link=$hostname.'/user/mail/'.$receptor->username;
                 $body="The user ".$receptor->username." has sent you an email! Log in to read it.";
                 $mail->setBodyHtml ( $body);
                 $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );

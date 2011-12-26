@@ -51,31 +51,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //set the language route url (the default also)
         $routeDefault = new Zend_Controller_Router_Route ( ':controller/:action/*', array ('controller' => 'index', 'action' => 'index') );
         //set the user profile route
-        $routeAddProject = new Zend_Controller_Router_Route( '/proyecto/crear/', array( 'controller' => 'project', 'action' => 'create') );
-        $routeEditProject = new Zend_Controller_Router_Route( '/proyecto/editar/:project', array( 'controller' => 'project', 'action' => 'edit') );
-        $routeVoteProject = new Zend_Controller_Router_Route( '/proyecto/voto/:link', array( 'controller' => 'project', 'action' => 'vote') );
-        $routeVoteProposal = new Zend_Controller_Router_Route( '/proyecto/voto-propuesta/:link', array( 'controller' => 'project', 'action' => 'voteProposal') );
-        $routeCommentProject = new Zend_Controller_Router_Route( '/proyecto/comentario/:link', array( 'controller' => 'project', 'action' => 'comment') );
-        $routeCommentProposal = new Zend_Controller_Router_Route( '/proyecto/comentario-propuesta/:link', array( 'controller' => 'project', 'action' => 'commentProposal') );
-        $routeProject = new Zend_Controller_Router_Route( '/proyecto/:project', array( 'controller' => 'project', 'action' => 'index') );
-        $routeProjectAlert = new Zend_Controller_Router_Route( '/proyecto/:project/alert/:msg', array( 'controller' => 'project', 'action' => 'index',) );
-        $routeProjectConcurso = new Zend_Controller_Router_Route( '/proyecto/:project/concurso', array( 'controller' => 'project', 'action' => 'index', 'concurso'=>1) );
-        $routeProjectList = new Zend_Controller_Router_Route( '/proyectos/:page/:category', array( 'controller' => 'project', 'action' => 'list', 'page'=>1, 'category'=>0) );
+        $routeAddProject = new Zend_Controller_Router_Route( '/event/crear/', array( 'controller' => 'project', 'action' => 'create') );
+        $routeEditProject = new Zend_Controller_Router_Route( '/event/editar/:project', array( 'controller' => 'project', 'action' => 'edit') );
+        $routeVoteProject = new Zend_Controller_Router_Route( '/event/voto/:link', array( 'controller' => 'project', 'action' => 'vote') );
+        $routeVoteProposal = new Zend_Controller_Router_Route( '/event/voto-propuesta/:link', array( 'controller' => 'project', 'action' => 'voteProposal') );
+        $routeCommentProject = new Zend_Controller_Router_Route( '/event/comentario/:link', array( 'controller' => 'project', 'action' => 'comment') );
+        $routeCommentProposal = new Zend_Controller_Router_Route( '/event/comentario-propuesta/:link', array( 'controller' => 'project', 'action' => 'commentProposal') );
+        $routeProject = new Zend_Controller_Router_Route( '/event/:project', array( 'controller' => 'project', 'action' => 'index') );
+        $routeProjectAlert = new Zend_Controller_Router_Route( '/event/:project/alert/:msg', array( 'controller' => 'project', 'action' => 'index',) );
+        $routeProjectConcurso = new Zend_Controller_Router_Route( '/event/:project/concurso', array( 'controller' => 'project', 'action' => 'index', 'concurso'=>1) );
+        $routeProjectList = new Zend_Controller_Router_Route( '/events/:page/:category', array( 'controller' => 'project', 'action' => 'list', 'page'=>1, 'category'=>0) );
         
         //set the user profile route
-        $routeProfile = new Zend_Controller_Router_Route( '/usuario/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
-        $routeMail = new Zend_Controller_Router_Route( '/usuario/mail/:username', array( 'controller' => 'user', 'action' => 'mail') );
-        $routeOauth = new Zend_Controller_Router_Route( '/usuario/oauth/:step', array( 'controller' => 'user', 'action' => 'oauth') );
-        $routeValidate = new Zend_Controller_Router_Route( '/usuario/validar/:token', array( 'controller' => 'user', 'action' => 'validate') );
-        $routeDelete = new Zend_Controller_Router_Route( '/usuario/baja/', array( 'controller' => 'user', 'action' => 'delete') );
-        $routeUser = new Zend_Controller_Router_Route( '/usuario/:action/*', array( 'controller' => 'user', 'action' => 'index') );
-        $routeAviso= new Zend_Controller_Router_Route( '/aviso/', array( 'controller' => 'static', 'action' => 'aviso') );
-        $routeCondiciones = new Zend_Controller_Router_Route( '/condiciones/', array( 'controller' => 'static', 'action' => 'condiciones') );
-        $routeContacto = new Zend_Controller_Router_Route( '/contacto/', array( 'controller' => 'static', 'action' => 'contacto') );
+        $routeProfile = new Zend_Controller_Router_Route( '/user/perfil/:username', array( 'controller' => 'user', 'action' => 'profile') );
+        $routeMail = new Zend_Controller_Router_Route( '/user/mail/:username', array( 'controller' => 'user', 'action' => 'mail') );
+        $routeOauth = new Zend_Controller_Router_Route( '/user/oauth/:step', array( 'controller' => 'user', 'action' => 'oauth') );
+        $routeValidate = new Zend_Controller_Router_Route( '/user/validar/:token', array( 'controller' => 'user', 'action' => 'validate') );
+        $routeDelete = new Zend_Controller_Router_Route( '/user/baja/', array( 'controller' => 'user', 'action' => 'delete') );
+        $routeUser = new Zend_Controller_Router_Route( '/user/:action/*', array( 'controller' => 'user', 'action' => 'index') );
+        $routeAviso= new Zend_Controller_Router_Route( '/legal/', array( 'controller' => 'static', 'action' => 'aviso') );
+        $routeCondiciones = new Zend_Controller_Router_Route( '/terms/', array( 'controller' => 'static', 'action' => 'condiciones') );
+        $routeContacto = new Zend_Controller_Router_Route( '/contact/', array( 'controller' => 'static', 'action' => 'contacto') );
         $routeFaq = new Zend_Controller_Router_Route( '/faq/', array( 'controller' => 'static', 'action' => 'faq') );
-        $routeFunciona = new Zend_Controller_Router_Route( '/funciona/', array( 'controller' => 'static', 'action' => 'funciona') );
-        $routePolitica = new Zend_Controller_Router_Route( '/politica/', array( 'controller' => 'static', 'action' => 'politica') );
-        $routeSobre = new Zend_Controller_Router_Route( '/sobre/', array( 'controller' => 'static', 'action' => 'sobre') );
+        $routeFunciona = new Zend_Controller_Router_Route( '/how/', array( 'controller' => 'static', 'action' => 'funciona') );
+        $routePolitica = new Zend_Controller_Router_Route( '/policy/', array( 'controller' => 'static', 'action' => 'politica') );
+        $routeSobre = new Zend_Controller_Router_Route( '/about/', array( 'controller' => 'static', 'action' => 'sobre') );
         $routePayment = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward/', array( 'controller' => 'support', 'action' => 'pago') );
         $routePayment2 = new Zend_Controller_Router_Route( '/apoyo/pago/:proyect/:support/:reward/:sponsor', array( 'controller' => 'support', 'action' => 'pago') );
         $routeCancelPayment = new Zend_Controller_Router_Route( '/apoyo/cancel/:preapproval_key', array( 'controller' => 'support', 'action' => 'cancel') );

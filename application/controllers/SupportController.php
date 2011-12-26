@@ -30,7 +30,7 @@ class SupportController extends Zend_Controller_Action
         $userModel=new Model_Users();
         if($sponsor!="" && !$userModel->existsSponsor($sponsor)){
             //redirecciona con cod_mensaje= 1
-            $this->_redirect("/proyecto/".$linkRewrite."/alert/1");
+            $this->_redirect("/event/".$linkRewrite."/alert/1");
         }
 
         $Project=new Model_Projects();
@@ -188,7 +188,7 @@ class SupportController extends Zend_Controller_Action
                      //mandar mail al superado
                      $modelProject=new Model_Projects();
                      $project=$modelProject->fetchById($supportKo['id_proyecto']);
-                     $link=Service_Urls::getHost()."/proyecto/".$project['link_rewrite'];
+                     $link=Service_Urls::getHost()."/event/".$project['link_rewrite'];
                      //$body="El apoyo que has realizado de ".$supportKo['apoyo']."&euro; al proyecto <a href='".$link."'>".$project['titulo']."</a> ha sido superado por otro patrocinador.";
                      //$body.="<br/>Esto anula autom&aacute;ticamente tu apoyo, ya que solo el m&aacute;s alto es que se tiene en cuenta.";
                      $modelUser=new Model_Users();

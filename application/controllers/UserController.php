@@ -19,7 +19,7 @@ class UserController extends Zend_Controller_Action
 
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-                $this->_redirect ( '/usuario/perfil/'.$auth->getIdentity()->username );
+                $this->_redirect ( '/user/perfil/'.$auth->getIdentity()->username );
         }
 
         $request = $this->getRequest();
@@ -45,7 +45,7 @@ class UserController extends Zend_Controller_Action
                 // system. (Not the password though!)
                 unset ( $checkuser['pass'] );
                 $auth->getStorage ()->write ( (object)$checkuser );
-                $this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
+                $this->_redirect("/user/perfil/".$auth->getIdentity()->username);
             }else{
                 // Invalid credentials
                 $form->setDescription('incorrect user or password');
@@ -123,7 +123,7 @@ class UserController extends Zend_Controller_Action
                     $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
 
                     $mail = new Zend_Mail ( );
-                    $link=$hostname  . '/usuario/validar/'  . $token;
+                    $link=$hostname  . '/user/validar/'  . $token;
                     $mail->setBodyHtml ( 'Please click the link to complete registration<br />'
                             .'<a href="'.$link.'">'.$link.'</a><br /><br />_______________________________<br />Rocking Red Ticket');
                     $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
@@ -169,7 +169,7 @@ class UserController extends Zend_Controller_Action
                     $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
 
                     $mail = new Zend_Mail ('utf-8');
-                    $link= $hostname .'/usuario/validar/'.$data['token'];
+                    $link= $hostname .'/user/validar/'.$data['token'];
                     $mail->setBodyHtml ( 'Has solicitado tus datos de conexión de La Butaca Escarlata<br />'
                             .'<a href="'.$link.'">'.$link.'</a>'.
                             '<br /><br />'.
@@ -207,7 +207,7 @@ class UserController extends Zend_Controller_Action
                         if ($code==null)
                         {
                             $error = $this->getRequest()->getParam('error');
-                            $this->_redirect("/usuario/login/".$error);
+                            $this->_redirect("/user/login/".$error);
                         }
 
                         $httpconf = array('adapter' => 'Zend_Http_Client_Adapter_Socket', 'ssltransport' => 'tls');
@@ -249,7 +249,7 @@ class UserController extends Zend_Controller_Action
                     catch (Exception $e)
                     {
                         //$this->_helper->_flashMessenger->addMessage ( sprintf($this->view->translate ( 'Sorry, we are experiencing technical problems with the %s service.' ), "Facebook") );
-                        $this->_redirect("/usuario/login/technical-problems-facebook");
+                        $this->_redirect("/user/login/technical-problems-facebook");
                     }
 
                 $model = new Model_Users();
@@ -279,7 +279,7 @@ class UserController extends Zend_Controller_Action
                     $response = $httpclient->request();
                     parse_str($response->getBody(),$access_code);
 
-                    $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$user->id_usuario."/";
+                    $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/user/".$user->id_usuario."/";
 
                     
                     $helper=new View_Helper_Image();
@@ -305,7 +305,7 @@ class UserController extends Zend_Controller_Action
                 $auth = Zend_Auth::getInstance ();
                 $auth->getStorage ()->write ( (object)$user );
 
-                $this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
+                $this->_redirect("/user/perfil/".$auth->getIdentity()->username);
 
         }
 
@@ -343,7 +343,7 @@ class UserController extends Zend_Controller_Action
 
                 $auth->getStorage()->write( (object)$data);
 
-                $this->_redirect ( '/usuario/perfil/'.$data ['username'] );
+                $this->_redirect ( '/user/perfil/'.$data ['username'] );
 
             } else{
                 $this->view->error='Sorry, the token does not exist or has expired';
@@ -402,7 +402,7 @@ class UserController extends Zend_Controller_Action
         $request = $this->getRequest ();
         if($auth->getIdentity()->username!=$request->username){
                 $self=false;
-                //$this->_redirect("/usuario/perfil/".$auth->getIdentity()->username);
+                //$this->_redirect("/user/perfil/".$auth->getIdentity()->username);
                 $modelUser=new Model_Users();
                 $this->view->user=$modelUser->fetchUserByUsername($request->username);
                 $this->view->logged=($auth->getIdentity()->username!="");
@@ -416,7 +416,7 @@ class UserController extends Zend_Controller_Action
             if($self){
                 //Cambio de imagen de perfil
                  if ($_FILES["imagen"]['name']!=""){
-                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/usuario/".$this->view->user->id_usuario."/";
+                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/user/".$this->view->user->id_usuario."/";
                      $helper=new View_Helper_Image();
 
                      $helper->ensurePath($path);

@@ -6,12 +6,6 @@ $this->headTitle('Rocking red ticket');
 echo $this->doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
     <head>
-    <!--<meta name="description" content="Punto de financiación para emprendedores y ofertas de trabajo. ¡Vamos a poner fin a esta crisis!"/>
-    <meta property="og:title" content="EL DESAFÍO ESCARLATA"/>
-    <meta property="og:url" content="http://www.labutacaescarlata.com/proyecto/la-butaca-escarlata/"/>
-    <meta property="og:image" content="http://www.labutacaescarlata.com/img/proyecto.jpg" />
-    <meta property="og:description"
-          content="¡Regístrate y obtén capital y grandes descuentos!"/>-->
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
         <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/global.css')->prependStylesheet($this->baseUrl().'/css/custom-theme/jquery-ui-1.8.13.custom.css'); ?>
@@ -33,27 +27,27 @@ echo $this->doctype(); ?>
                                 $auth = Zend_Auth::getInstance ();
                                 if ($auth->hasIdentity()):?>
                                 <div id="profile">
-                                    <div>Hello, <a href="/usuario/perfil/<?=$auth->getIdentity()->username?>"><?=$auth->getIdentity()->username?></a></div>
-                                    <div><a href="/usuario/logout">Logout</a></div>
+                                    <div>Hello, <a href="/user/perfil/<?=$auth->getIdentity()->username?>"><?=$auth->getIdentity()->username?></a></div>
+                                    <div><a href="/user/logout">Logout</a></div>
                                     <input type="hidden" id="idUser" value="<?=$auth->getIdentity()->id_usuario?>"/>
                                     <input type="hidden" id="user_sponsor" value="<?=$auth->getIdentity()->cod_patrocinio?>"/>
                                 </div>
                             <?else:?>
-                                <form action="/usuario/login" method="post">
+                                <form action="/user/login" method="post">
                                     <span>User:</span><input type="text" name="user"/>
                                     <span>Password:</span><input type="password" name="password"/>
                                     <input type="submit" value="Log in"/>
                                     <input type="button" class="fb" value=""/>
                                 </form>
-                                <div><a href="/usuario/forgot/">Forgot your password?</a></div>
-                                <div><a href="/usuario/register/">Join now!</a></div>
+                                <div><a href="/user/forgot/">Forgot your password?</a></div>
+                                <div><a href="/user/register/">Join now!</a></div>
                             <?endif;?>
 			</div>
 			<div id="social">
                             <?$config = Zend_Registry::get('config');?>
                             <a href="<?=$config->social->urlTuenti?>" target="_blank"><img src="/img/tu.png"/></a>
                             <a href="<?=$config->social->urlLinkedin?>" target="_blank"><img src="/img/in.png"/></a>
-                            <a href="<?=$config->social->urlTwitter?>" target="_blank" ><img src="/img/tw.png"/></a>
+                            <!--<a href="<?=$config->social->urlTwitter?>" target="_blank" ><img src="/img/tw.png"/></a>-->
                             <a href="<?=$config->social->urlFacebook?>" target="_blank"><img src="/img/fb_ico.png"/></a>
                             
 
@@ -66,11 +60,11 @@ echo $this->doctype(); ?>
 			<div id="menu">
 				<ul>
 					<li <?=($_SERVER['REQUEST_URI']=="/")?"class='active'":""?>><a href="/">Home</a></li>
-					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/proyecto")>0)?"class='active'":""?>><a href="/proyectos/">Events</a></li>
-					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/sobre")>0)?"class='active'":""?>><a href="/sobre/">About RRT</a></li>
-					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/funcion")>0)?"class='active'":""?>><a href="/funciona/">How does it works</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/events")>0)?"class='active'":""?>><a href="/events/">Events</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/about")>0)?"class='active'":""?>><a href="/about/">About RRT</a></li>
+					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/how")>0)?"class='active'":""?>><a href="/how/">How does it works</a></li>
 					<li <?=(substr_count($_SERVER['REQUEST_URI'],"/faq")>0)?"class='active'":""?>><a href="/faq/">FAQ</a></li>
-					<li><a href="http://labutacaescarlata.blogspot.com/" target="_blank">Blog</a></li>
+					<li><a href="http://rockingredticket.blogspot.com/" target="_blank">Blog</a></li>
 				</ul>
 				<div class="cl"></div>
 			</div>
@@ -95,15 +89,13 @@ echo $this->doctype(); ?>
 
 <div class="fb-like" data-href="http://labutacaescarlata.com" data-send="true" data-layout="standard" data-width="300" data-show-faces="true" data-colorscheme="light" data-font="arial"></div>
                             </div>
-                            <div>
-                                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://labutacaescarlata.com" data-count="horizontal" data-via="butacaescarlata">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-                            </div>
+                            
                         </div>
 			<div class="panel">
 				<div class="terminos">&nbsp;<!--<a href="/aviso/">Aviso legal</a>--></div>
 				<div class="terminos">&nbsp;<!--<a href="/politica/">Política de privacidad</a>--></div>
-				<div class="terminos"><a href="/condiciones/">Term of use</a></div>
-				<div class="terminos"><a href="/contacto/">Contact</a></div>
+				<div class="terminos"><a href="/terms/">Term of use</a></div>
+				<div class="terminos"><a href="/contact/">Contact</a></div>
                                 <div id="moloko"><div></div> <a href="http://www.molokofactory.com" target="_blank"><img src="/img/molokologo.png"></img></a></div>
 			</div>
                         
