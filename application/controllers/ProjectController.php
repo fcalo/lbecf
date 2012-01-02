@@ -196,6 +196,7 @@ class ProjectController extends Zend_Controller_Action
                          $dataRecompensa['apoyo_minimo']=$minimos[$key];
                          
                          $dataRecompensa['subasta']=isset($_POST['subasta_'.($key+1)])?"S":"N";
+                         $dataRecompensa['no_entrada']=isset($_POST['no_entrada_'.($key+1)])?"S":"N";
                          $dataRecompensa['recompensa']=$recompensa;
                          $modelReward->save($dataRecompensa);
                      }
@@ -249,7 +250,7 @@ class ProjectController extends Zend_Controller_Action
                 $form=$this->view->form;
                 if (!$form->isValid($request->getPost())) {
                      // Invalid entries
-                    $this->view->error="<li>Reqiev all data</li>";
+                    $this->view->error="<li>Rewiev all data</li>";
                     return $this->render('create'); // re-render
                 }
 
@@ -282,6 +283,7 @@ class ProjectController extends Zend_Controller_Action
                          $dataRecompensa['apoyo_minimo']=$minimos[$key];
 
                          $dataRecompensa['subasta']=isset($_POST['subasta_'.($key+1)])?"S":"N";
+                         $dataRecompensa['no_entrada']=isset($_POST['no_entrada_'.($key+1)])?"S":"N";
                          $dataRecompensa['recompensa']=$recompensa;
                          $modelReward->save($dataRecompensa, $clean);
                          $clean=false;
@@ -310,6 +312,8 @@ class ProjectController extends Zend_Controller_Action
                 foreach($data as $key=>$value){
                     $d[$key]=$value;
                 }
+                $a=explode("-",$d['fecha']);
+                $d['fecha_evento']=$a[2]."/".$a[1]."/".$a[0];
                 $a=explode("-",$d['fec_fin']);
                 $d['fecha']=$a[2]."/".$a[1]."/".$a[0];
                 $d['importe']=round($d['importe_solicitado']);

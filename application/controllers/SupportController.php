@@ -107,7 +107,10 @@ class SupportController extends Zend_Controller_Action
             $p=$modelProject->fetchById($support['id_proyecto']);
 
             $body="The ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
-            $body="Enjoy the event and see you soon!";
+            if($support['cod_ticket']!="")
+                $body.="Your ticket code is:<b>".$support['cod_ticket']."</br></br>";
+            $body.="Enjoy the event and see you soon!";
+            
             $mail->setBodyHtml ( $body);
             $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
@@ -198,12 +201,27 @@ class SupportController extends Zend_Controller_Action
                  }
                  //Se actualiza la recompensa para que el apoyo minimo sea superior
                  $rewardSupport->set(array("apoyo_minimo"=>($_REQUEST['max_total_amount_of_all_payments']+1)),$support['id_recompensa']);
+
+
                  
              }
 
 
              $modelSupport->setApproved($support['id_apoyo']);
              $support=$modelSupport->fetch($support['id_apoyo']);
+
+
+            /***
+          * Código de ticket
+          */
+             $modelReward=new Model_Rewards();
+             $reward=$modelReward->fetch($support['id_recompensa']);
+             
+             if($reward['no_entrada']=="N"){
+             //incluye entrada
+                $modelSupport->generateCodTicket($support['id_apoyo']);
+             }
+             
 
              if($support['cancelado']!="S"){
                  $modelProject=new Model_Projects();
@@ -223,6 +241,7 @@ class SupportController extends Zend_Controller_Action
                  $mail->setSubject('New support');
                  $mail->send();
              }
+
 
 
              /********************
