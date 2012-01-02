@@ -37,12 +37,12 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Aceptar": function() {
+				"Ok": function() {
                                         $("#dialog-form div").hide();
                                         $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
                                         setTimeout('location.href="/user/baja/"',1000);
 				},
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			}
@@ -53,7 +53,7 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Aceptar": function() {
+				"Ok": function() {
                                         $("#dialog-form-cancel div").hide();
                                         $("#dialog-form-cancel").css("background","url(../img/loader.gif) center center no-repeat");
                                         $.ajax({
@@ -73,7 +73,7 @@ $(function() {
                                             }
                                         });
 				},
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			}
@@ -89,12 +89,12 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Aceptar": function() {
+				"Ok": function() {
                                         $("#dialog-form div").hide();
                                         $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
                                         setTimeout('$("#frm-image").submit();',1000);
 				},
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			}
@@ -105,12 +105,12 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Aceptar": function() {
+				"Ok": function() {
                                         $("#dialog-form div").hide();
                                         $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
                                         setTimeout('$("#frm-mail").submit();',1000);
 				},
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			}
@@ -122,7 +122,7 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			},

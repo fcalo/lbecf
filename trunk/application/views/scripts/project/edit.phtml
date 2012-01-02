@@ -55,6 +55,10 @@
                                 Auctioned?
                                 <input class="check_subasta" type="checkbox" <?=($reward['subasta']=="S"?"checked='checked'":"")?> value="" name="subasta_<?=$i?>">
                             </span>
+                            <span class="data">
+                                Ticket not included
+                                <input class="check_no_entrada" type="checkbox" <?=($reward['no_entrada']=="S"?"checked='checked'":"")?> value="" name="no_entrada_<?=$i?>">
+                            </span>
                         </div>
                     </div>
                     <?endforeach;?>

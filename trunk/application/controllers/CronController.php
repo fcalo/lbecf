@@ -32,7 +32,7 @@ class CronController extends Zend_Controller_Action
                 foreach($supports as $support){
                     $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
                     $r=$modelReward->fetch($support['id_recompensa']);
-                    $body=$u['username']."(".$u['email'].") - ".$r['recompensa'];
+                    $body.=$u['username']."(".$u['email'].") - ".$r['recompensa'];
                 }
 
                 $mail->setBodyHtml ($body);

@@ -86,7 +86,7 @@
 <div id="loading"></div>
 <div id="panel_ayuda"></div>
 <div id="panel_ayuda_content">
-	<div id="panel_ayuda_content_cerrar"><a href="javascript:closeHelp()">Cerrar</a></div>
+	<div id="panel_ayuda_content_cerrar"><a href="javascript:closeHelp()">Close</a></div>
 	
 	<div id="panel_ayuda_content_text"></div>
 	

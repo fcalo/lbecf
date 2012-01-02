@@ -86,7 +86,7 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Apoyar": function() {
+				"Support": function() {
 					var bValid = true;
 					$("#amount").removeClass( "ui-state-error" );
 
@@ -102,7 +102,7 @@ $(function() {
                                             $(".validateTips").html("Al menos debes aportar "+$("#apoyo-minimo").val()+" € para obtener la recompensa seleccionada")
                                         }
 				},
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			},
@@ -118,7 +118,7 @@ $(function() {
                 width: 350,
                 modal: true,
                 buttons: {
-                        "Proponer": function() {
+                        "Propose": function() {
                                 var bValid = true;
                                 $("#proposal").removeClass( "ui-state-error" );
 
@@ -133,7 +133,7 @@ $(function() {
                                     $("#proposal").addClass( "ui-state-error" );
                                 }
                         },
-                        "Cerrar": function() {
+                        "Close": function() {
                                 $( this ).dialog( "close" );
                         }
                 },
@@ -155,6 +155,8 @@ $(function() {
                     $(".reward-item:nth-child("+count+") input").val("");
                     $(".reward-item:nth-child("+count+") .check_subasta").attr("checked",0);
                     $(".reward-item:nth-child("+count+") .check_subasta").attr("name","subasta_"+count);
+                    $(".reward-item:nth-child("+count+") .check_no_entrada").attr("checked",0);
+                    $(".reward-item:nth-child("+count+") .check_no_entrada").attr("name","no_entrada"+count);
 
                 });
                 $("#btn-reward-delete").click(function(){
@@ -216,7 +218,7 @@ $(function() {
 			width: 350,
 			modal: true,
 			buttons: {
-				"Cerrar": function() {
+				"Close": function() {
 					$( this ).dialog( "close" );
 				}
 			},
