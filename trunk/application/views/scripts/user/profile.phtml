@@ -74,14 +74,14 @@
         </ul>
     </div>
     <?endif;?>
-    <div class="profile-box">
+    <!--<div class="profile-box">
         <h3><?=$this->self?"Your proposal":"Proposal"?></h3>
         <ul>
             <?foreach($this->proposals as $item):?>
                 <li>Proposal <?=$item['c']?>  on <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a></li>
             <?endforeach;?>
         </ul>
-    </div>
+    </div>-->
     <div class="profile-box">
         <h3><?=$this->self?"Your Comments":"Comments"?></h3>
         <ul>
@@ -90,7 +90,7 @@
             <?endforeach;?>
         </ul>
     </div>
-    <div class="profile-box">
+    <!--<div class="profile-box">
         <h3><?=$this->self?"Contents you participe":"Contents"?></h3>
         <ul>
               <?
@@ -114,7 +114,7 @@
 
            <?endforeach;?>
         </ul>
-    </div>
+    </div>-->
     <div class="cl"></div>
 </div>
 <?if($this->self):?>
