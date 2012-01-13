@@ -11,8 +11,10 @@ $helperDate=new View_Helper_Date();?>
     <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Home</a></li>
-		<li><a href="#tabs-2">Collaborators</a></li>
-		<li><a href="#tabs-3">Contests</a></li>
+                <?if(count($this->collaborators)>0):?>
+                    <li><a href="#tabs-2">Collaborators</a></li>
+                <?endif;?>
+		<!--<li><a href="#tabs-3">Contests</a></li>-->
 	</ul>
 	<div id="tabs-1">
             <div id="ficha">
@@ -32,7 +34,7 @@ $helperDate=new View_Helper_Date();?>
                         <span id="lup">(<?=$this->votos['positivos']?>)</span>
                     </div>
                 </div>
-                <h1><span>Proyecto: </span><?=$this->project->titulo?></h1>
+                <h1><span>Event: </span><?=$this->project->titulo?> - <?=$this->project->ciudad?>(<?=implode("/",array_reverse(explode("-",$this->project->fecha)))?>) </h1>
                 <div id="ficha-imagen"><img src="<?=$this->image?>"></div>
                 
                 <div id="ficha-info">
@@ -59,7 +61,7 @@ $helperDate=new View_Helper_Date();?>
                         <a href="http://www.facebook.com/sharer.php?u=<?=$this->url?>&r=<?=rand(0,1000)?>&t=<?=$this->project->titulo?>" target="_blank"><img src="/img/fb_ico.png"/></a>
                         <a href="http://twitter.com/share?original_referer=<?=$this->url?>&source=tweetbutton&text=<?=$this->project->titulo?>" target="_blank" ><img src="/img/tw.png"/></a>
                         <a href="http://www.linkedin.com/cws/share?original_referer=<?=$this->url?>&url=<?=$this->url?>" target="_blank"><img src="/img/in.png"/></a>
-                        <a href="http://www.tuenti.com/share?url=<?=$this->url?>" target="_blank"><img src="/img/tu.png"/></a>
+                        <!--<a href="http://www.tuenti.com/share?url=<?=$this->url?>" target="_blank"><img src="/img/tu.png"/></a>-->
                         
                     </div>
                     <h2>Description</h2>
@@ -67,6 +69,7 @@ $helperDate=new View_Helper_Date();?>
                 </div>
             </div>
 	</div>
+        <?if(count($this->collaborators)>0):?>
 	<div id="tabs-2">
             <div id="colaboradores">
                 <?foreach($this->collaborators as $collaborator):?>
@@ -79,7 +82,8 @@ $helperDate=new View_Helper_Date();?>
                 
             </div>
 	</div>
-	<div id="tabs-3">
+        <?endif;?>
+	<!--<div id="tabs-3">
             <div id="concurso">
                 <h2 class="unescape"><?=$this->project->titulo_concurso?></h2>
 		<p class="unescape"><?=nl2br($this->project->descripcion_concurso)?></p>
@@ -144,12 +148,12 @@ $helperDate=new View_Helper_Date();?>
                 <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Propose"/></div>
                 
             </div>
-	</div>
+	</div>-->
     </div>
     <div id="recompensas">
         <input type="hidden" id="id-recompensa"/>
         <input type="hidden" id="apoyo-minimo"/>
-        <span>Recompensas por apoyar el proyecto</span>
+        <span>Vip Tickets</span>
         <ul class="scroll-content-item ui-widget-header">
             <?foreach($this->rewards as $reward):?>
             <li>
