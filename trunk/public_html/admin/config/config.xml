@@ -447,26 +447,31 @@
                 <name>text_1</name>
                 <description>Que es</description>
                 <type>text</type>
+                <fckeditor>S</fckeditor>
             </field>
             <field>
                 <name>text_2</name>
                 <description>Publicar tu proyecto</description>
                 <type>text</type>
+                <fckeditor>S</fckeditor>
             </field>
             <field>
                 <name>text_3</name>
                 <description>Patricinar / Invertir</description>
                 <type>text</type>
+                <fckeditor>S</fckeditor>
             </field>
             <field>
                 <name>text_4</name>
                 <description>Colaborar</description>
                 <type>text</type>
+                <fckeditor>S</fckeditor>
             </field>
             <field>
                 <name>text_5</name>
                 <description>Sistema de pagos</description>
                 <type>text</type>
+                <fckeditor>S</fckeditor>
             </field>
         </fields>
     </entity>
