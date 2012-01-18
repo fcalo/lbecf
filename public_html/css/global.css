@@ -2,7 +2,7 @@ body{
 	width:100%;
 	height:100%;
 	margin:0;
-	font-family:"Bodoni MT", Arial;
+	font-family: Arial;
 	font-size:12px;
 	text-align:center;
 	background-color:#f7f7f7;
@@ -51,6 +51,8 @@ input[type='text'], input[type='password']{
 	margin-top:10px;
 }
 #header #title span{
+        font-size:14px;
+        font-family: "Bodoni MT";
 	margin-left:30px;
         color:#000;
 }
@@ -183,7 +185,16 @@ input[type='text'], input[type='password']{
 #panel-home{
     margin:0px 7px 0 7px;
 }
-
+#panel-home .line {
+    border-top: 6px solid;
+    margin: 5px 0 5px 60px;
+    width: 643px;
+}
+#panel-home #home-message{
+    background:url(../img/centralhome.gif) no-repeat;
+    width:777px;
+    height:282px;
+}
 #panel-home #destacado .top{
     background:url(../img/destacado-top.jpg) no-repeat;
     width:960px;
@@ -768,6 +779,15 @@ input[type='text'], input[type='password']{
     list-style: none;
     color:#600;
 }
+#agree{
+    display:block;
+}
+#agree span{
+    float:left;
+}
+#fb-label, #submit-label, #agree-label{
+    display:none;
+}
 
 /* registro y login */
 /* funciona*/
@@ -796,11 +816,13 @@ input[type='text'], input[type='password']{
     margin:0 115px;
     color:#000;
     padding-bottom: 20px;
+    font-family: "Times New Roman","serif";
+    font-size: 12pt;
 }
 #content #texto-funciona h3{
     color:#900;
     font-weight:bold;
-    font-size:14px;
+    font-size:14pt;
 }
 /* FIN funciona */
 
@@ -896,6 +918,7 @@ input[type='text'], input[type='password']{
 #content #panel-profile .profile-box h3{
     padding-left:10px;
     color:#900;
+    font-size:12px;
 }
 #content #panel-profile .profile-box a{
     color:#900;
@@ -938,3 +961,4 @@ input[type='text'], input[type='password']{
     display:none;
 }
 /*FIN mail*/
+
