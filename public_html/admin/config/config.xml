@@ -114,6 +114,36 @@
                 <in_list>S</in_list>
             </field>
             <field>
+                <name>ticket_centro_1</name>
+                <description>Línea 1 centro ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
+                <name>ticket_centro_2</name>
+                <description>Línea 2 centro ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
+                <name>ticket_centro_3</name>
+                <description>Línea 3 centro ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
+                <name>ticket_centro_4</name>
+                <description>Línea 4 centro ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
+                <name>ticket_derecha_1</name>
+                <description>Línea 1 derecha ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
+                <name>ticket_derecha_2</name>
+                <description>Línea 2 derecha ticket</description>
+                <type>varchar(45</type>
+            </field>
+            <field>
                 <name>titulo_concurso</name>
                 <description>Título concurso</description>
                 <type>varchar(128)</type>
