@@ -128,6 +128,59 @@ class Model_Supports
 	}
 	return $rstr;
     }
+    public function generateTicket($idSupport,$digest, $code){
+
+
+        $sql="SELECT p.ticket_centro_1, p.ticket_centro_2,p.ticket_centro_3,p.ticket_centro_4,p.ticket_derecha_1,p.ticket_derecha_2";
+        $sql.=" FROM apoyo a";
+        $sql.=" INNER JOIN proyectos p ON p.id_proyecto=a.id_proyecto";
+        $sql.=" WHERE a.id_apoyo=".$idSupport;
+
+
+        $rt=$this->db->getAdapter()->query($sql)->fetchAll();
+
+
+        $codImagen=md5($digest.$this->randomString());
+
+        $image = imagecreatefromjpeg(dirname(__file__)."/../ticket.jpg");
+        $color = ImageColorAllocate($image, 0, 0, 0);
+        $fuente=dirname(__file__)."/../arial.ttf";
+        $fuenteBold=dirname(__file__)."/../Arial Bold.ttf";
+
+        $widthCharacter=7;
+
+        $texto=$rt[0]['ticket_centro_1'];
+        imagettftext($image, 12, 0,290-((strlen($texto)/2)*$widthCharacter), 150, $color,$fuente, $texto);
+        $texto=$rt[0]['ticket_centro_2'];
+        imagettftext($image, 12, 0,290-((strlen($texto)/2)*$widthCharacter), 170, $color,$fuente, $texto);
+        $texto=$rt[0]['ticket_centro_3'];
+        imagettftext($image, 12, 0,290-((strlen($texto)/2)*$widthCharacter), 190, $color,$fuente, $texto);
+        $texto=$rt[0]['ticket_centro_4'];
+        imagettftext($image, 12, 0,290-((strlen($texto)/2)*$widthCharacter), 210, $color,$fuente, $texto);
+
+
+        $widthCharacter=6;
+        $texto=$rt[0]['ticket_derecha_1'];
+        imagettftext($image, 10, 0,485-((strlen($texto)/2)*$widthCharacter), 58, $color,$fuente, $texto);
+        $texto=$rt[0]['ticket_derecha_2'];
+        imagettftext($image, 10, 0,485-((strlen($texto)/2)*$widthCharacter), 78, $color,$fuente, $texto);
+        /*$texto="Doors: 8pm";
+        imagettftext($image, 12, 0,490-((strlen($texto)/2)*$widthCharacter), 98, $color,$fuente, $texto);*/
+
+        //codigo
+        imagettftext($image, 14, 0,435, 220, $color,$fuenteBold, $code);
+
+
+
+        $path=dirname(__file__)."/../../public_html/ticket/";
+        @mkdir($path);
+        imagejpeg($image, $path.$codImagen.".jpg");
+        
+        //liberamos la memoria ocupada por la imagen
+        imagedestroy($image);
+        return $codImagen;
+
+    }
 
 
 

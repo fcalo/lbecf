@@ -87,10 +87,9 @@ class SupportController extends Zend_Controller_Action
         $paypalConfig['returnUrl']=$hostname.$config->payment->paypal->return;
         $paypalConfig['paypalUrl']=$config->payment->paypal->paypal_url;
         $paypalConfig['bussines']=$config->payment->paypal->bussines;
-        var_dump($paypalConfig['bussines']);
+        //var_dump($paypalConfig['bussines']);
 
 
-        //TODO: Obtener datos de conexion del local.ini
         $params=array();
         $paypal=new Service_Paypal();
 
@@ -108,18 +107,18 @@ class SupportController extends Zend_Controller_Action
 
             $body="The ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
             if($support['cod_ticket']!="")
-                $body.="Your ticket code is:<b>".$support['cod_ticket']."</br></br>";
+                $body.="Your ticket code is:<b>".$support['cod_ticket']."<br/><br/>";
             $body.="Enjoy the event and see you soon!";
+            $body.="<br/><br/>";
+            $modelUser=new Model_Users();
+            $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
+            $imagen=$modelSupport->generateTicket($idSupport,$u['email'].$support['cod_ticket'],$support['cod_ticket']);
+            $body.="<img src='http://www.rockingredticket.com/ticket/".$imagen.".jpg' />";
             
             $mail->setBodyHtml ( $body);
             $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
 
-            $modelUser=new Model_Users();
-            $u=$modelUser->fetchUser($support['id_usuario_apoyo']);
-
-            var_dump($u['email']);
-            die;
-
+            
             $mail->addTo($u['email']);
             $mail->setSubject('Support confirm');
             $mail->send();
