@@ -11,7 +11,7 @@ $(function() {
         i=1;
         while($("#progressbar_"+i).length>0){
            $( "#progressbar_"+i ).progressbar({
-                    value: ($("#porcentaje_+i").html()*1)
+                    value: ($("#porcentaje_"+i).html()*1)
             });
             i++;
         }

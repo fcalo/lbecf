@@ -105,7 +105,7 @@ class SupportController extends Zend_Controller_Action
             $modelProject=new Model_Projects();
             $p=$modelProject->fetchById($support['id_proyecto']);
 
-            $body="The ".$p['titulo']." has successfully achieved its goal! The charge in your account will be effectively made in the next few hours and the creator will contact you within a week.<br/><br/>";
+            $body="Thanks for making things happen! A has successfully achieved its goal! The charge in your account will be effectively made in the next few hours. To attend the event you just have to print your Rocking Red Ticket attached in this mail.<br/><br/>";
             if($support['cod_ticket']!="")
                 $body.="Your ticket code is:<b>".$support['cod_ticket']."<br/><br/>";
             $body.="Enjoy the event and see you soon!";

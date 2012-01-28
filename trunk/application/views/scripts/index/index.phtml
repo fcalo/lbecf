@@ -1,9 +1,8 @@
 <?
 function paintHomeMessage(){?>
 <div class="cl"></div>
-<div class="line"></div>
-    <div id="home-message"></div>
-<div class="line"></div>
+<div id="home-message"></div>
+
 <?}
 ?>
 
@@ -33,7 +32,7 @@ function paintHomeMessage(){?>
                     <img  width="123" src="<?="/admin/".str_replace("/".$project['id_proyecto']."/", "/".$project['id_proyecto']."/160x/thumb_", $project['imagen']);?>">
                 </div>
                 <div class="project-info">
-                        <div class="number"><span id="porcentaje_<?=$i?>">0</span> %</div>
+                        <div class="number"><span id="porcentaje_<?=$i?>"><?=round($project['porcentaje'],0)?></span> %</div>
                         <div class="text">raised</div>
                         <div id="progressbar_<?=$i?>"></div>
                         <div class="number"><?=round($project['recaudado'],0)?> de <?=round($project['importe_solicitado'],0)?> &euro;</div>
