@@ -53,7 +53,8 @@ class ProjectController extends Zend_Controller_Action
             $this->view->rewards=$rewards;
             $this->view->rewardsSale=$rewardsSale;
             $this->view->project=$project;
-            $this->view->porcentaje=($supports->sum_apoyo/$project->importe_solicitado)*100;
+
+            $this->view->porcentaje=$project->importe_solicitado==0?100:($supports->sum_apoyo/$project->importe_solicitado)*100;
             //$now=new Datetime();
             //$interval = $this->dateDifference(date(), $project->fec_fin);
             $this->view->days=$project->days;
