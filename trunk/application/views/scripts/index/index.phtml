@@ -35,7 +35,9 @@ function paintHomeMessage(){?>
                         <div class="number"><span id="porcentaje_<?=$i?>"><?=round($project['porcentaje'],0)?></span> %</div>
                         <div class="text">raised</div>
                         <div id="progressbar_<?=$i?>"></div>
-                        <div class="number"><?=round($project['recaudado'],0)?> de <?=round($project['importe_solicitado'],0)?> &euro;</div>
+                        <?if(round($project['importe_solicitado'],0)>0):?>
+                        <div class="number"><?=round($project['recaudado'],0)?> of <?=round($project['importe_solicitado'],0)?> &euro;</div>
+                        <?endif;?>
                         <div class="number margin"><?=$project['numApoyos']?> <span class="text">attendees</span></div>
                         <div class="number margin"><?=$project['days']?> <span class="text">days</span></div>
 

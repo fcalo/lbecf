@@ -218,6 +218,36 @@ class ProjectController extends Zend_Controller_Action
                  if(!$model->uploadImage($path,$idProject))
                        die("error");
 
+                //mail avisos
+                $mail = new Zend_Mail( );
+
+                $config = Zend_Registry::get('config');
+
+                $body="El evento ".$data['titulo']." ha sido creado.";
+                
+                $mail->setBodyHtml ( $body);
+                $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
+                
+                $mail->addTo($config->resources->emails->main);
+                $mail->setSubject('Evento '.$data['titulo'].' creado');
+                $mail->send();
+
+                $mail = new Zend_Mail ( );
+
+                $config = Zend_Registry::get('config');
+
+                $body="Your event will be reviewed in the next 48 hours<br/><br/>";
+                $body.="Thanks for making things happen!<br/>";
+                
+
+                $mail->setBodyHtml ( $body);
+                $mail->setFrom ( 'noresponder@rockingredticket.com', 'rockingredticket.com' );
+
+
+                $mail->addTo($auth->getIdentity()->email);
+                $mail->setSubject('Succesfully created');
+                $mail->send();
+
                  $this->view->msg="thank you for create your event.";
 
              }else{

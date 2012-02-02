@@ -194,7 +194,7 @@ input[type='text'], input[type='password']{
     background:url(../img/centralhome.gif) no-repeat;
     width:777px;
     height:315px;
-    margin-top:5px;
+    margin:5px auto;
 }
 #panel-home #destacado .top{
     background:url(../img/destacado-top.jpg) no-repeat;
@@ -965,4 +965,7 @@ input[type='text'], input[type='password']{
 
 #texto-funciona .txt div{
     float:left;
+}
+#content #panel-form.create-project dd#submit-element{
+    margin-top:10px;
 }
