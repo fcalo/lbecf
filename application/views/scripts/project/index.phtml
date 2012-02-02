@@ -41,9 +41,11 @@ $helperDate=new View_Helper_Date();?>
                     <div class="number"><span id="porcentaje"><?=round($this->porcentaje,0)?></span> %</div>
                     <div class="text">raised</div>
                     <div id="progressbar"></div>
-                    <div class="text"><?=round($this->recaudado,0)?> de <?=round($this->project->importe_solicitado,0)?> &euro;</div>
+                    <?if(round($this->project->importe_solicitado,0)>0):?>
+                    <div class="text"><?=round($this->recaudado,0)?> of <?=round($this->project->importe_solicitado,0)?> &euro;</div>
+                    <?endif;?>
                     <div class="number margin"><?=$this->numApoyos?></div>
-                    <div class="text">supports</div>
+                    <div class="text">attendees</div>
                     <?if(!$this->closed):?>
                     <div class="number margin"><?=$this->days?></div>
                     <div class="text">days</div>
