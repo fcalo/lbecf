@@ -213,10 +213,8 @@ $helperDate=new View_Helper_Date();?>
                 <tr>
 		<td><label for="amount">Amount by which support</label></td>
 		<td><input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all" /></td>
-                </tr><tr>
-		<td><label for="sponsor">Sponsor code(Opcional):</label></td>
-                <td><input type="text" name="sponsor" id="sponsor" maxlength="10" size="12" class="text ui-widget-content ui-corner-all" /></td>
-                </tr>
+                </tr><input type="hidden" name="sponsor" id="sponsor" maxlength="10" size="12" class="text ui-widget-content ui-corner-all" />
+                
                 </table>
 	</fieldset>
 	</form>
