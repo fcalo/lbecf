@@ -156,6 +156,7 @@ input[type='text'], input[type='password']{
     float:left;
 }
 .cl{clear:both;}
+.cl-left{clear:left;}
 #footer div.panel{
 	background-color:#990000;
 	margin:0 10px;
@@ -194,7 +195,7 @@ input[type='text'], input[type='password']{
     background:url(../img/centralhome.gif) no-repeat;
     width:777px;
     height:315px;
-    margin:5px auto;
+    margin:5px 0;
 }
 #panel-home #destacado .top{
     background:url(../img/destacado-top.jpg) no-repeat;
@@ -357,6 +358,10 @@ input[type='text'], input[type='password']{
     float:left;
 }
 
+#panel-home #twet-news,
+#panel-list #twet-news{
+    float:right;
+}
 #panel-home #category-list,
 #panel-list #category-list{
     width:129px;
@@ -366,6 +371,7 @@ input[type='text'], input[type='password']{
     margin:10px 0 10px 20px;
     border-left:1px solid #900;
     float:right;
+    clear:right;
 }
 #panel-home #category-list span,
 #panel-list #category-list span{
@@ -709,11 +715,18 @@ input[type='text'], input[type='password']{
     width:70px;
     padding: 1px 10px;
 }
-#panel-form #reward-item{
+#panel-form #reward-item,
+#panel-form #collaborator-item{
     margin:10px 0;
     padding:10px 0;
     border-top:1px dotted #900;
     border-bottom:1px dotted #900;
+}
+#panel-form .contest{
+    border-bottom: 1px dotted #990000;
+    border-top: 1px dotted #990000;
+    margin:5px 0;
+    padding:5px 0;
 }
 
 /* fin proyecto */
