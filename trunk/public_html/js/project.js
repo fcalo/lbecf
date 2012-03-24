@@ -6,8 +6,11 @@
 
 $(function() {
 
-        if($("#edit-project").length==0)
+        if($("#edit-project").length==0){
             $(".reward input").val("");
+            $(".collaborator input").val("");
+        }
+
 
         $("#back-project").click(function(){
             $("#panel-form").hide();
@@ -151,7 +154,6 @@ $(function() {
                 $("#btn-reward").click(function(){
                     $("#reward-item").clone().appendTo(".reward");
                     var count=$(".reward-item").length;
-                    $(".reward-item:nth-child("+count+") span b").html(count);
                     $(".reward-item:nth-child("+count+") input").val("");
                     $(".reward-item:nth-child("+count+") .check_subasta").attr("checked",0);
                     $(".reward-item:nth-child("+count+") .check_subasta").attr("name","subasta_"+count);
@@ -161,8 +163,20 @@ $(function() {
                 });
                 $("#btn-reward-delete").click(function(){
                     var count=$(".reward-item").length;
-                    if(count>0)
+                    if(count>1)
                         $(".reward-item:nth-child("+count+")").remove();
+
+                });
+                $("#btn-collaborator").click(function(){
+                    $("#collaborator-item").clone().appendTo(".collaborator");
+                    var count=$(".collaborator-item").length;
+                    $(".collaborator-item:nth-child("+count+") input").val("");
+
+                });
+                $("#btn-collaborator-delete").click(function(){
+                    var count=$(".collaborator-item").length;
+                    if(count>1)
+                        $(".collaborator-item:nth-child("+count+")").remove();
 
                 });
 
