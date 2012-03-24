@@ -17,7 +17,9 @@ class Model_Collaborators
         );
         return $row;
     }
-
+    public function save(array $data){
+        return $this->db->insert($data);
+    }
 
 }
 

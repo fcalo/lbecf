@@ -184,8 +184,11 @@ class ProjectController extends Zend_Controller_Action
 
                  $recompensas=$_POST['recompensa'];unset($data['recompensa']);
                  $minimos=$_POST['minimo'];unset($data['minimo']);
-                 
-                 
+
+                 $colaboradores=$_POST['colaborador'];unset($data['colaborador']);
+                 $contactos=$_POST['contacto'];unset($data['contacto']);
+                 $descColaboradores=$_POST['descripcion_colaborador'];unset($data['descripcion_colaborador']);
+
                  $idProject=$model->saveProject($data);
 
                  $modelReward=new Model_Rewards();
@@ -200,6 +203,23 @@ class ProjectController extends Zend_Controller_Action
                          $dataRecompensa['no_entrada']=isset($_POST['no_entrada_'.($key+1)])?"S":"N";
                          $dataRecompensa['recompensa']=$recompensa;
                          $modelReward->save($dataRecompensa);
+                     }
+                 }
+
+                 
+                 
+                 $modelCollaborator=new Model_Collaborators();
+
+                 foreach($colaboradores as $key=>$colaborador){
+
+
+                     if($colaborador!="" && $contactos[$key]!=""){
+                         $dataColaborador=array();
+                         $dataColaborador['id_proyecto']=$idProject;
+                         $dataColaborador['colaborador']=$colaborador;
+                         $dataColaborador['contacto']=$contactos[$key];
+                         $dataColaborador['descripcion_colaborador']=$descColaboradores[$key];
+                         $modelCollaborator->save($dataColaborador);
                      }
                  }
 

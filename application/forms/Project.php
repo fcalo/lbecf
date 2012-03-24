@@ -36,6 +36,18 @@ class Form_Project extends Zend_Form {
                 /*$this->addElement ( 'checkbox', 'subasta', array ('decorators' => $decorator, 'label' => '¿Se subasta?:'));*/
 
 
+                $this->addElement ( 'text', 'titulo_concurso', array ('decorators' => $decorator, 'label' => 'Title contest(Optional):', 'filters' => array ('StringTrim' ),'required' => false ));
+                $this->addElement ( 'textarea', 'descripcion_concurso',
+                        array ('label' => 'Describe your contest(Optional):', 'required' => false,'rows' => 4,'cols' => 60 )
+                 );
+
+                $this->addElement ( 'text', 'colaborador', array ('decorators' => $decorator, 'label' => 'Collaborator:', 'filters' => array ('StringTrim' ),'required' => true ));
+                $this->addElement ( 'text', 'contacto', array ('decorators' => $decorator, 'label' => 'Contact:', 'filters' => array ('StringTrim' ),'required' => true ));
+                $this->addElement ( 'textarea', 'descripcion_colaborador',
+                        array ('label' => 'Describes the collaboration were looking:', 'required' => false,'rows' => 4,'cols' => 60 )
+                 );
+
+
                 
 
   
