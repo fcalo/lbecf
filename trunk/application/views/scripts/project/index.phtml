@@ -14,7 +14,9 @@ $helperDate=new View_Helper_Date();?>
                 <?if(count($this->collaborators)>0):?>
                     <li><a href="#tabs-2">Collaborators</a></li>
                 <?endif;?>
-		<!--<li><a href="#tabs-3">Contests</a></li>-->
+                <?if($this->project->titulo_concurso!=""):?>
+                    <li><a href="#tabs-3">Contests</a></li>
+                <?endif?>
 	</ul>
 	<div id="tabs-1">
             <div id="ficha">
@@ -85,7 +87,8 @@ $helperDate=new View_Helper_Date();?>
             </div>
 	</div>
         <?endif;?>
-	<!--<div id="tabs-3">
+        <?if($this->project->titulo_concurso!=""):?>
+	<div id="tabs-3">
             <div id="concurso">
                 <h2 class="unescape"><?=$this->project->titulo_concurso?></h2>
 		<p class="unescape"><?=nl2br($this->project->descripcion_concurso)?></p>
@@ -150,7 +153,8 @@ $helperDate=new View_Helper_Date();?>
                 <div id="proponer"><input type="button" id="add-propuesta" class="btn-red" value="Propose"/></div>
                 
             </div>
-	</div>-->
+	</div>
+        <?endif;?>
     </div>
     <div id="recompensas">
         <input type="hidden" id="id-recompensa"/>

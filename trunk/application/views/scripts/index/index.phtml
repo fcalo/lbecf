@@ -1,19 +1,50 @@
 <?
 function paintHomeMessage(){?>
-<div class="cl"></div>
+<div class="cl-left"></div>
 <div id="home-message"></div>
 
 <?}
 ?>
 
 <div id="panel-home">
-    <div id="category-list">
-        <span>Categories</span>
-        <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>">All</a></div>
-        <?foreach ($this->categories as $category):?>
-            <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
-        <?endforeach;?>
-    </div>
+    <div id="twet-news">
+        <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 129,
+  height: 300,
+  theme: {
+    shell: {
+      background: '#333333',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#000000',
+      color: '#ffffff',
+      links: '#4aed05'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    behavior: 'all'
+  }
+}).render().setUser('RRTicket').start();
+</script>
+    
+            <div id="category-list">
+                <span>Categories</span>
+                <div class="mnu-cat"><a class="<?=(0==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>">All</a></div>
+                <?foreach ($this->categories as $category):?>
+                    <div class="mnu-cat"><a class="<?=($category['id_categoria']==$this->idCategory?"active":"")?>" href="/events/<?=$this->page?>/<?=$category['id_categoria']?>"><?=$category['categoria']?></a></div>
+                <?endforeach;?>
+            </div>
+        </div>
     <div id="projects-home">
         <?$i=0;
             foreach ($this->projects as $project):

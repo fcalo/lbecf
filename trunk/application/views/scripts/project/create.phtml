@@ -35,8 +35,8 @@
                 <?echo $this->form->fecha;
                 echo $this->form->importe;?>
                 <div class="reward">
+                    <h2>Rewards</h2>
                     <div id="reward-item" class="reward-item">
-                        <span>Reward nº <b>1</b></span>
                         <?echo  str_replace("recompensa","recompensa[]", $this->form->recompensa);
                             echo str_replace("minimo","minimo[]", $this->form->minimo);
                             echo str_replace("\"subasta","\"subasta[]", $this->form->subasta);
@@ -55,6 +55,25 @@
                 </div>
                 <input type="button" id="btn-reward" class="btn-red" value="More"/>
                 <input type="button" id="btn-reward-delete" class="btn-red" value="Less"/>
+                <div class="contest">
+                    <h2>Contest</h2>
+                <?echo $this->form->titulo_concurso;
+                echo $this->form->descripcion_concurso;?>
+                </div>
+                
+                
+                <div id="collaborator" class="collaborator">
+                    <h2>Collaborators</h2>
+                    <div id="collaborator-item" class="collaborator-item">
+                        <?echo  str_replace("colaborador","colaborador[]", $this->form->colaborador);
+                            echo str_replace("contacto","contacto[]", $this->form->contacto);
+                            echo str_replace("\"descripcion_colaborador","\"descripcion_colaborador[]", $this->form->descripcion_colaborador);
+                            ?>
+                    </div>
+                </div>
+                <input type="button" id="btn-collaborator" class="btn-red" value="More"/>
+                <input type="button" id="btn-collaborator-delete" class="btn-red" value="Less"/>
+                
                 <?echo $this->form->submit; ?>
             </form>
         </fieldset>
