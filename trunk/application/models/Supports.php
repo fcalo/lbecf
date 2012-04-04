@@ -89,6 +89,14 @@ class Model_Supports
                     );
     }
 
+    public function fetchSupportersByProject($idProject){
+        $sql="SELECT u.email";
+        $sql.=" FROM apoyo a inner join usuario u on u.id_usuario=a.id_usuario_apoyo";
+        $sql.=" WHERE a.id_proyecto=".$idProject;
+
+        return $this->db->getAdapter()->query($sql)->fetchAll();
+    }
+
     public function clearCodSponsor($codSponsor){
         $rt=true;
         $sql="UPDATE apoyo SET cod_patrocinio_apoyo=null";

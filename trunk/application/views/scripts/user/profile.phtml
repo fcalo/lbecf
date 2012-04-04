@@ -34,10 +34,29 @@
                 <?if($this->self || $item['activo']=="S") :?>
                     <li>
                         <?if($item['activo']=="S"):?>
-                        <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a>
+                        <a href="/event/<?=$item['link_rewrite']?>"><?=$item['titulo']?></a> - <a href="#" class="update" id="<?=$item['id_proyecto']?>">Add Info</a>
                         <?else:?>
                             <?=$item['titulo']?> - <a href="/event/editar/<?=$item['link_rewrite']?>">Edit</a>
+                        <?endif;
+                            if(isset($item['updates']) && count($item['updates'])>0):?>
+                        <ul>
+                            <?foreach($item['updates'] as $update):
+                                    $words=explode(" ",$update['actualizacion']);?>
+                                <li>
+                                    <?if(count($words)<10):?>
+                                       <?=$update['actualizacion']?>
+                                    <?else:?>
+                                           <?for($i=0;$i<10;$i++):?>
+                                                <?=$words[$i]?>
+                                           <?endfor;?>
+                                    <?endif;?>
+                                 <?=$update['fecha_actualizacion']?> - <a href="#" class="remove_update" id="<?=$item['id_proyecto']."_".$update['id_actualizacion']?>">Remove</a>
+                                </li>
+                                
+                            <?endforeach;?>
+                        </ul>
                         <?endif;?>
+
                     </li>
                 <?endif;?>
             <?endforeach;?>
@@ -151,6 +170,21 @@
     </div>
 </div>
 <?endif;?>
+<div id="dialog-form-update" title="Update Event">
+    <div>
+        <form id="frm-update" method="post" >
+            <input type="hidden" id="update_id" name="id"/>
+            <table>
+                
+                <tr>
+                    <td>Info</td><td><textarea id="update" name="update" rows="4" cols="25"></textarea></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+
 <?if($this->send):?>
 <div id="dialog-send" title="Enviado">
     <div>
@@ -158,3 +192,6 @@
     </div>
 </div>
 <?endif;?>
+<form name="frm_remove_update" id="frm_remove_update" method="post">
+    <input type="hidden" id="input_remove_update" name="input_remove_update"/>
+</form>
