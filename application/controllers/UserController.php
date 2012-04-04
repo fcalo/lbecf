@@ -413,44 +413,73 @@ class UserController extends Zend_Controller_Action
         
         
         if($request->isPost()){
-            if($self){
-                //Cambio de imagen de perfil
-                 if ($_FILES["imagen"]['name']!=""){
-                     $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/user/".$this->view->user->id_usuario."/";
-                     $helper=new View_Helper_Image();
 
-                     $helper->ensurePath($path);
-                     chmod($path,0777);
-                     $path.=basename($_FILES["imagen"]['name']);
+            if (isset($_POST['input_remove_update'])){
+                $modelProject=new Model_Projects();
+                $a=explode("_",$_POST['input_remove_update']);
+                $modelProject->removeInfo($a[0],$a[1]);
+            }
 
-                     if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
-                            die("an error occurred in upload photo");
-                     chmod($path,0777);
+            if (isset($_POST['update'])){
+                $modelProject=new Model_Projects();
+                $modelProject->addInfo($_POST['id'],$_POST['update']);
+                $project=$modelProject->fetchById($_POST['id']);
+                
+                $modelSupport=new Model_Supports();
+                $supports=$modelSupport->fetchSupportersByProject($_POST['id']);
 
-                     $user=new Model_Users();
-                     if(!$user->uploadImage($path,$this->view->user->id_usuario))
-                           die("error");
+                foreach($supports as $support){
+                    $body="Check the news about ".$project['titulo']."! The creator has added some additional information.";
+                    $body.="<br/><br/>";
+                    $hostname = 'http://' . $this->getRequest ()->getHttpHost ();
+                    $link=$hostname."/event/".$project['link_rewrite'];
+                    $body.="<a href='".$link."'>".$link."</a>";
 
-                     $u=$user->fetchUser($this->view->user->id_usuario);
-
-                     unset($u['pass']);
-
-                    $auth->clearIdentity ();
-                    $auth->getStorage ()->write ( (object)$u );
-                 }
-            }else{
-                //Mensajeria interna
-                $data['id_usuario_remitente']=$auth->getIdentity()->id_usuario;
-                $data['id_usuario_receptor']=$this->view->user->id_usuario;
-                $data['asunto']=$_POST['asunto'];
-                $data['mensaje']=$_POST['mensaje'];
-                $message=new Model_Messages();
-                $modelUser=new Model_Users();
-                $remitente=$modelUser->fetchUser($data['id_usuario_remitente']);
-                $receptor=$modelUser->fetchUser($data['id_usuario_receptor']);
-                $message->save($data, true, $remitente, $receptor);
+                    $subject=$project['titulo']." updated";
+                    Service_Mail::sendMail($support['email'], $subject, $body);
+                }
                 
 
+            }else{
+                if($self){
+                    //Cambio de imagen de perfil
+                     if ($_FILES["imagen"]['name']!=""){
+                         $path=$_SERVER['DOCUMENT_ROOT']."/admin/uploads/user/".$this->view->user->id_usuario."/";
+                         $helper=new View_Helper_Image();
+
+                         $helper->ensurePath($path);
+                         chmod($path,0777);
+                         $path.=basename($_FILES["imagen"]['name']);
+
+                         if(!move_uploaded_file($_FILES["imagen"]['tmp_name'], $path))
+                                die("an error occurred in upload photo");
+                         chmod($path,0777);
+
+                         $user=new Model_Users();
+                         if(!$user->uploadImage($path,$this->view->user->id_usuario))
+                               die("error");
+
+                         $u=$user->fetchUser($this->view->user->id_usuario);
+
+                         unset($u['pass']);
+
+                        $auth->clearIdentity ();
+                        $auth->getStorage ()->write ( (object)$u );
+                     }
+                }else{
+                    //Mensajeria interna
+                    $data['id_usuario_remitente']=$auth->getIdentity()->id_usuario;
+                    $data['id_usuario_receptor']=$this->view->user->id_usuario;
+                    $data['asunto']=$_POST['asunto'];
+                    $data['mensaje']=$_POST['mensaje'];
+                    $message=new Model_Messages();
+                    $modelUser=new Model_Users();
+                    $remitente=$modelUser->fetchUser($data['id_usuario_remitente']);
+                    $receptor=$modelUser->fetchUser($data['id_usuario_receptor']);
+                    $message->save($data, true, $remitente, $receptor);
+
+
+                }
             }
         }
 
@@ -473,6 +502,7 @@ class UserController extends Zend_Controller_Action
 
         $modelProjects=new Model_Projects();
         $this->view->projects=$modelProjects->fetchByUser($this->view->user->id_usuario);
+
 
         $this->view->proposalsComments=$modelProposal->getCommentsByUser($this->view->user->id_usuario);
 

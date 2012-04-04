@@ -17,6 +17,9 @@ $helperDate=new View_Helper_Date();?>
                 <?if($this->project->titulo_concurso!=""):?>
                     <li><a href="#tabs-3">Contests</a></li>
                 <?endif?>
+                <?if(count($this->actualizaciones)>0):?>
+                    <li><a href="#tabs-4">Updates (<?=count($this->actualizaciones)?>)</a></li>
+                <?endif?>
 	</ul>
 	<div id="tabs-1">
             <div id="ficha">
@@ -154,6 +157,20 @@ $helperDate=new View_Helper_Date();?>
                 
             </div>
 	</div>
+        <?endif;?>
+        <?if(count($this->actualizaciones)>0):?>
+        <div id="tabs-4">
+
+            <div id="colaboradores">
+                <?foreach($this->actualizaciones as $actualizacion):?>
+                    <div class="colaborador">
+                        <h2><?=$actualizacion['fecha_actualizacion']?></h2>
+                        <p class="propuesta"><?=$actualizacion['actualizacion']?></p>
+                    </div>
+                <?endforeach;?>
+
+            </div>
+        </div>
         <?endif;?>
     </div>
     <div id="recompensas">

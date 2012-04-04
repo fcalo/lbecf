@@ -9,6 +9,7 @@ class Model_Projects
         $this->db=new Application_Model_DbTable_Projects();
         $this->dbComments=new Application_Model_DbTable_CommentsProjects();
         $this->dbCommentsProposal=new Application_Model_DbTable_CommentsProposal();
+        $this->dbUpdates=new Application_Model_DbTable_Updates();
     }
 
 
@@ -34,7 +35,24 @@ class Model_Projects
         $rs=$this->db->fetchAll(
         $this->db->select()
         ->where('id_usuario= "'.$idUser.'"')
-        );
+        )->toArray();
+        foreach ($rs as $k=>$v){
+            $updates=$this->dbUpdates->fetchAll(
+                $this->dbUpdates->select()
+                ->where('id_proyecto= "'.$v['id_proyecto'].'"')
+                )->toArray();
+            foreach($updates as $kk=>$vv){
+                $fec=$updates[$kk]['fecha_actualizacion'];
+                $a=explode(":",$fec);
+                $b=explode(" ", $a[0]);
+                $c=explode("-",$b[0]);
+
+                $fec=$c[2]."/".$c[1]."/".$c[0]." ".$b[1].":".$a[1];
+                $updates[$kk]['fecha_actualizacion']=$fec;
+            }
+            $rs[$k]['updates']=$updates;
+        }
+
         return $rs;
     }
 
@@ -192,6 +210,31 @@ class Model_Projects
 
    public function setCompleted($idProject){
         return $this->db->update(array("completo"=>"S"), "id_proyecto=".$idProject);
+    }
+
+    public function addInfo($idProject, $update){
+        $this->dbUpdates->insert(array("id_proyecto"=>$idProject,"actualizacion"=>$update));
+    }
+    public function removeInfo($idProject, $idUpdate){
+        $sql="delete from actualizaciones where id_actualizacion=".$idUpdate;
+        return $this->db->getAdapter()->query($sql);
+    }
+    public function getUpdates($idProject)
+    {
+        $updates=$this->dbUpdates->fetchAll(
+            $this->dbUpdates->select()
+            ->where('id_proyecto= "'.$idProject.'"')
+            )->toArray();
+        foreach($updates as $kk=>$vv){
+            $fec=$updates[$kk]['fecha_actualizacion'];
+            $a=explode(":",$fec);
+            $b=explode(" ", $a[0]);
+            $c=explode("-",$b[0]);
+
+            $fec=$c[2]."/".$c[1]."/".$c[0]." ".$b[1].":".$a[1];
+            $updates[$kk]['fecha_actualizacion']=$fec;
+        }
+        return $updates;
     }
 }
 
