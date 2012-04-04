@@ -28,6 +28,14 @@ $(function() {
     $("#mail").click(function(){
           $( "#dialog-form-mail" ).dialog( "open" );
     })
+    $(".update").click(function(){
+          $("#update_id").val($(this).attr("id"));
+          $( "#dialog-form-update" ).dialog( "open" );
+    })
+    $(".remove_update").click(function(){
+          $("#input_remove_update").val($(this).attr("id"));
+          $("#frm_remove_update").submit();
+    })
     $("#new-project").click(function(){
           location.href="/event/crear/";
     })
@@ -109,6 +117,23 @@ $(function() {
                                         $("#dialog-form div").hide();
                                         $("#dialog-form").css("background","url(../img/loader.gif) center center no-repeat");
                                         setTimeout('$("#frm-mail").submit();',1000);
+				},
+				"Close": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+    $( "#dialog-form-update" ).dialog({
+			autoOpen: false,
+			height: 210,
+			width: 300,
+			modal: true,
+			buttons: {
+				"Ok": function() {
+                                        if($("#update").val()!=""){
+                                            $("#dialog-form-update").css("background","url(../img/loader.gif) center center no-repeat");
+                                            setTimeout('$("#frm-update").submit();',1000);
+                                        }
 				},
 				"Close": function() {
 					$( this ).dialog( "close" );

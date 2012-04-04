@@ -327,6 +327,33 @@
                 </field>
             </fields>
         </entity>
+        <entity>
+            <id_entity>15</id_entity>
+            <title>Actualizaciones</title>
+            <table>actualizaciones</table>
+            <fields>
+                <field>
+                    <name>id_actualizacion</name>
+                    <description>id</description>
+                    <type>int(11)</type>
+                    <null>N</null>
+                    <auto_increment>S</auto_increment>
+                    <primary_key>S</primary_key>
+                </field>
+                <field>
+                    <name>fecha_actualizacion</name>
+                    <description>Fecha</description>
+                    <type>date</type>
+                    <null>N</null>
+                    <in_list>S</in_list>
+                </field>
+                <field>
+                    <name>actualizacion</name>
+                    <description>Actualizacion</description>
+                    <type>text</type>
+                </field>
+            </fields>
+        </entity>
    </entity>
 
    <entity>
