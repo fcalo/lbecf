@@ -20,6 +20,9 @@ $helperDate=new View_Helper_Date();?>
                 <?if(count($this->actualizaciones)>0):?>
                     <li><a href="#tabs-4">Updates (<?=count($this->actualizaciones)?>)</a></li>
                 <?endif?>
+                <?if(count($this->attendes)>0):?>
+                    <li><a href="#tabs-5">Attendes (<?=count($this->attendes)?>)</a></li>
+                <?endif?>
 	</ul>
 	<div id="tabs-1">
             <div id="ficha">
@@ -169,6 +172,22 @@ $helperDate=new View_Helper_Date();?>
                     </div>
                 <?endforeach;?>
 
+            </div>
+        </div>
+        <?endif;?>
+        <?if(count($this->attendes)>0):?>
+        <div id="tabs-5">
+
+            <div id="attendes">
+                <?foreach($this->attendes as $attende):?>
+                    <div class="attende">
+                        <a href="/user/perfil/<?=$attende['username']?>"><img src="<?=$helper->image($attende['id_usuario'], $attende['imagen'])?>"></a>
+                        <div>
+                            <span><a href="/user/perfil/<?=$attende['username']?>"><?=$attende['username']?></a></span>
+                        </div>
+                    </div>
+                <?endforeach;?>
+                <div class="cl"></div>
             </div>
         </div>
         <?endif;?>

@@ -90,9 +90,11 @@ class Model_Supports
     }
 
     public function fetchSupportersByProject($idProject){
-        $sql="SELECT u.email";
+        $sql="SELECT u.email, u.username, u.imagen, u.id_usuario";
         $sql.=" FROM apoyo a inner join usuario u on u.id_usuario=a.id_usuario_apoyo";
         $sql.=" WHERE a.id_proyecto=".$idProject;
+        $sql.=" AND a.approved='S'";
+        $sql.=" AND a.cancelado='N'";
 
         return $this->db->getAdapter()->query($sql)->fetchAll();
     }

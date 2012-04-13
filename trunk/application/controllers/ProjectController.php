@@ -54,6 +54,7 @@ class ProjectController extends Zend_Controller_Action
             $this->view->rewardsSale=$rewardsSale;
             $this->view->project=$project;
             $this->view->actualizaciones=$model->getUpdates($project->id_proyecto);
+            $this->view->attendes=$modelSupport->fetchSupportersByProject($project->id_proyecto);
 
             $this->view->porcentaje=$project->importe_solicitado==0?100:($supports->sum_apoyo/$project->importe_solicitado)*100;
             //$now=new Datetime();

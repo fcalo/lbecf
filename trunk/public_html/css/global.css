@@ -358,6 +358,7 @@ input[type='text'], input[type='password']{
     float:left;
 }
 
+
 #panel-home #twet-news,
 #panel-list #twet-news{
     float:right;
@@ -981,4 +982,11 @@ input[type='text'], input[type='password']{
 }
 #content #panel-form.create-project dd#submit-element{
     margin-top:10px;
+}
+
+#attendes .attende{
+    float:left;
+    width:100px;
+    height: 100px;
+
 }
